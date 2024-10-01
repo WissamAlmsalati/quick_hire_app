@@ -4,14 +4,9 @@ import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../screens/sign_up_screen.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class LoginForm extends StatelessWidget {
+   LoginForm({super.key});
 
-  @override
-  _LoginFormState createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();

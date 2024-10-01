@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/widgets/login_form_widget.dart';
+import '../../core/utils/constants.dart';
 import 'data/repositories/auth_repository.dart';
 import 'data/repositories/auth_repository_impl.dart';
 
@@ -27,7 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ],
-      child: const Scaffold(
+      child:  Scaffold(
+        backgroundColor: AppColors.backgroundColor,
         body: Column(
           children: [
             SizedBox(height: 100),

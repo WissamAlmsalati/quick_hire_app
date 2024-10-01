@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/widgets/custom_text_field.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../../login_Screen.dart';
 import '../cubit/auth_cubit.dart';
@@ -25,19 +26,19 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
       child: Column(
         children: [
-          TextField(
+          CustomTextField(
             controller: usernameController,
-            decoration: InputDecoration(labelText: 'Username'),
+            labelText: 'username',
+            obscureText: false,
           ),
-          TextField(
-            controller: emailController,
-            decoration: InputDecoration(labelText: 'Email'),
-          ),
-          TextField(
-            controller: passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
-            obscureText: true,
-          ),
+          CustomTextField(
+              controller: emailController,
+              labelText: "email",
+              obscureText: false),
+          CustomTextField(
+              controller: passwordController,
+              labelText: "password",
+              obscureText: true),
           Row(
             children: [
               Radio<String>(
@@ -67,7 +68,9 @@ class _SignUpFormState extends State<SignUpForm> {
               final email = emailController.text;
               final password = passwordController.text;
               final username = usernameController.text;
-              context.read<AuthCubit>().signUp(email, password, username, userType);
+              context
+                  .read<AuthCubit>()
+                  .signUp(email, password, username, userType);
             },
             child: Text('Sign Up'),
           ),
@@ -89,12 +92,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 builder: (context) => LoginScreen(),
               ));
             },
-            child: Text(
-                'Login'
-            ),
+            child: Text('Login'),
           ),
         ],
-
       ),
     );
   }
