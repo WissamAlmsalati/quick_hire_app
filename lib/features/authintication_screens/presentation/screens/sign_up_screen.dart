@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
-import 'package:quick_hire/features/authintication_screens/presentation/widgets/login_form_widget.dart';
-import 'data/repositories/auth_repository.dart';
-import 'data/repositories/auth_repository_impl.dart';
+import '../cubit/auth_cubit.dart';
+import '../../data/repositories/auth_repository.dart';
+import '../../data/repositories/auth_repository_impl.dart';
+import '../widgets/sign_up_form.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,19 +27,19 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ],
-      child: const Scaffold(
+      child: Scaffold(
         body: Column(
           children: [
             SizedBox(height: 100),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 13, right: 13),
+                padding: const EdgeInsets.only(left: 13, right: 13),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Login',
+                      'Sign Up',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Text(
-                      'to search for new Employers or Jobs',
+                      'to join our community',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Color(0xFF0077B5),
                       ),
                     ),
-                    LoginForm(),
+                    SignUpForm(),
                   ],
                 ),
               ),
