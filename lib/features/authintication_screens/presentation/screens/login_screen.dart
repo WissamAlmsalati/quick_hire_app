@@ -43,14 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Login',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Urbanist',
-                          color: Color(0xFF0077B5),
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge
                       ),
                       const Text(
                         'to search for new Employers or Jobs',
