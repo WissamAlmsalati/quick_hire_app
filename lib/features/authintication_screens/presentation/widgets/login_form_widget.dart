@@ -99,16 +99,7 @@ class LoginForm extends StatelessWidget {
               borderColor: AppColors.primaryColor,
 
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/icons/6929234_google_logo_icon.png',
-                    width: 40, height: 40),
-                const Gap(20),
-                SvgPicture.asset('assets/icons/F_icon_reversed.svg',
-                    width: 40, height: 40),
-              ],
-            ),
+
             TextButton(
               onPressed: () {
                 Navigator.push(context,
