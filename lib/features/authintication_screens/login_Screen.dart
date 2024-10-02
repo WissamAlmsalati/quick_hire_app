@@ -42,21 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       'Login',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Urbanist',
-                        color: Color(0xFF0077B5),
-                      ),
+
                     ),
                     Text(
                       'to search for new Employers or Jobs',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Urbanist',
-                        color: Color(0xFF0077B5),
-                      ),
+
                     ),
                     LoginForm(),
 
