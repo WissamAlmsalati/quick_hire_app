@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
@@ -83,9 +84,9 @@ class LoginForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/google.png', width: 40, height: 40),
+                Image.asset('assets/icons/6929234_google_logo_icon.png', width: 40, height: 40),
                 const Gap(20),
-                Image.asset('assets/images/facebook.png', width: 40, height: 40),
+                SvgPicture.asset('assets/icons/F_icon_reversed.svg', width: 40, height: 40),
               ],
             ),
             TextButton(
