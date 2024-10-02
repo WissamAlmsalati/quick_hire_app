@@ -5,12 +5,13 @@ import 'package:gap/gap.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
+import '../../../../core/utils/app_icon.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../screens/sign_up_screen.dart';
 
 class LoginForm extends StatelessWidget {
-   LoginForm({super.key});
+  LoginForm({super.key});
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -28,17 +29,20 @@ class LoginForm extends StatelessWidget {
           children: [
             Gap(70),
             CustomTextField(
-          controller: emailController,
-          labelText: 'Email',
-          obscureText: false,
+              controller: emailController,
+              labelText: 'Email',
+              obscureText: false,
             ),
-
             CustomTextField(
-          controller: passwordController,
+              controller: passwordController,
               labelText: 'Password',
               obscureText: true,
             ),
-            CustomButton(text: "Login", onPressed: (){}, color: AppColors.primaryColor, textColor: Colors.white),
+            CustomButton(
+                text: "Login",
+                onPressed: () {},
+                color: AppColors.primaryColor,
+                textColor: Colors.white),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
@@ -51,30 +55,32 @@ class LoginForm extends StatelessWidget {
                 return Container();
               },
             ),
-
             const Gap(100),
-            TextButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
-            }, child: Text('Sign Up'))
-
-            const Gap(40),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUpScreen()));
+                },
+                child: Text('Sign Up')),
+            Gap(40),
             Row(
               children: [
                 Expanded(
                   child: Divider(
-                    color: Colors.grey,
+                    color: Colors.black.withOpacity(0.10),
                     height: 20,
-                    thickness: 1,
+                    thickness: 2,
                     indent: 7,
                     endIndent: 10,
                   ),
                 ),
-                Text('Or login with ', style: TextStyle(color: Color(0xFF333333), fontSize: 10)),
+                Text('Or login with ',
+                    style: TextStyle(color: Color(0xFF333333), fontSize: 10)),
                 Expanded(
                   child: Divider(
-                    color: Colors.grey,
+                    color: Colors.black.withOpacity(0.10),
                     height: 20,
-                    thickness: 1,
+                    thickness: 2,
                     indent: 7,
                     endIndent: 10,
                   ),
@@ -82,21 +88,34 @@ class LoginForm extends StatelessWidget {
               ],
             ),
             const Gap(30),
+            CustomButton(
+              text: "Login with Facebook",
+              onPressed: () {},
+              color: AppColors.backgroundColor,
+              textColor: AppColors.primaryColor,
+              isHaveIcon: true,
+              icon: AppIcons.facebookIcon,
+              isHaveBorder: true,
+              borderColor: AppColors.primaryColor,
+
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/icons/6929234_google_logo_icon.png', width: 40, height: 40),
+                Image.asset('assets/icons/6929234_google_logo_icon.png',
+                    width: 40, height: 40),
                 const Gap(20),
-                SvgPicture.asset('assets/icons/F_icon_reversed.svg', width: 40, height: 40),
+                SvgPicture.asset('assets/icons/F_icon_reversed.svg',
+                    width: 40, height: 40),
               ],
             ),
             TextButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignUpScreen()));
               },
               child: Text('Sign Up'),
             ),
-
           ],
         ),
       ),
