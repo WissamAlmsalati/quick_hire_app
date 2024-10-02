@@ -38,6 +38,7 @@ class LoginForm extends StatelessWidget {
               labelText: 'Password',
               obscureText: true,
             ),
+            const Gap(40),
             CustomButton(
                 text: "Login",
                 onPressed: () {},
@@ -55,14 +56,8 @@ class LoginForm extends StatelessWidget {
                 return Container();
               },
             ),
-            const Gap(100),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen()));
-                },
-                child: Text('Sign Up')),
-            Gap(40),
+
+            const Gap(40),
             Row(
               children: [
                 Expanded(
@@ -88,6 +83,12 @@ class LoginForm extends StatelessWidget {
               ],
             ),
             const Gap(30),
+            CustomButton(text: "Login with Google",
+                onPressed: (){}, color: AppColors.backgroundColor,
+                textColor: AppColors.primaryColor,
+                isHaveIcon: true, icon: AppIcons.googleIcon,
+                isHaveBorder: true, borderColor: AppColors.primaryColor),
+            const Gap(19),
             CustomButton(
               text: "Login with Facebook",
               onPressed: () {},
@@ -99,22 +100,22 @@ class LoginForm extends StatelessWidget {
               borderColor: AppColors.primaryColor,
 
             ),
+            const Gap(25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/icons/6929234_google_logo_icon.png',
-                    width: 40, height: 40),
-                const Gap(20),
-                SvgPicture.asset('assets/icons/F_icon_reversed.svg',
-                    width: 40, height: 40),
+                Text("dont have an account?",
+                    style: TextStyle(color: Color(0xFF333333), fontSize: 11)),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUpScreen()));
+                  },
+                  child: Text('Sign Up',
+                  style: TextStyle(color: AppColors.primaryColor, fontSize: 11)
+                  ),
+                ),
               ],
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()));
-              },
-              child: Text('Sign Up'),
             ),
           ],
         ),
