@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quick_hire/core/utils/constants.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../../login_Screen.dart';
@@ -29,6 +31,7 @@ class _SignUpFormState extends State<SignUpForm> {
         height: MediaQuery.of(context).size.height * 0.7,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextField(
               controller: usernameController,
@@ -54,7 +57,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     });
                   },
                 ),
-                Text('Client'),
+                const Text('Client'),
                 Radio<String>(
                   value: 'freelancer',
                   groupValue: userType,
@@ -64,7 +67,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     });
                   },
                 ),
-                Text('Freelancer'),
+                const Text('Freelancer'),
               ],
             ),
             ElevatedButton(
@@ -76,23 +79,30 @@ class _SignUpFormState extends State<SignUpForm> {
                     .read<AuthCubit>()
                     .signUp(email, password, username, userType);
               },
-              child: Text('Sign Up'),
+              child: const Text('Sign Up'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                final email = emailController.text;
-                final password = passwordController.text;
-                final username = usernameController.text;
-                context
-                    .read<AuthCubit>()
-                    .signUp(email, password, username, userType);
-              },
-              child: Text('Sign Up'),
+            CustomButton(
+              text: "Sign up with Facebook",
+              onPressed: () {},
+              color: AppColors.backgroundColor,
+              textColor: AppColors.primaryColor,
+              isHaveBorder: true,
+              borderColor: AppColors.primaryColor,
             ),
+            CustomButton(
+              text: "Sign up with Google",
+              onPressed: () {},
+
+              color: AppColors.backgroundColor,
+              textColor: AppColors.primaryColor,
+              isHaveBorder: true,
+              borderColor: AppColors.primaryColor,
+            ),
+
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (state is AuthError) {
                   return Text(state.message);
                 } else if (state is AuthSuccess) {
@@ -101,13 +111,23 @@ class _SignUpFormState extends State<SignUpForm> {
                 return Container();
               },
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ));
-              },
-              child: Text('Login'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Already have an account ?"),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ));
+                  },
+                  child: const Text('Login'),
+                ),
+              ],
             ),
           ],
         ),

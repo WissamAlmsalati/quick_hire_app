@@ -11,8 +11,73 @@ class AppTheme {
           fontWeight: FontWeight.bold,
           color: Color(0xFF0077B5),
         ),
+        displayMedium: GoogleFonts.urbanist(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        displaySmall: GoogleFonts.urbanist(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        headlineLarge: GoogleFonts.urbanist(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        headlineMedium: GoogleFonts.urbanist(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        headlineSmall: GoogleFonts.urbanist(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        titleLarge: GoogleFonts.urbanist(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        titleMedium: GoogleFonts.urbanist(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        titleSmall: GoogleFonts.urbanist(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
         bodyLarge: GoogleFonts.urbanist(
-          fontSize: 13,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        bodyMedium: GoogleFonts.urbanist(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        bodySmall: GoogleFonts.urbanist(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        labelLarge: GoogleFonts.urbanist(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        labelMedium: GoogleFonts.urbanist(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF0077B5),
+        ),
+        labelSmall: GoogleFonts.urbanist(
+          fontSize: 10,
           fontWeight: FontWeight.bold,
           color: Color(0xFF0077B5),
         ),
@@ -44,7 +109,7 @@ class AppTheme {
           minimumSize: Size(
             MediaQuery.of(context).size.width * 0.9,
             MediaQuery.of(context).size.height * 0.05,
-          ), // Set
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.025),
           )
