@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:quick_hire/core/utils/constants.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/login_form_widget.dart';
 import '../../data/repositories/auth_repository.dart';
@@ -28,41 +30,46 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ],
       child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(height: 100),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 13, right: 13),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Urbanist',
-                        color: Color(0xFF0077B5),
-                      ),
-                    ),
-                    Text(
-                      'to search for new Employers or Jobs',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Urbanist',
-                        color: Color(0xFF0077B5),
-                      ),
-                    ),
-                    LoginForm(),
+        backgroundColor: AppColors.backgroundColor,
 
-                  ],
+        body: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(height: 100),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 13, right: 13),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Urbanist',
+                          color: Color(0xFF0077B5),
+                        ),
+                      ),
+                      const Text(
+                        'to search for new Employers or Jobs',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Urbanist',
+                          color: Color(0xFF0077B5),
+                        ),
+                      ),
+                      SizedBox(
+                          child: LoginForm()),
+
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

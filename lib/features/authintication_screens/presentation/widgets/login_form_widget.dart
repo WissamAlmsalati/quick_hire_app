@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/core/widgets/custom_button.dart';
+import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../screens/sign_up_screen.dart';
@@ -21,37 +25,19 @@ class LoginForm extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: [
-            TextFormField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                }
-                return null;
-              },
+            Gap(70),
+            CustomTextField(
+          controller: emailController,
+          labelText: 'Email',
+          obscureText: false,
             ),
-            TextFormField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+
+            CustomTextField(
+          controller: passwordController,
+              labelText: 'Password',
               obscureText: true,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                }
-                return null;
-              },
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  final email = emailController.text;
-                  final password = passwordController.text;
-                  context.read<AuthCubit>().signIn(email, password);
-                }
-              },
-              child: Text('Login'),
-            ),
+            CustomButton(text: "Login", onPressed: (){}, color: AppColors.Primary, textColor: Colors.white),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
