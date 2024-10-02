@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-
-import 'features/authintication_screens/login_Screen.dart';
+import 'core/theme/app_theme.dart';
+import 'features/authintication_screens/presentation/screens/sign_up_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-
-      home: LoginScreen()
+    return MaterialApp(
+      title: 'My App',
+      theme: AppTheme.getLightTheme(context),
+      home: SignUpScreen(),
     );
   }
 }

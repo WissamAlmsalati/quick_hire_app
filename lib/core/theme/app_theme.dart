@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData getLightTheme(BuildContext context) {
     return ThemeData(
       primaryColor: Color(0xFF0077B5),
       textTheme: TextTheme(
@@ -35,12 +35,19 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Color(0xFF0077B5),
+          foregroundColor: Colors.white,
+          backgroundColor: Color(0xFF0077B5),
           textStyle: GoogleFonts.urbanist(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
-          minimumSize: Size(150, 50), // Set width and height
+          minimumSize: Size(
+            MediaQuery.of(context).size.width * 0.9,
+            MediaQuery.of(context).size.height * 0.05,
+          ), // Set
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.025),
+          )
         ),
       ),
       colorScheme: const ColorScheme(
