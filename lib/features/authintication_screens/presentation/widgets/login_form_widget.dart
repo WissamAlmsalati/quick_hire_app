@@ -27,17 +27,22 @@ class LoginForm extends StatelessWidget {
           children: [
             Gap(70),
             CustomTextField(
-          controller: emailController,
-          labelText: 'Email',
-          obscureText: false,
+              controller: emailController,
+              labelText: 'Email',
+              obscureText: false,
             ),
-
             CustomTextField(
-          controller: passwordController,
+              controller: passwordController,
               labelText: 'Password',
               obscureText: true,
             ),
-            CustomButton(text: "Login", onPressed: (){}, color: AppColors.Primary, textColor: Colors.white),
+            const Gap(40),
+            CustomButton(
+              text: "Login",
+              onPressed: (){},
+              color: AppColors.Primary,
+              textColor: Colors.white,
+            ),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
@@ -50,11 +55,45 @@ class LoginForm extends StatelessWidget {
                 return Container();
               },
             ),
-            const Gap(100),
-            TextButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
-            }, child: Text('Sign Up'))
-
+            const Gap(40),
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    height: 20,
+                    thickness: 1,
+                    indent: 7,
+                    endIndent: 10,
+                  ),
+                ),
+                Text('Or login with ', style: TextStyle(color: Color(0xFF333333), fontSize: 10)),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    height: 20,
+                    thickness: 1,
+                    indent: 7,
+                    endIndent: 10,
+                  ),
+                ),
+              ],
+            ),
+            const Gap(30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/google.png', width: 40, height: 40),
+                const Gap(20),
+                Image.asset('assets/images/facebook.png', width: 40, height: 40),
+              ],
+            ),
+            TextButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+              },
+              child: Text('Sign Up'),
+            ),
           ],
         ),
       ),
