@@ -38,6 +38,7 @@ class LoginForm extends StatelessWidget {
               labelText: 'Password',
               obscureText: true,
             ),
+            Gap(40),
             CustomButton(
                 text: "Login",
                 onPressed: () {},
@@ -55,13 +56,7 @@ class LoginForm extends StatelessWidget {
                 return Container();
               },
             ),
-            const Gap(100),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen()));
-                },
-                child: Text('Sign Up')),
+            
             Gap(40),
             Row(
               children: [
@@ -89,6 +84,18 @@ class LoginForm extends StatelessWidget {
             ),
             const Gap(30),
             CustomButton(
+              text: "Login with Google",
+              onPressed: () {},
+              color: AppColors.backgroundColor,
+              textColor: AppColors.primaryColor,
+              isHaveIcon: true,
+              icon: AppIcons.googleIcon,
+              isHaveBorder: true,
+              borderColor: AppColors.primaryColor,
+
+            ),
+            Gap(20),
+            CustomButton(
               text: "Login with Facebook",
               onPressed: () {},
               color: AppColors.backgroundColor,
@@ -100,12 +107,20 @@ class LoginForm extends StatelessWidget {
 
             ),
 
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()));
-              },
-              child: Text('Sign Up'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account ?",
+                    style: TextStyle(color: Color(0xFF333333), fontSize: 10)),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUpScreen()));
+                  },
+                  child: Text('Sign Up',
+                      style: TextStyle(color: Color(0xFF0077B5), fontSize: 10)),
+                ),
+              ],
             ),
           ],
         ),
