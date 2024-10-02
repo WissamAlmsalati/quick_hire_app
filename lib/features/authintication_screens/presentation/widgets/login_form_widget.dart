@@ -9,7 +9,7 @@ import '../cubit/auth_cubit.dart';
 import '../screens/sign_up_screen.dart';
 
 class LoginForm extends StatelessWidget {
-  LoginForm({super.key});
+   LoginForm({super.key});
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -25,26 +25,23 @@ class LoginForm extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: [
-            const Gap(70),
+            Gap(70),
             CustomTextField(
-              controller: emailController,
-              labelText: 'Email',
-              obscureText: false,
+          controller: emailController,
+          labelText: 'Email',
+          obscureText: false,
             ),
+
             CustomTextField(
-              controller: passwordController,
+          controller: passwordController,
               labelText: 'Password',
               obscureText: true,
             ),
-            CustomButton(
-                text: "Login",
-                onPressed: () {},
-                color: AppColors.Primary,
-                textColor: Colors.white),
+            CustomButton(text: "Login", onPressed: (){}, color: AppColors.Primary, textColor: Colors.white),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
-                  return const CircularProgressIndicator();
+                  return CircularProgressIndicator();
                 } else if (state is AuthError) {
                   return Text(state.message);
                 } else if (state is AuthSuccess) {
@@ -54,14 +51,10 @@ class LoginForm extends StatelessWidget {
               },
             ),
             const Gap(100),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpScreen()));
-                },
-                child: const Text('Sign Up'))
+            TextButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+            }, child: Text('Sign Up'))
+
           ],
         ),
       ),
