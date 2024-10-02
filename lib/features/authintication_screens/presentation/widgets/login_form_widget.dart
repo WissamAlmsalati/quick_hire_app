@@ -55,9 +55,9 @@ class LoginForm extends StatelessWidget {
             const Gap(100),
             TextButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
-            }, child: Text('Sign Up'))
+            }, child: Text('Sign Up')),
 
-            const Gap(40),
+             Gap(40),
             Row(
               children: [
                 Expanded(
