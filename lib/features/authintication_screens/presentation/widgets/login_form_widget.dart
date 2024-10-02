@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
@@ -35,16 +37,7 @@ class LoginForm extends StatelessWidget {
               labelText: 'Password',
               obscureText: true,
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  final email = emailController.text;
-                  final password = passwordController.text;
-                  context.read<AuthCubit>().signIn(email, password);
-                }
-              },
-              child: Text('Login'),
-            ),
+            CustomButton(text: "Login", onPressed: (){}, color: AppColors.Primary, textColor: Colors.white),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
