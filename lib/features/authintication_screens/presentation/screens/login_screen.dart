@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: Theme.of(context).textTheme.bodyLarge
                       ),
                       const Text(
-                        'to search for new Employers or Jobs',
+                        'to search for Employers or Jobs',
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,

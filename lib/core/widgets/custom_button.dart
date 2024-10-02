@@ -58,16 +58,14 @@ class CustomButton extends StatelessWidget {
                 SizedBox(
                   width: width ?? MediaQuery.of(context).size.width * 0.02,
                 ),
-                Text(
-                  text,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: textColor),
-                ),
+                Text(text,style: TextStyle(
+                  color: textColor
+                ),),
               ],
             )
-          : Text(
-              text,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: textColor),
-            ),
+          : Text(text,style: TextStyle(
+        color: textColor
+      ),),
     );
   }
 }
