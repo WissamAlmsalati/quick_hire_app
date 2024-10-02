@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
               labelText: 'Password',
               obscureText: true,
             ),
-            CustomButton(text: "Login", onPressed: (){}, color: AppColors.Primary, textColor: Colors.white),
+            CustomButton(text: "Login", onPressed: (){}, color: AppColors.primaryColor, textColor: Colors.white),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
