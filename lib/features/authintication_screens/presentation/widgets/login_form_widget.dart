@@ -28,22 +28,17 @@ class LoginForm extends StatelessWidget {
           children: [
             Gap(70),
             CustomTextField(
-              controller: emailController,
-              labelText: 'Email',
-              obscureText: false,
+          controller: emailController,
+          labelText: 'Email',
+          obscureText: false,
             ),
+
             CustomTextField(
-              controller: passwordController,
+          controller: passwordController,
               labelText: 'Password',
               obscureText: true,
             ),
-            const Gap(40),
-            CustomButton(
-              text: "Login",
-              onPressed: (){},
-              color: AppColors.Primary,
-              textColor: Colors.white,
-            ),
+            CustomButton(text: "Login", onPressed: (){}, color: AppColors.primaryColor, textColor: Colors.white),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoading) {
@@ -56,6 +51,12 @@ class LoginForm extends StatelessWidget {
                 return Container();
               },
             ),
+
+            const Gap(100),
+            TextButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+            }, child: Text('Sign Up'))
+
             const Gap(40),
             Row(
               children: [
@@ -95,6 +96,7 @@ class LoginForm extends StatelessWidget {
               },
               child: Text('Sign Up'),
             ),
+
           ],
         ),
       ),
