@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/widgets/login_form_widget.dart';
 import '../../core/utils/constants.dart';
@@ -31,33 +30,31 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
       child:  Scaffold(
         backgroundColor: AppColors.backgroundColor,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 100),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 13, right: 13),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Login',
-          
-                      ),
-                      Text(
-                        'to search for new Employers or Jobs',
-          
-                      ),
-                      LoginForm(),
-          
-                    ],
-                  ),
+        body: Column(
+          children: [
+            SizedBox(height: 100),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 13, right: 13),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Login',
+
+                    ),
+                    Text(
+                      'to search for new Employers or Jobs',
+
+                    ),
+                    LoginForm(),
+
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
