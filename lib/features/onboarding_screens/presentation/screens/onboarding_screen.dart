@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
-import 'package:quick_hire/features/authintication_screens/login_Screen.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/screens/sign_up_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -61,7 +60,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     MaterialPageRoute(builder: (context) => const LoginScreen()),
                   );
                 },
-                color: AppColors.primaryColor,
+                 color: AppColors.primaryColor,
                 textColor: AppColors.backgroundColor,
               ),
               Gap(19),
