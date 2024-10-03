@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+import '../cubit/auth_cubit.dart';
+import '../../data/repositories/auth_repository.dart';
+import '../../data/repositories/auth_repository_impl.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
-import '../../data/repositories/auth_repository.dart';
 import '../../login_Screen.dart';
-import '../cubit/auth_cubit.dart';
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  _SignUpFormState createState() => _SignUpFormState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
@@ -22,114 +24,157 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(
-        context.read<AuthRepository>(),
-      ),
-      child: Container(
-        // color: Color(0xFF0077B5),
-        height: MediaQuery.of(context).size.height * 0.7,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomTextField(
-              controller: usernameController,
-              labelText: 'username',
-              obscureText: false,
-            ),
-            CustomTextField(
-                controller: emailController,
-                labelText: "email",
-                obscureText: false),
-            CustomTextField(
-                controller: passwordController,
-                labelText: "password",
-                obscureText: true),
-            Row(
-              children: [
-                Radio<String>(
-                  value: 'client',
-                  groupValue: userType,
-                  onChanged: (value) {
-                    setState(() {
-                      userType = value!;
-                    });
-                  },
-                ),
-                const Text('Client'),
-                Radio<String>(
-                  value: 'freelancer',
-                  groupValue: userType,
-                  onChanged: (value) {
-                    setState(() {
-                      userType = value!;
-                    });
-                  },
-                ),
-                const Text('Freelancer'),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () {
-                final email = emailController.text;
-                final password = passwordController.text;
-                final username = usernameController.text;
-                context
-                    .read<AuthCubit>()
-                    .signUp(email, password, username, userType);
-              },
-              child: const Text('Sign Up'),
-            ),
-            CustomButton(
-              text: "Sign up with Facebook",
-              onPressed: () {},
-              color: AppColors.backgroundColor,
-              textColor: AppColors.primaryColor,
-              isHaveBorder: true,
-              borderColor: AppColors.primaryColor,
-            ),
-            CustomButton(
-              text: "Sign up with Google",
-              onPressed: () {},
+    final size = MediaQuery.of(context).size;
+    final padding = size.width * 0.05; // Responsive padding
 
-              color: AppColors.backgroundColor,
-              textColor: AppColors.primaryColor,
-              isHaveBorder: true,
-              borderColor: AppColors.primaryColor,
-            ),
-
-            BlocBuilder<AuthCubit, AuthState>(
-              builder: (context, state) {
-                if (state is AuthLoading) {
-                  return const CircularProgressIndicator();
-                } else if (state is AuthError) {
-                  return Text(state.message);
-                } else if (state is AuthSuccess) {
-                  return Text('Welcome, ${state.user.email}');
-                }
-                return Container();
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Already have an account ?"),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ));
-                  },
-                  child: const Text('Login'),
+    return MultiProvider(
+      providers: [
+        Provider<AuthRepository>(
+          create: (_) => AuthRepositoryImpl(),
+        ),
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(
+            context.read<AuthRepository>(),
+          ),
+        ),
+      ],
+      child: Scaffold(
+        backgroundColor: AppColors.backgroundColor,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: padding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Sign Up',
+                      style: Theme.of(context).textTheme.displayLarge
+                          ?.copyWith(color: AppColors.primaryColor),
+                    ),
+                    Text(
+                      'to join our community',
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(color: AppColors.primaryColor),
+                    ),
+                    CustomTextField(
+                      controller: usernameController,
+                      labelText: 'Username',
+                      obscureText: false,
+                    ),
+                    CustomTextField(
+                      controller: emailController,
+                      labelText: "Email",
+                      obscureText: false,
+                    ),
+                    CustomTextField(
+                      controller: passwordController,
+                      labelText: "Password",
+                      obscureText: true,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            title: const Text('Client'),
+                            leading: Radio<String>(
+                              value: 'client',
+                              groupValue: userType,
+                              onChanged: (value) {
+                                setState(() {
+                                  userType = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            title: const Text('Freelancer'),
+                            leading: Radio<String>(
+                              value: 'freelancer',
+                              groupValue: userType,
+                              onChanged: (value) {
+                                setState(() {
+                                  userType = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    CustomButton(
+                      text: "Sign Up",
+                      onPressed: () {
+                        final email = emailController.text;
+                        final password = passwordController.text;
+                        final username = usernameController.text;
+                        context.read<AuthCubit>().signUp(
+                          email,
+                          password,
+                          username,
+                          userType,
+                        );
+                      },
+                      color: AppColors.primaryColor,
+                      textColor: AppColors.backgroundColor,
+                      isHaveBorder: true,
+                      borderColor: AppColors.primaryColor,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                      text: "Sign up with Facebook",
+                      onPressed: () {},
+                      color: AppColors.backgroundColor,
+                      textColor: AppColors.primaryColor,
+                      isHaveBorder: true,
+                      borderColor: AppColors.primaryColor,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                      text: "Sign up with Google",
+                      onPressed: () {},
+                      color: AppColors.backgroundColor,
+                      textColor: AppColors.primaryColor,
+                      isHaveBorder: true,
+                      borderColor: AppColors.primaryColor,
+                    ),
+                    const SizedBox(height: 20),
+                    BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        if (state is AuthLoading) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else if (state is AuthError) {
+                          return Text(state.message);
+                        } else if (state is AuthSuccess) {
+                          return Text('Welcome, ${state.user.email}');
+                        }
+                        return Container();
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Already have an account?"),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ));
+                          },
+                          child: const Text('Login'),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );

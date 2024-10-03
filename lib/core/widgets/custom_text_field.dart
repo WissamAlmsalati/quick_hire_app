@@ -33,10 +33,8 @@ class CustomTextField extends StatelessWidget {
             hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Colors.black.withOpacity(0.50),
                 fontSize: MediaQuery.of(context).size.width * 0.04),
-            labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.black.withOpacity(0.50),
-                fontSize: MediaQuery.of(context).size.width * 0.04),
-            // Use hintText instead of labelText
+
+
             border: OutlineInputBorder(
               borderRadius:
                   BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),

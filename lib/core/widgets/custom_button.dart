@@ -15,6 +15,8 @@ class CustomButton extends StatelessWidget {
   final String? icon;
   final bool? isHaveBorder;
   final Color? borderColor;
+  final double? topPd;
+  final double? buttomPd;
 
   const CustomButton(
       {super.key,
@@ -29,43 +31,52 @@ class CustomButton extends StatelessWidget {
       this.isHaveIcon,
       this.icon,
       this.isHaveBorder,
-      this.borderColor});
+      this.borderColor,  this.topPd,  this.buttomPd});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(color),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 10),
-            side: BorderSide(
-              color: borderColor ?? Colors.transparent,
-              width: 1.2,
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding:  EdgeInsets.only(
+          top:topPd ?? 0,
+          bottom: buttomPd??0,
+        ),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(color),
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius ?? 10),
+                side: BorderSide(
+                  color: borderColor ?? Colors.transparent,
+                  width: 1.2,
+                ),
+              ),
             ),
           ),
+          child: isHaveIcon == true
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                        height: MediaQuery.of(context).size.height * 0.03,
+                        width: MediaQuery.of(context).size.width * 0.03,
+                        icon!),
+                    SizedBox(
+                      width: width ?? MediaQuery.of(context).size.width * 0.02,
+                    ),
+                    Text(text,style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: textColor),)
+                  ],
+                )
+              : Text(text,style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: textColor
+
+          ),),
         ),
       ),
-      child: isHaveIcon == true
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                    height: MediaQuery.of(context).size.height * 0.03,
-                    width: MediaQuery.of(context).size.width * 0.03,
-                    icon!),
-                SizedBox(
-                  width: width ?? MediaQuery.of(context).size.width * 0.02,
-                ),
-                Text(text,style: TextStyle(
-                  color: textColor
-                ),),
-              ],
-            )
-          : Text(text,style: TextStyle(
-        color: textColor
-      ),),
     );
   }
 }
