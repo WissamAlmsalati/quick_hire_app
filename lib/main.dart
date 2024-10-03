@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My App',
       theme: AppTheme.getLightTheme(context),
-      home: SignUpScreen(),
+      home: const SignUpProvider(),
     );
   }
 }
