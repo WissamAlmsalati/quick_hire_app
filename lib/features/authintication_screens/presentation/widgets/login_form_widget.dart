@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
+import 'package:quick_hire/features/authintication_screens/presentation/widgets/sign_up_form.dart';
 import '../../../../core/utils/app_icon.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';

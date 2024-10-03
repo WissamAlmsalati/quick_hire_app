@@ -27,17 +27,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final size = MediaQuery.of(context).size;
     final padding = size.width * 0.05; // Responsive padding
 
-    return MultiProvider(
-      providers: [
-        Provider<AuthRepository>(
-          create: (_) => AuthRepositoryImpl(),
-        ),
-        BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit(
-            context.read<AuthRepository>(),
-          ),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => AuthCubit(
+        context.read<AuthRepository>(),
+      ),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         body: SafeArea(
