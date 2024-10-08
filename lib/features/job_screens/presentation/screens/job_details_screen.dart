@@ -60,7 +60,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20), // Add space above the username column
+                    SizedBox(height:  20), // Add space above the username column
                     Text(
                       widget.username,
                       style: TextStyle(
