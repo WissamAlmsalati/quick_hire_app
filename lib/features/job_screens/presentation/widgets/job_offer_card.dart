@@ -29,7 +29,7 @@ class JobOfferCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ),
+
             SizedBox(width: 5),
             Text(
               'Budget: ',
@@ -69,15 +69,7 @@ class JobOfferCard extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        SizedBox(height: 20),
-        Container(
-          width: double.infinity,
-          child: Divider(
-            color: Colors.grey,
-          ),
-        ),
-      ],
-    );
+    ),
+    ],);
   }
 }
