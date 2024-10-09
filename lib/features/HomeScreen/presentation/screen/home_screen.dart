@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/custom_text_field.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final emailController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
@@ -13,10 +16,10 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome to Home Screen'),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Logout'),
+            CustomTextField(
+              controller: emailController,
+              labelText: 'Email',
+              obscureText: false,
             ),
           ],
         ),

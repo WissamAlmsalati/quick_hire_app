@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
 
             border: OutlineInputBorder(
               borderRadius:
-                  BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),
+              BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
