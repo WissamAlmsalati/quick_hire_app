@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
+import 'package:quick_hire/features/job_screens/presentation/widgets/job_offer_card.dart';
 
 class FreelancerProfileScreen extends StatefulWidget {
   final String username;
@@ -116,13 +117,18 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       TextButton(onPressed: (){}, child: Text("See all"))
                     ],
                   ),
-                  Row(
-                    children: [
-                      SkillButtons(skillName: 'HTML'),
-                      SkillButtons(skillName: 'CSS'),
-                      SkillButtons(skillName: 'JavaScript'),
-                      SkillButtons(skillName: 'React'),
-                    ],
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                  Container(
+                    height: MediaQuery.of(context).size.width * 0.3, // Set a fixed height for the ListView
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        SkillButtons(skillName: 'Logo Design'),
+                        SkillButtons(skillName: 'Web Development'),
+                        SkillButtons(skillName: 'React'),
+                        SkillButtons(skillName: 'JavaScript'),
+                      ],
+                    ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                   Row(
