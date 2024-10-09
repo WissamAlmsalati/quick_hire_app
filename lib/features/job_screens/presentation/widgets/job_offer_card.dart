@@ -29,9 +29,6 @@ class JobOfferCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(
-              Icons.circle_outlined,
-              size: 40,
             ),
             SizedBox(width: 5),
             Text(
