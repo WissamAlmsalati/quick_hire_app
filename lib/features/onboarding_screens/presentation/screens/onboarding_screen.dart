@@ -4,6 +4,9 @@ import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/screens/sign_up_screen.dart';
 
+import '../../../authintication_screens/presentation/screens/login_screen.dart';
+import '../../../authintication_screens/presentation/widgets/sign_up_form.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -17,65 +20,76 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor, // Set the background color here
 
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.03,
+          right: MediaQuery.of(context).size.width * 0.03,
+        ),
         child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-            Gap(50),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
             Image.asset('assets/images/onboarding.png'),
-            Gap(50),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 13, right: 13),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'QuickHire',
-                      style: Theme.of(context).textTheme.displayLarge,
-
-                    ),
-                    const Text(
-                      'A platform that provides work opportunities for those who wish to work independently, at their own time and location.',
-                      style:  TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Urbanist',
-                        color: Color(0xFF0077B5),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-                    Gap(30),
-               CustomButton(
-                text: 'Login',
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  );
-                },
-                 color: AppColors.primaryColor,
-                textColor: AppColors.backgroundColor,
-              ),
-              Gap(19),
-            CustomButton(
-              text: "Sign up",
-              onPressed: () {},
-              color: AppColors.backgroundColor,
-              textColor: AppColors.primaryColor,
-              isHaveBorder: true,
-              borderColor: AppColors.primaryColor,
-              topPd: MediaQuery.of(context).size.height * 0.005,
-              buttomPd: MediaQuery.of(context).size.height * 0.005,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
             ),
 
+            Padding(
+              padding: const EdgeInsets.only(left: 13, right: 13),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'QuickHire',
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                   ),
+                   Text(
+                    'A platform that provides work opportunities for those who wish to work independently, at their own time and location.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Urbanist',
+                      color: Color(0xFF0077B5),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  CustomButton(
+                    text: 'Login',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      );
+                    },
+                    color: AppColors.primaryColor,
+                    textColor: AppColors.backgroundColor,
+                  ),
+                  CustomButton(
+                    text: "Sign up",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                      );
 
+                    },
+                    color: AppColors.backgroundColor,
+                    textColor: AppColors.primaryColor,
+                    isHaveBorder: true,
+                    borderColor: AppColors.primaryColor,
+                    topPd: MediaQuery.of(context).size.height * 0.005,
+                    buttomPd: MediaQuery.of(context).size.height * 0.005,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

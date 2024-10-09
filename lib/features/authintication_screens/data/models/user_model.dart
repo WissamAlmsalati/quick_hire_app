@@ -9,6 +9,7 @@ class User {
   List<String> activeProjects;
   List<String> oldProjects;
   int wallet;
+  String token; // Add the token field
 
   User({
     required this.id,
@@ -21,6 +22,7 @@ class User {
     required this.activeProjects,
     required this.oldProjects,
     required this.wallet,
+    required this.token, // Add the token field to the constructor
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class User {
       activeProjects: List<String>.from(json['activeProjects'] ?? []),
       oldProjects: List<String>.from(json['oldProjects'] ?? []),
       wallet: json['wallet'] ?? 0,
+      token: json['token'] ?? '', // Add the token field to fromJson
     );
   }
 
@@ -50,6 +53,7 @@ class User {
       'activeProjects': activeProjects,
       'oldProjects': oldProjects,
       'wallet': wallet,
+      'token': token, // Add the token field to toJson
     };
   }
 }

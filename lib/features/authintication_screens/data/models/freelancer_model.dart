@@ -18,6 +18,7 @@ class Freelancer extends User {
     required List<String> activeProjects,
     required List<String> oldProjects,
     required int wallet,
+    required String token,
     required this.skills,
     required this.rate,
     required this.portfolio,
@@ -34,6 +35,7 @@ class Freelancer extends User {
     activeProjects: activeProjects,
     oldProjects: oldProjects,
     wallet: wallet,
+    token: token, // Add the token field to the super constructor
   );
 
   factory Freelancer.fromJson(Map<String, dynamic> json) {
@@ -48,6 +50,7 @@ class Freelancer extends User {
       activeProjects: List<String>.from(json['activeProjects']),
       oldProjects: List<String>.from(json['oldProjects']),
       wallet: json['wallet'],
+      token: json['token'], // Add the token field to fromJson
       skills: List<String>.from(json['skills']),
       rate: json['rate'],
       portfolio: List<String>.from(json['portfolio']),
