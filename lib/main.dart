@@ -2,13 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_hire/core/theme/app_theme.dart';
-import 'package:quick_hire/features/authintication_screens/data/repositories/auth_repository.dart';
+import 'package:quick_hire/core/utils/token_checker.dart';
 import 'package:quick_hire/features/authintication_screens/data/repositories/auth_repository_impl.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
-import 'package:quick_hire/features/authintication_screens/presentation/screens/login_screen.dart';
+import 'package:quick_hire/features/onboarding_screens/presentation/screens/onboarding_screen.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'features/authintication_screens/presentation/screens/login_screen.dart';
+
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<AuthRepositoryImpl>(
+          create: (context) => AuthRepositoryImpl(),
+        ),
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(context.read<AuthRepositoryImpl>()),
+        ),
+        Provider<FlutterSecureStorage>(
+          create: (_) => FlutterSecureStorage(),
+        ),
+        Provider<TokenChecker>(
+          create: (context) => TokenChecker(context.read<FlutterSecureStorage>()),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,21 +38,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<AuthRepository>(
-          create: (_) => AuthRepositoryImpl(),
-        ),
-        BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit(
-            context.read<AuthRepository>(),
-          ),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'My App',
-        theme: AppTheme.getLightTheme(context),
-        home: const LoginScreen(),
+    return MaterialApp(
+      title: 'My App',
+      theme: AppTheme.getLightTheme(context),
+      home: FutureBuilder<bool>(
+        future: context.read<TokenChecker>().hasToken(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData && snapshot.data == true) {
+            return const HomeScreen();
+          } else {
+            return const OnboardingScreen();
+          }
+        },
       ),
     );
   }

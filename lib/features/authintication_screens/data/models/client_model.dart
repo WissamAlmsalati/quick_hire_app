@@ -15,9 +15,11 @@ class Client extends User {
     required List<String> activeProjects,
     required List<String> oldProjects,
     required int wallet,
+    required String token,
     required this.companyName,
     required this.projects,
   }) : super(
+    token: token,
     id: id,
     username: username,
     email: email,
@@ -33,6 +35,7 @@ class Client extends User {
   factory Client.fromJson(Map<String, dynamic> json) {
     return Client(
       id: json['id'],
+      token: json['token'],
       username: json['username'],
       email: json['email'],
       password: json['password'],
