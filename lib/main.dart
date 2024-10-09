@@ -6,6 +6,9 @@ import 'package:quick_hire/features/authintication_screens/data/repositories/aut
 import 'package:quick_hire/features/authintication_screens/data/repositories/auth_repository_impl.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/screens/login_screen.dart';
+import 'package:quick_hire/features/job_screens/presentation/screens/job_details_screen.dart';
+
+import 'features/job_screens/presentation/screens/category_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'My App',
         theme: AppTheme.getLightTheme(context),
-        home: const LoginScreen(),
+        home: const CategoryScreen( categoryName: 'Graphic Designers',),
       ),
     );
   }
