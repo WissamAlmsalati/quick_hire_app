@@ -131,7 +131,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
               Row(
                 children: [
                   SvgPicture.asset('assets/images/mail.svg'),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.03),
                   Text(
                     'johndoe@example.com',
                     style: TextStyle(
