@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+import '../../../HomeScreen/presentation/screen/home_screen.dart';
 import '../cubit/auth_cubit.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../../../core/widgets/custom_button.dart';

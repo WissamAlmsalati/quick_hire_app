@@ -6,6 +6,7 @@ import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import '../../../../core/utils/app_icon.dart';
+import '../../../HomeScreen/presentation/screen/home_screen.dart';
 import '../cubit/auth_cubit.dart';
 import '../screens/sign_up_screen.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -215,27 +216,3 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Welcome to Home Screen'),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Logout'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
