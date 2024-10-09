@@ -25,7 +25,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             Gap(50),
             Image.asset('assets/images/onboarding.png'),
-            Gap(50),
+            Gap(30),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
