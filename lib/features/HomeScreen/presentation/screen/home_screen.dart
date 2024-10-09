@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.amber,
+                          color: Colors.grey,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
@@ -134,8 +134,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),
+                        border: Border.all(
+                          color: Colors.black.withOpacity(
+                              0.50), // Change color and opacity as needed
+
+                          width: 1,
+                        ),
                       ),
                       child: Center(
                         child: Text(
@@ -185,10 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: double.infinity,
                       margin: EdgeInsets.only(
                           bottom: MediaQuery.sizeOf(context).height * 0.01),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+
                       child: Container(
                         padding: EdgeInsets.all(8.0),
                         // Adjust padding as needed
@@ -237,9 +239,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: AppColors.primaryColor,
                                         ),
                                   ),
-                                  Spacer(),
+
                                   Text(
-                                    "\$150 - \$200 " + index.toString(),
+                                    "\$150 - \$200" ,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium
@@ -247,6 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: AppColors.primaryColor,
                                         ),
                                   ),
+                                  Spacer(),
                                   Container(
                                     height: 40,
                                     decoration: BoxDecoration(
@@ -262,9 +265,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
 
-                                ])
+                                ]),
+                            Divider(
+                              thickness: 1,
+                              color: Colors.grey,
+                            )
                           ],
                         ),
                       ),
