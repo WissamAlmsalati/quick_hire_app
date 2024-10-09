@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+
+import '../../../../core/utils/app_icon.dart';
 
 class JobOfferCard extends StatelessWidget {
   final String jobTitle;
@@ -22,6 +25,7 @@ class JobOfferCard extends StatelessWidget {
         Text(
           jobDescription,
           style: TextStyle(
+            fontWeight: FontWeight.normal,
             color: AppColors.typographyColor,
           ),
         ),
@@ -29,9 +33,8 @@ class JobOfferCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(
-              Icons.circle_outlined,
-              size: 40,
+            SvgPicture.asset(AppIcons.coinIcon, width: 30,
+
             ),
             SizedBox(width: 5),
             Text(

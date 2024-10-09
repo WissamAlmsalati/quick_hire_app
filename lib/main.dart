@@ -9,6 +9,7 @@ import 'package:quick_hire/features/authintication_screens/presentation/screens/
 import 'package:quick_hire/features/job_screens/presentation/screens/job_details_screen.dart';
 
 import 'features/job_screens/presentation/screens/category_screen.dart';
+import 'features/profile_screens/presentation/screens/freelancer_profile_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,8 +34,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'My App',
         theme: AppTheme.getLightTheme(context),
-        home: const CategoryScreen( categoryName: 'Graphic Designers',),
-      ),
+        home: const CategoryScreen(categoryName: 'Design'),  ),
     );
   }
 }
