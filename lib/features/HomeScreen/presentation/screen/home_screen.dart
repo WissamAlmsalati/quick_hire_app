@@ -13,7 +13,9 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        title: Text('Quick Hire'),
+        title: Text('Quick Hire',style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+          color: Colors.white,
+        ),),
         centerTitle: true,
       ),
       body: Padding(
