@@ -10,6 +10,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'features/authintication_screens/presentation/screens/login_screen.dart';
 import 'features/buttom_nav_bar/preentation/screens/navigation_screen.dart';
+import 'features/profile_screens/presentation/screens/freelancer_profile_screen.dart';
 
 
 void main() {
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasData && snapshot.data == true) {
             return const ButtomNavBar();
           } else {
-            return const OnboardingScreen();
+            return const FreelancerProfileScreen(username: 'johnny storm'
+                '', locationUrl: 'baxter building',);
           }
         },
       ),
