@@ -19,6 +19,7 @@ class AppIcons{
   static const String checkIcon = "assets/icons/check-contained.svg";
   static const String circleIcon = "assets/icons/circle.svg";
   static const String cpuIcon = "assets/icons/cpu.svg";
+  static const String searchIcon = "assets/icons/search-01.svg";
   static const String penIcon = "assets/icons/fountain pen.svg";
   static const String notesIcon = "assets/icons/notes 01.svg";
   static const String xCircleIcon = "assets/icons/x-circle-contained.svg";
