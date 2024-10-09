@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/core/widgets/custom_text_field.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
+
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        title: Text('Home'),
+        backgroundColor: AppColors.primaryColor,
+        title: Text('Quick Hire',style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+          color: Colors.white,
+        ),),
+        centerTitle: true,
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.04,
+          right: MediaQuery.of(context).size.width * 0.04,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome to Home Screen'),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Logout'),
-            ),
+            CustomTextField(
+                icon: Icon(Icons.search),
+                controller: controller,
+                hintText: "Search for a new jop",
+                obscureText: false),
           ],
         ),
       ),
