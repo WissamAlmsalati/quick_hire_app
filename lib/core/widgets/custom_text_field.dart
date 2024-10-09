@@ -3,33 +3,37 @@ import 'package:quick_hire/core/utils/constants.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String labelText;
+  final String? labelText;
   final bool obscureText;
+  final String? hintText;
+  final Icon? icon;
   final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
     required this.controller,
-    required this.labelText,
+     this.labelText,
     required this.obscureText,
-    this.validator,
+    this.validator, this.hintText, this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(labelText,style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+      Text(labelText??'',style: Theme.of(context).textTheme.bodyMedium?.copyWith(
         color: AppColors.primaryColor,
         fontSize: MediaQuery.of(context).size.width * 0.04,
       ),),
       Padding(
         padding:  EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.01),
         child: TextFormField(
+
           controller: controller,
           decoration: InputDecoration(
+            prefixIcon: icon??null,
             fillColor: Color(0xFFFFFFFF),
             filled: true,
-            hintText: labelText,
+            hintText: hintText,
             hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Colors.black.withOpacity(0.50),
                 fontSize: MediaQuery.of(context).size.width * 0.04),
