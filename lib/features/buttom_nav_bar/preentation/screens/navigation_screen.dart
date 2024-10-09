@@ -28,7 +28,9 @@ class ButtomNavBar extends StatelessWidget {
             body: _screens[state],
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: AppColors.primaryColor,
-              backgroundColor: AppColors.navBarColor,
+              unselectedItemColor: AppColors.secondaryColor,
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: AppColors.backgroundColor,
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
