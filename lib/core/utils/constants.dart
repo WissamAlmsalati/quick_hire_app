@@ -11,6 +11,4 @@ class AppColors{
   static Color alertColor = const Color(0xFFFF9800);
   static Color hilightColor = const Color(0xFF4CAF50);
   static Color errorColor = const Color(0xFFF44336);
-
-  static Color navBarColor = const Color(0xFFD9D9D9);
 }

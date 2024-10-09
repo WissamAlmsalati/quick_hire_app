@@ -1,38 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
-import '../../../../core/utils/app_icon.dart';
-import '../cubit/auth_cubit.dart';
-import '../screens/sign_up_screen.dart';
-import '../../data/repositories/auth_repository.dart';
-import '../../data/repositories/auth_repository_impl.dart';
-import '../widgets/sign_up_form.dart';
-
-class LoginProvider extends StatelessWidget {
-  const LoginProvider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<AuthRepository>(
-          create: (_) => AuthRepositoryImpl(),
-        ),
-        BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit(
-            context.read<AuthRepository>(),
-          ),
-        ),
-      ],
-      child: const LoginScreen(),
-    );
-  }
-}
+import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
+import 'package:quick_hire/features/authintication_screens/presentation/screens/sign_up_screen.dart';
+import 'package:quick_hire/core/utils/app_icon.dart';
+import 'package:quick_hire/features/authintication_screens/presentation/widgets/sign_up_form.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -168,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         );
                       },
-                      child:  Text(
+                      child: Text(
                         'Sign Up',
                         style: TextStyle(
                           color: AppColors.primaryColor,
