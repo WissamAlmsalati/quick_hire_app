@@ -231,20 +231,25 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            // Row(
-            //   children: [
-            //     CustomButton(
-            //       text: "Accept Job",
-            //       onPressed: () {},
-            //       color: AppColors.primaryColor,
-            //       textColor: AppColors.backgroundColor,
-            //       isHaveIcon: false,
-            //
-            //       isHaveBorder: true,
-            //       borderColor: AppColors.primaryColor,
-            //     ),
-            //   ],
-            // )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: CustomButton(text: 'Apply Now', onPressed: (){}, color: AppColors.primaryColor, textColor: AppColors.backgroundColor, isHaveBorder: false,
+                  fontSize: 16, borderRadius: 10, width: 100, height: 50, topPd: 10, buttomPd: 10,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: CustomButton(text: 'Save Job', onPressed: (){}, color: AppColors.backgroundColor, textColor: AppColors.primaryColor, isHaveBorder: true,
+
+                  fontSize: 16, borderRadius: 10, width: 100, height: 50, topPd: 10, buttomPd: 10,
+                  borderColor: AppColors.primaryColor,
+
+                ),
+                ),
+              ],
+            ),
 
           ],
         ),

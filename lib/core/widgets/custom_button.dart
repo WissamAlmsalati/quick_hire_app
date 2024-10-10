@@ -52,6 +52,7 @@ class CustomButton extends StatelessWidget {
                 side: BorderSide(
                   color: borderColor ?? Colors.transparent,
                   width: 1.2,
+
                 ),
               ),
             ),
@@ -71,7 +72,8 @@ class CustomButton extends StatelessWidget {
                         color: textColor),)
                   ],
                 )
-              : Text(text,style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              : Text(text,style: TextStyle(
+            fontSize: fontSize,
             color: textColor
 
           ),),
