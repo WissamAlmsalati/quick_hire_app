@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
 
 class JobDetailsScreen extends StatefulWidget {
@@ -142,8 +144,13 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             SizedBox(height: 10,),
             Row(
               children: [
-                Icon(Icons.location_pin,size: 40,)
-                ,
+              SvgPicture.asset(
+              AppIcons.locationIcon,
+              color: AppColors.secondaryColor,
+              width: MediaQuery.of(context).size.width * 0.08,
+              height: MediaQuery.of(context).size.width * 0.08,
+            ),
+
                 SizedBox(width: 5,)
                 ,Text('Location: ',
                 style: TextStyle(
@@ -161,8 +168,13 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             SizedBox(height: 20,),
             Row(
               children: [
-                Icon(Icons.circle_outlined,size: 40,)
-                ,
+              SvgPicture.asset(
+              AppIcons.coinIcon,
+              color: AppColors.secondaryColor,
+              width: MediaQuery.of(context).size.width * 0.08,
+              height: MediaQuery.of(context).size.width * 0.08,
+            ),
+
                 SizedBox(width: 5,)
 
                 ,Text('Budget: ',
@@ -205,6 +217,35 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 SkillButtons(skillName: "photoshop"),
               ],
             ),
+            SizedBox(height: 10,)
+            ,Container(
+              width: double.infinity,
+              child: Divider(
+                color: Colors.grey,
+              ),
+            ),
+            SizedBox(height: 10,),
+            Text('About Client:',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            // Row(
+            //   children: [
+            //     CustomButton(
+            //       text: "Accept Job",
+            //       onPressed: () {},
+            //       color: AppColors.primaryColor,
+            //       textColor: AppColors.backgroundColor,
+            //       isHaveIcon: false,
+            //
+            //       isHaveBorder: true,
+            //       borderColor: AppColors.primaryColor,
+            //     ),
+            //   ],
+            // )
+
           ],
         ),
       ),

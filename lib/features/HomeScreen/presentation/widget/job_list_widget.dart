@@ -63,8 +63,10 @@ class JobListWidget extends StatelessWidget {
                             SvgPicture.asset(
                               AppIcons.coinIcon,
                               color: AppColors.secondaryColor,
+                              width: MediaQuery.of(context).size.width * 0.07,
+                              height: MediaQuery.of(context).size.width * 0.07,
                             ),
-                            SizedBox(width: MediaQuery.of(context).size.width * 0.005),
+                            SizedBox(width: MediaQuery.of(context).size.width * 0.01),
                             Text(
                               "Budget: ${job.budget.toString()}\$ - ${job.budget.toString()}\$",
                               style: Theme.of(context).textTheme.bodySmall,
