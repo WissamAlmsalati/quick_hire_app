@@ -16,7 +16,7 @@ class ButtomNavBar extends StatelessWidget {
       HomeScreen(),
       JobsScreen(),
       InboxScreen(),
-      ProfileScreen(),
+      FreelancerProfileScreen(),
     ];
 
     return BlocProvider(
@@ -80,8 +80,8 @@ class InboxScreen extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class FreelancerProfileScreen extends StatelessWidget {
+  const FreelancerProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

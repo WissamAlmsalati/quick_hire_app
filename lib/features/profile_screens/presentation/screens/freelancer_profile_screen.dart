@@ -6,9 +6,8 @@ import 'package:quick_hire/core/widgets/skill_buttons.dart';
 import 'package:quick_hire/features/job_screens/presentation/widgets/job_offer_card.dart';
 
 class FreelancerProfileScreen extends StatefulWidget {
-  final String username;
-  final String locationUrl;
-  const FreelancerProfileScreen({super.key, required this.username, required this.locationUrl});
+
+  const FreelancerProfileScreen({super.key,});
 
   @override
   State<FreelancerProfileScreen> createState() => _FreelancerProfileScreenState();
@@ -66,7 +65,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
               ),
               SizedBox(height: MediaQuery.of(context).size.width * 0.02),
               Text(
-                widget.username,
+                'johnny storm',
                 style: TextStyle(
                   color: AppColors.secondaryColor,
                   fontSize: 20,
@@ -89,7 +88,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       height: MediaQuery.of(context).size.width * 0.1),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.01),
                   Text(
-                    widget.locationUrl,
+                    'baxter building',
                     style: TextStyle(
                       color: AppColors.primaryColor,
                       fontSize: 16,
