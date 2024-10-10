@@ -37,7 +37,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.white),
+          icon: SvgPicture.asset(
+            AppIcons.backIcon,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

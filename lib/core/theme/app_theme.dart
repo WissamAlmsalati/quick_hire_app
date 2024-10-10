@@ -62,7 +62,7 @@ class AppTheme {
           color: Color(0xFF0077B5),
         ),
         bodySmall: GoogleFonts.urbanist(
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: FontWeight.bold,
           color: Color(0xFF333333),
         ),

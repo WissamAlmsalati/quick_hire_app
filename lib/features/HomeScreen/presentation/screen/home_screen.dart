@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import 'package:quick_hire/features/job_screens/presentation/screens/category_screen.dart';
@@ -23,14 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         backgroundColor: AppColors.primaryColor,
-        title: Text(
-          "Quick Hire",
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: Colors.white,
-              ),
+        leading: IconButton(
+          icon: SvgPicture.asset(
+            AppIcons.settingIcon,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
+        centerTitle: true,
+        title: SvgPicture.asset('assets/images/quickhire logo.svg'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -40,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               CustomTextField(
+                icon: AppIcons.searchIcon,
                 controller: controller,
                 hintText: "Search for a new job",
                 obscureText: false,
