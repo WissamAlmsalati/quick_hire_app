@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quick_hire/core/utils/app_icon.dart';
+import 'package:quick_hire/core/utils/constants.dart';
 
 import '../../data/datasources/job_remote_data_source.dart';
 import '../../data/repositories/job_repository.dart';
@@ -56,25 +59,35 @@ class JobListWidget extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            SvgPicture.asset(
+                              AppIcons.coinIcon,
+                              color: AppColors.secondaryColor,
+                            ),
+                            SizedBox(width: MediaQuery.of(context).size.width * 0.005),
                             Text(
-                              "Budget: \$${job.budget.toString()}",
+                              "Budget: ${job.budget.toString()}\$ - ${job.budget.toString()}\$",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             Spacer(),
                             Container(
-                              height: 40,
+                              height: 38,
                               decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.blue, width: 2),
-                                borderRadius: BorderRadius.circular(50),
+                                    Border.all(color: AppColors.secondaryColor, width: 2),
+                                borderRadius: BorderRadius.circular(30),
                               ),
                               child: TextButton(
                                 onPressed: () {},
-                                child: Text("See more",
-                                    style: TextStyle(color: Colors.blue)),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.width * 0.0001),
+                                  child: Text("See more",
+                                      style: Theme.of(context).textTheme.labelMedium,
+                                ),
                               ),
                             ),
+                            )
                           ],
+
                         ),
                         Divider(thickness: 1, color: Colors.grey),
                       ],

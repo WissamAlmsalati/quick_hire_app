@@ -64,7 +64,7 @@ class AppTheme {
         bodySmall: GoogleFonts.urbanist(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: Color(0xFF333333),
         ),
         labelLarge: GoogleFonts.urbanist(
           fontSize: 14,
@@ -73,7 +73,7 @@ class AppTheme {
         ),
         labelMedium: GoogleFonts.urbanist(
           fontSize: 12,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w600,
           color: Color(0xFF0077B5),
         ),
         labelSmall: GoogleFonts.urbanist(

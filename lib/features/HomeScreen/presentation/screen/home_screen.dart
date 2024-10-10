@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
+import 'package:quick_hire/features/job_screens/presentation/screens/category_screen.dart';
 
 import '../widget/job_list_widget.dart';
 
@@ -134,21 +135,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: NeverScrollableScrollPhysics(),
                   // Disable scroll inside GridView
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            MediaQuery.of(context).size.width * 0.05),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(
-                              0.50), // Change color and opacity as needed
+                    return GestureDetector(
+                      onTap: (){
+                        print('Category $index');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>   CategoryScreen(categoryName: index)));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.width * 0.05),
+                          border: Border.all(
+                            color: Colors.black.withOpacity(
+                                0.50), // Change color and opacity as needed
 
-                          width: 1,
+                            width: 1,
+                          ),
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Category $index',
-                          style: TextStyle(fontSize: 16.0),
+                        child: Center(
+                          child: Text(
+                            'Category $index',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
                         ),
                       ),
                     );
