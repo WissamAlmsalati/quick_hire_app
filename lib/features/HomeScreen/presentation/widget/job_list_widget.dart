@@ -84,16 +84,9 @@ class JobListWidget extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => JobDetailsScreen(
+                                      builder: (context) => JobDetailsScreen(index: index,
                                         //image: job.image,
-                                       username: job.id,
-                                        date: job.deadline,
-                                        //status: job.status,
-                                        jobTitle: job.title,
-                                        jobDescription: job.description,
-                                        //locationUrl: job.locationUrl,
-                                        budgetMax: job.budget,
-                                        budgetMin: job.budget,
+                                       
                                       ),
                                     ),
                                   );
