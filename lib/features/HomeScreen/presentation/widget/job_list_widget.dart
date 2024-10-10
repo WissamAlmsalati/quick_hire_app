@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/features/job_screens/presentation/screens/job_details_screen.dart';
 
 import '../../data/datasources/job_remote_data_source.dart';
 import '../../data/repositories/job_repository.dart';
@@ -77,17 +78,37 @@ class JobListWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => JobDetailsScreen(
+                                        //image: job.image,
+                                       username: job.id,
+                                        date: job.deadline,
+                                        //status: job.status,
+                                        jobTitle: job.title,
+                                        jobDescription: job.description,
+                                        //locationUrl: job.locationUrl,
+                                        budgetMax: job.budget,
+                                        budgetMin: job.budget,
+                                      ),
+                                    ),
+                                  );
+                                },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.width * 0.0001),
-                                  child: Text("See more",
-                                      style: Theme.of(context).textTheme.labelMedium,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                                    vertical: MediaQuery.of(context).size.width * 0.0001,
+                                  ),
+                                  child: Text(
+                                    "See more",
+                                    style: Theme.of(context).textTheme.labelMedium,
+                                  ),
                                 ),
                               ),
-                            ),
                             )
                           ],
-
                         ),
                         Divider(thickness: 1, color: Colors.grey),
                       ],

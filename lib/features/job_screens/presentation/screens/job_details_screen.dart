@@ -4,24 +4,24 @@ import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
 
 class JobDetailsScreen extends StatefulWidget {
-  final String image;
-  final String username;
-  final String date;
-  final bool status;
+  final String? image;
+  final String? username;
+  final DateTime? date;
+  final bool? status;
   final String jobTitle;
   final String jobDescription;
-  final String locationUrl;
-  final String budgetMax;
-  final String budgetMin;
+  final String? locationUrl;
+  final double budgetMax;
+  final double budgetMin;
 
   const JobDetailsScreen({
     super.key,
-    required this.image,
-    required this.username,
-    required this.date,
-    required this.status,
+      this.image,
+     this.username,
+     this.date,
+     this.status,
     required this.jobTitle,
-    required this.jobDescription, required this.locationUrl, required this.budgetMax, required this.budgetMin,
+    required this.jobDescription,  this.locationUrl, required this.budgetMax, required this.budgetMin,
   });
 
   @override
@@ -54,7 +54,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(widget.image),
+                  backgroundImage: NetworkImage(widget.image??'assets/images/cyclops-profile.png'),
                 ),
                 SizedBox(width: 5), // Add space between the image and text
                 Column(
@@ -62,7 +62,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   children: [
                     SizedBox(height:  20), // Add space above the username column
                     Text(
-                      widget.username,
+                      widget.username??'Unknown User',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -72,20 +72,20 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     Row(
                       children: [
                         Text(
-                          widget.date,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey,
-                          ),
-                        ),
+  widget.date?.toString() ?? 'a while ago',
+  style: TextStyle(
+    fontSize: 10,
+    color: Colors.grey,
+  ),
+),
                         SizedBox(width: 5),
-                        Text(
-                          widget.status ? 'Active' : 'Inactive',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: widget.status ? Colors.green : Colors.red,
-                          ),
-                        ),
+                       Text(
+  (widget.status ?? false) ? 'Active' : 'Inactive',
+  style: TextStyle(
+    fontSize: 10,
+    color: (widget.status ?? false) ? Colors.green : Colors.red,
+  ),
+),
                       ],
                     ),
                     SizedBox(height: 5),
@@ -151,7 +151,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   fontWeight: FontWeight.bold,
                 ),),
                 Text(
-                  widget.locationUrl,
+                  widget.locationUrl?? 'Unknown Location',
                   style: TextStyle(
                     color: AppColors.typographyColor,
                   ),
@@ -172,8 +172,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   ),),
 
                 Text(
-                  widget.budgetMin+' - '+
-                  widget.budgetMax,
+                  widget.budgetMin.toString()+' - '+
+                  widget.budgetMax.toString(),
                   style: TextStyle(
                     color: AppColors.typographyColor,
                   ),
