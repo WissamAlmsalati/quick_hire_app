@@ -3,11 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
-import 'package:quick_hire/features/job_screens/presentation/widgets/job_offer_card.dart';
+import 'package:quick_hire/features/HomeScreen/presentation/widget/job_list_widget.dart';
 
 class FreelancerProfileScreen extends StatefulWidget {
-
-  const FreelancerProfileScreen({super.key,});
+  const FreelancerProfileScreen({super.key});
 
   @override
   State<FreelancerProfileScreen> createState() => _FreelancerProfileScreenState();
@@ -22,7 +21,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
         leading: IconButton(
           icon: SvgPicture.asset(
             AppIcons.settingIcon,
-            color: Colors.white, // Change the color here
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -34,8 +33,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child:
-        SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,15 +50,15 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       ),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.secondaryColor, // Border color
-                        width: 2.0, // Border width
+                        color: AppColors.secondaryColor,
+                        width: 2.0,
                       ),
                     ),
                   ),
                   Spacer(),
                   SvgPicture.asset(AppIcons.editIcon,
-                      width: MediaQuery.of(context).size.width * 0.1,
-                      height: MediaQuery.of(context).size.width * 0.1),
+                      width: MediaQuery.of(context).size.width * 0.07,
+                      height: MediaQuery.of(context).size.width * 0.07),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.width * 0.02),
@@ -184,7 +182,6 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
               SizedBox(height: MediaQuery.of(context).size.width * 0.05),
               Row(
                 children: [
-
                   Text(
                     'Last worked on projects:',
                     style: TextStyle(
@@ -194,26 +191,11 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                   ),
                 ],
               ),
-
-              SizedBox(
-                child: Column(
-                  children: [
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                  ],
-                ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+              Container(
+                height: 600, // Set a fixed height for the JobListWidget
+                child: JobListWidget(),
               ),
-
-
-
-
-
             ],
           ),
         ),

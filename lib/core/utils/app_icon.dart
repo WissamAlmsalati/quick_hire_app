@@ -6,6 +6,7 @@ class AppIcons{
   static const String homeIcon = "assets/icons/home-04.svg";
   static const String editIcon = "assets/icons/edit-contained.svg";
   static const String jobsIcon = "assets/icons/icon-brief-search.svg";
+  static const String briefIcon = "assets/icons/briefcase search.svg";
   static const String inboxIcon = "assets/icons/inbox-02.svg";
   static const String codeIcon = "assets/icons/code.svg";
   static const String coinIcon = "assets/icons/currency-coin-dollar.svg";

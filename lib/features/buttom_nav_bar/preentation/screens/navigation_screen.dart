@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/features/authintication_screens/presentation/screens/login_screen.dart';
+import 'package:quick_hire/features/profile_screens/presentation/screens/freelancer_profile_screen.dart';
 
 import '../../../HomeScreen/presentation/screen/home_screen.dart';
 import '../cubit/navigation_cubit.dart';
@@ -31,21 +34,33 @@ class ButtomNavBar extends StatelessWidget {
               unselectedItemColor: AppColors.secondaryColor,
               type: BottomNavigationBarType.fixed,
               backgroundColor: AppColors.backgroundColor,
-              items: const [
+              items: [
+               BottomNavigationBarItem(
+  icon: SvgPicture.asset(
+    AppIcons.homeIcon, // Use the correct icon name from AppIcons
+    color: state == 0 ? AppColors.primaryColor : AppColors.secondaryColor,
+  ),
+  label: 'Home',
+),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
+                  icon: SvgPicture.asset(
+                AppIcons.briefIcon, // Use the correct icon name from AppIcons
+                color: state == 1 ? AppColors.primaryColor : AppColors.secondaryColor,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.work),
                   label: 'Jobs',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.email),
+                  icon: SvgPicture.asset(
+                    AppIcons.inboxIcon, // Use the correct icon name from AppIcons
+                    color: state == 2 ? AppColors.primaryColor : AppColors.secondaryColor,
+                  ),
                   label: 'Inbox',
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
+                 BottomNavigationBarItem(
+                   icon: SvgPicture.asset(
+                     AppIcons.userIcon, // Use the correct icon name from AppIcons
+                     color: state == 3 ? AppColors.primaryColor : AppColors.secondaryColor,
+                   ),
                   label: 'Profile',
                 ),
               ],
@@ -80,11 +95,4 @@ class InboxScreen extends StatelessWidget {
   }
 }
 
-class FreelancerProfileScreen extends StatelessWidget {
-  const FreelancerProfileScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
