@@ -169,7 +169,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     fontSize: 16,
                   ),),
                   SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                  Text('ui ux: 200', style: TextStyle(
+                  Text('App Ui: 200', style: TextStyle(
                     color: AppColors.typographyColor,
                     fontSize: 16,
                   ),),
