@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 
+import '../widget/job_list_widget.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -134,7 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),
+                        borderRadius: BorderRadius.circular(
+                            MediaQuery.of(context).size.width * 0.05),
                         border: Border.all(
                           color: Colors.black.withOpacity(
                               0.50), // Change color and opacity as needed
@@ -164,7 +167,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Spacer(),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => JobListWidget()));
+                    },
                     child: Text(
                       "View All",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -177,108 +182,8 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
               // Job listings grid with 2 rows and 4 columns
               SizedBox(
-                height: MediaQuery.of(context).size.height *
-                    1.6, // Fixed height for the grid
-                child: ListView.builder(
-                  itemCount: 10,
-                  // Number of job listings
-                  physics: NeverScrollableScrollPhysics(),
-                  // Disable scroll inside GridView
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.17,
-                      width: double.infinity,
-                      margin: EdgeInsets.only(
-                          bottom: MediaQuery.sizeOf(context).height * 0.01),
-
-                      child: Container(
-                        padding: EdgeInsets.all(8.0),
-                        // Adjust padding as needed
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          // Align children to the start vertically
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // Align children to the start horizontally
-                          children: [
-                            Text(
-                              "JobName " + index.toString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(
-                                    color: AppColors.primaryColor,
-                                  ),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.001,
-                            ),
-                            Text(
-                              maxLines: 2,
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." +
-                                  index.toString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    color: AppColors.primaryColor,
-                                  ), //i need loream text here
-                            ),
-                            SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.001,
-                            ),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Budget: " + index.toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          color: AppColors.primaryColor,
-                                        ),
-                                  ),
-
-                                  Text(
-                                    "\$150 - \$200" ,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          color: AppColors.primaryColor,
-                                        ),
-                                  ),
-                                  Spacer(),
-                                  Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.blue, width: 2), // Change color and width as needed
-                                      borderRadius: BorderRadius.circular(50), // Optional: to round the corners
-                                    ),
-                                    child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        "See more",
-                                        style: TextStyle(
-                                          color: Colors.blue, // Change text color if needed
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                ]),
-                            Divider(
-                              thickness: 1,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                  height: MediaQuery.sizeOf(context).height * 0.5,
+                  child: JobListWidget()),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/features/buttom_nav_bar/preentation/screens/navigation_screen.dart';
 import '../../../HomeScreen/presentation/screen/home_screen.dart';
 import '../cubit/auth_cubit.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -128,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             // Navigate to HomeScreen on success
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => HomeScreen()),
+                              MaterialPageRoute(builder: (context) => ButtomNavBar()),
                             );
                           } else if (state is AuthError) {
                             // Display an error message using a snackbar

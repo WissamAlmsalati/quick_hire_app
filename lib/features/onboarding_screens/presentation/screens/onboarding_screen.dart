@@ -31,8 +31,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: MediaQuery.of(context).size.height * 0.15,
             ),
             Image.asset('assets/images/onboarding.png'),
+
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.1,
             ),
 
             Padding(

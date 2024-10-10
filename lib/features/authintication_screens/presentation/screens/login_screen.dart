@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
+import 'package:quick_hire/features/buttom_nav_bar/preentation/screens/navigation_screen.dart';
 import '../../../../core/utils/app_icon.dart';
 import '../../../HomeScreen/presentation/screen/home_screen.dart';
 import '../cubit/auth_cubit.dart';
@@ -86,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Navigate to HomeScreen on success
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(builder: (context) => ButtomNavBar()),
                       );
                     } else if (state is AuthError) {
                       ScaffoldMessenger.of(context).showSnackBar(

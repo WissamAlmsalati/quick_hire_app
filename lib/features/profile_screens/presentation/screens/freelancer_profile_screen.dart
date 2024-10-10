@@ -36,189 +36,189 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child:
-            SingleChildScrollView(
-              child: Column(
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              Row(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/cyclops-profile.png'),
+                        fit: BoxFit.cover,
+                      ),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.secondaryColor, // Border color
+                        width: 2.0, // Border width
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  SvgPicture.asset(AppIcons.editIcon,
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      height: MediaQuery.of(context).size.width * 0.1),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              Text(
+                widget.username,
+                style: TextStyle(
+                  color: AppColors.secondaryColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+              Text(
+                'I am a professional web developer with over 5 years of experience. I am proficient in HTML, CSS, JavaScript, and React. I have worked on several projects and I am confident in my ability to deliver quality work.',
+                style: TextStyle(
+                  color: AppColors.secondaryColor,
+                  fontSize: 13,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+              Row(
+                children: [
+                  SvgPicture.asset(AppIcons.locationIcon,
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      height: MediaQuery.of(context).size.width * 0.1),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                  Text(
+                    widget.locationUrl,
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+              Container(
+                width: double.infinity,
+                child: Divider(
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+              Row(
+                children: [
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                  Text(
+                    'Skills & Expertise:',
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Spacer(),
+                  TextButton(onPressed: (){}, child: Text("See all"))
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              Wrap(
+                spacing: 8.0,
+                runSpacing: 4.0,
+                children: [
+                  SkillButtons(skillName: 'Logo Design'),
+                  SkillButtons(skillName: 'Graphic Design'),
+                  SkillButtons(skillName: 'Illustration'),
+                  SkillButtons(skillName: 'Photoshop'),
+                  SkillButtons(skillName: 'Adobe Illustrator'),
+                  SkillButtons(skillName: 'Adobe InDesign'),
+                  SkillButtons(skillName: 'Adobe XD'),
+                  SkillButtons(skillName: 'Figma'),
+                  SkillButtons(skillName: 'Sketch'),
+                  SkillButtons(skillName: 'CorelDRAW'),
+                  SkillButtons(skillName: 'Typography'),
+                  SkillButtons(skillName: 'Color Theory'),
+                  SkillButtons(skillName: 'Brand Identity'),
+                  SkillButtons(skillName: 'Visual Design'),
+                  SkillButtons(skillName: 'User Interface Design'),
+                  SkillButtons(skillName: 'User Experience Design'),
+                  SkillButtons(skillName: 'Web Design'),
+                  SkillButtons(skillName: 'Mobile App Design'),
+                  SkillButtons(skillName: 'Icon Design'),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+              Container(
+                width: double.infinity,
+                child: Divider(
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                  Row(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.width * 0.2,
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/cyclops-profile.png'),
-                            fit: BoxFit.cover,
-                          ),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.secondaryColor, // Border color
-                            width: 2.0, // Border width
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      SvgPicture.asset(AppIcons.editIcon,
-                          width: MediaQuery.of(context).size.width * 0.1,
-                          height: MediaQuery.of(context).size.width * 0.1),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.02),
                   Text(
-                    widget.username,
+                    'Rates & Pricing',
                     style: TextStyle(
-                      color: AppColors.secondaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.01),
-                  Text(
-                    'I am a professional web developer with over 5 years of experience. I am proficient in HTML, CSS, JavaScript, and React. I have worked on several projects and I am confident in my ability to deliver quality work.',
-                    style: TextStyle(
-                      color: AppColors.secondaryColor,
-                      fontSize: 13,
-                    ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                  Row(
-                    children: [
-                      SvgPicture.asset(AppIcons.locationIcon,
-                          width: MediaQuery.of(context).size.width * 0.1,
-                          height: MediaQuery.of(context).size.width * 0.1),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-                      Text(
-                        widget.locationUrl,
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                  Container(
-                    width: double.infinity,
-                    child: Divider(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-                  Row(
-                    children: [
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                      Text(
-                        'Skills & Expertise:',
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Spacer(),
-                      TextButton(onPressed: (){}, child: Text("See all"))
-                    ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 4.0,
-                    children: [
-                      SkillButtons(skillName: 'Logo Design'),
-                      SkillButtons(skillName: 'Graphic Design'),
-                      SkillButtons(skillName: 'Illustration'),
-                      SkillButtons(skillName: 'Photoshop'),
-                      SkillButtons(skillName: 'Adobe Illustrator'),
-                      SkillButtons(skillName: 'Adobe InDesign'),
-                      SkillButtons(skillName: 'Adobe XD'),
-                      SkillButtons(skillName: 'Figma'),
-                      SkillButtons(skillName: 'Sketch'),
-                      SkillButtons(skillName: 'CorelDRAW'),
-                      SkillButtons(skillName: 'Typography'),
-                      SkillButtons(skillName: 'Color Theory'),
-                      SkillButtons(skillName: 'Brand Identity'),
-                      SkillButtons(skillName: 'Visual Design'),
-                      SkillButtons(skillName: 'User Interface Design'),
-                      SkillButtons(skillName: 'User Experience Design'),
-                      SkillButtons(skillName: 'Web Design'),
-                      SkillButtons(skillName: 'Mobile App Design'),
-                      SkillButtons(skillName: 'Icon Design'),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-                  Container(
-                    width: double.infinity,
-                    child: Divider(
-                      color: Colors.grey,
+                  Text('Logo Design: 300', style: TextStyle(
+                    color: AppColors.typographyColor,
+                    fontSize: 16,
+                  ),),
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                  Text('ui ux: 200', style: TextStyle(
+                    color: AppColors.typographyColor,
+                    fontSize: 16,
+                  ),),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+              Container(
+                width: double.infinity,
+                child: Divider(
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+              Row(
+                children: [
+
+                  Text(
+                    'Last worked on projects:',
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Rates & Pricing',
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                      Text('Logo Design: 300', style: TextStyle(
-                        color: AppColors.typographyColor,
-                        fontSize: 16,
-                      ),),
-                      SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                      Text('ui ux: 200', style: TextStyle(
-                        color: AppColors.typographyColor,
-                        fontSize: 16,
-                      ),),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                  Container(
-                    width: double.infinity,
-                    child: Divider(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-                  Row(
-                    children: [
+                ],
+              ),
 
-                      Text(
-                        'Last worked on projects:',
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                    SizedBox(
-                      child: Column(
-                        children: [
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                          JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
-                        ],
-                      ),
-                    ),
+              SizedBox(
+                child: Column(
+                  children: [
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                    JobOfferCard(jobTitle: 'Logo Designer', jobDescription: 'Looking for a logo designer for my company', budgetMax: '500', budgetMin: '100'),
+                  ],
+                ),
+              ),
 
 
 
 
 
-          ],
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

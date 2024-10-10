@@ -10,7 +10,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'features/authintication_screens/presentation/screens/login_screen.dart';
 import 'features/buttom_nav_bar/preentation/screens/navigation_screen.dart';
-import 'features/profile_screens/presentation/screens/freelancer_profile_screen.dart';
 
 
 void main() {
@@ -41,6 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: AppTheme.getLightTheme(context),
       home: FutureBuilder<bool>(
@@ -51,8 +51,7 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasData && snapshot.data == true) {
             return const ButtomNavBar();
           } else {
-            return const FreelancerProfileScreen(username: 'johnny storm'
-                '', locationUrl: 'baxter building',);
+            return const OnboardingScreen();
           }
         },
       ),
