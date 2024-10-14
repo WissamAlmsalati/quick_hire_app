@@ -8,6 +8,7 @@ import 'package:quick_hire/features/authintication_screens/presentation/screens/
 import 'package:quick_hire/features/profile_screens/presentation/screens/freelancer_profile_screen.dart';
 
 import '../../../HomeScreen/presentation/screen/home_screen.dart';
+import '../../../job_feature/presentation/screen/job_screen.dart';
 import '../cubit/navigation_cubit.dart';
 
 class ButtomNavBar extends StatelessWidget {
@@ -77,14 +78,7 @@ class ButtomNavBar extends StatelessWidget {
   }
 }
 
-class JobsScreen extends StatelessWidget {
-  const JobsScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});

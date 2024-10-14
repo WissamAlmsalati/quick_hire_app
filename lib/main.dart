@@ -7,7 +7,12 @@ import 'package:quick_hire/features/authintication_screens/data/repositories/aut
 import 'package:quick_hire/features/authintication_screens/presentation/cubit/auth_cubit.dart';
 import 'package:quick_hire/features/onboarding_screens/presentation/screens/onboarding_screen.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 
+import 'features/HomeScreen/data/datasources/job_remote_data_source.dart';
+import 'features/HomeScreen/data/repositories/job_repository.dart';
+import 'features/HomeScreen/domain/usecases/get_jobs.dart';
+import 'features/HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
 import 'features/authintication_screens/presentation/screens/login_screen.dart';
 import 'features/buttom_nav_bar/preentation/screens/navigation_screen.dart';
 
@@ -25,7 +30,18 @@ void main() {
           create: (_) => FlutterSecureStorage(),
         ),
         Provider<TokenChecker>(
-          create: (context) => TokenChecker(context.read<FlutterSecureStorage>()),
+          create: (context) =>
+              TokenChecker(context.read<FlutterSecureStorage>()),
+        ),
+        BlocProvider(
+          create: (context) => JobCubit(
+            getJobs: GetJobs(
+              repository: JobRepository(
+                remoteDataSource:
+                    JobRemoteDataSourceImpl(client: http.Client()),
+              ),
+            ),
+          )..fetchJobs(),
         ),
       ],
       child: MyApp(),

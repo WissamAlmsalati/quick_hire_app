@@ -36,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           onPressed: () async {
-            final authLocalDataSource = AuthLocalDataSource(FlutterSecureStorage());
+            final authLocalDataSource =
+                AuthLocalDataSource(FlutterSecureStorage());
             await authLocalDataSource.deleteToken();
             await authLocalDataSource.deleteId();
             Navigator.pushReplacement(
@@ -138,47 +139,48 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               // Category grid with 2 rows and 4 columns
               Container(
-                height: MediaQuery.of(context).size.height *
-                    0.22, // Fixed height for the grid
-                child: GridView.builder(
-                  itemCount: 8,
-                  // Number of categories
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4, // 4 columns
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 10.0,
-                    childAspectRatio: 1.0, // Square cells
-                  ),
-                  physics: NeverScrollableScrollPhysics(),
-                  // Disable scroll inside GridView
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: (){
-                        print('Category $index');
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>   CategoryScreen(categoryName: index)));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.05),
-                          border: Border.all(
-                            color: Colors.black.withOpacity(
-                                0.50), // Change color and opacity as needed
+                  height: MediaQuery.of(context).size.height *
+                      0.10, // Fixed height for the grid
+                  child: ListView.builder(
+                    itemCount: 4,
+                    // Display 4 items0
+                    physics: NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    // Disable scroll inside ListView
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          print('Category $index');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CategoryScreen(categoryName: index)));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.025),
 
-                            width: 1,
+                          // Add vertical margin between items
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                MediaQuery.of(context).size.width * 0.05),
+                            border: Border.all(
+                              color: Colors.black.withOpacity(0.50),
+                              // Change color and opacity as needed
+                              width: 1,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Category $index',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
                           ),
                         ),
-                        child: Center(
-                          child: Text(
-                            'Category $index',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                      );
+                    },
+                  )),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
               // Job listings
               Row(
@@ -192,7 +194,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Spacer(),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => JobListWidget()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => JobListWidget()));
                     },
                     child: Text(
                       "View All",
