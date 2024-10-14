@@ -4,6 +4,7 @@ import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
 import 'package:quick_hire/features/HomeScreen/presentation/widget/job_list_widget.dart';
+import 'package:quick_hire/features/profile_screens/presentation/screens/edit_profile_screen.dart';
 
 class FreelancerProfileScreen extends StatefulWidget {
   const FreelancerProfileScreen({super.key});
@@ -56,9 +57,14 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                   ),
                   Spacer(),
-                  SvgPicture.asset(AppIcons.editIcon,
+                  IconButton(onPressed: (){Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditProfileScreen())
+                  );
+                  }, icon: SvgPicture.asset(AppIcons.editIcon,
                       width: MediaQuery.of(context).size.width * 0.07,
-                      height: MediaQuery.of(context).size.width * 0.07),
+                      height: MediaQuery.of(context).size.width * 0.07),)
+
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.width * 0.02),

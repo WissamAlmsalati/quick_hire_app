@@ -26,4 +26,5 @@ class AppIcons{
   static const String xCircleIcon = "assets/icons/x-circle-contained.svg";
   static const String speakerIcon = "assets/icons/announcement.svg";
   static const String userIcon = "assets/icons/user-profile-02.svg";
+  static const String penEditIcon = "assets/icons/pencil-02.svg";
 }
