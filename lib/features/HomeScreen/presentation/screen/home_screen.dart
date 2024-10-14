@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,7 +6,10 @@ import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import 'package:quick_hire/features/job_screens/presentation/screens/category_screen.dart';
+import 'package:quick_hire/features/authintication_screens/data/datasources/local/auth_local_data_source.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../../../authintication_screens/presentation/screens/login_screen.dart';
 import '../widget/job_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,8 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
             AppIcons.settingIcon,
             color: Colors.white,
           ),
-          onPressed: () {
-            Navigator.pop(context);
+          onPressed: () async {
+            final authLocalDataSource = AuthLocalDataSource(FlutterSecureStorage());
+            await authLocalDataSource.deleteToken();
+            await authLocalDataSource.deleteId();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+            );
           },
         ),
         centerTitle: true,

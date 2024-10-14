@@ -5,11 +5,14 @@ import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
+import 'package:quick_hire/features/HomeScreen/domain/usecases/job_repository.dart';
 import 'package:quick_hire/features/HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
 import 'package:http/http.dart' as http;
 import '../../../HomeScreen/data/datasources/job_remote_data_source.dart';
 import '../../../HomeScreen/data/repositories/job_repository.dart';
 import '../../../HomeScreen/domain/usecases/get_jobs.dart';
+import 'package:quick_hire/features/authintication_screens/data/datasources/local/auth_local_data_source.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class JobDetailsScreen extends StatefulWidget {
   final int index;
@@ -32,6 +35,12 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             remoteDataSource: JobRemoteDataSourceImpl(client: http.Client()),
           ),
         ),
+        applyJob: ApplyJob(
+          repository: JobRepository(
+            remoteDataSource: JobRemoteDataSourceImpl(client: http.Client()),
+          ),
+        ),
+        authLocalDataSource: AuthLocalDataSource(FlutterSecureStorage()),
       )..fetchJobs(),
       child: Scaffold(
         appBar: AppBar(
@@ -48,7 +57,18 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           centerTitle: true,
           title: SvgPicture.asset('assets/images/quickhire logo.svg'),
         ),
-        body: BlocBuilder<JobCubit, JobState>(
+        body: BlocConsumer<JobCubit, JobState>(
+          listener: (context, state) {
+            if (state is JobApplicationSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Job application successful!')),
+              );
+            } else if (state is JobError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Failed to apply for job: ${state.message}')),
+              );
+            }
+          },
           builder: (context, state) {
             if (state is JobLoading) {
               return Center(child: CircularProgressIndicator());
@@ -243,7 +263,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         Expanded(
                           child: CustomButton(
                             text: 'Apply Now',
-                            onPressed: () {},
+                            onPressed: () {
+                              context.read<JobCubit>().applyForJob(job.id);
+                            },
                             color: AppColors.primaryColor,
                             textColor: AppColors.backgroundColor,
                             isHaveBorder: false,

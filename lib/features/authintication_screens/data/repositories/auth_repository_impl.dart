@@ -27,6 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
     if (response.statusCode == 200) {
       final user = User.fromJson(jsonDecode(response.body));
       await authLocalDataSource.cacheToken(user.token); // Save the token
+      await authLocalDataSource.cacheId(user.id); // Save the id
       return user;
     } else {
       throw Exception('Failed to login');
@@ -52,6 +53,8 @@ class AuthRepositoryImpl implements AuthRepository {
       print('Registration successful: ${response.body}');
       final user = User.fromJson(jsonDecode(response.body));
       await authLocalDataSource.cacheToken(user.token); // Save the token
+      await authLocalDataSource.cacheId(user.id); // Save the id
+
       return user;
     } else {
       print('Registration failed: ${response.body}');

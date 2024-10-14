@@ -1,29 +1,53 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
+import 'package:quick_hire/features/HomeScreen/domain/usecases/job_repository.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../domain/entities/job.dart';
 import '../../../domain/usecases/get_jobs.dart';
 import 'package:equatable/equatable.dart';
-
+import 'package:quick_hire/features/authintication_screens/data/datasources/local/auth_local_data_source.dart';
 
 part 'job_state.dart';
 
-
 class JobCubit extends Cubit<JobState> {
   final GetJobs getJobs;
+  final ApplyJob? applyJob;
+  final AuthLocalDataSource? authLocalDataSource;
 
-  JobCubit({required this.getJobs}) : super(JobInitial());
+  JobCubit({
+    required this.getJobs,
+    this.applyJob,
+    this.authLocalDataSource,
+  }) : super(JobInitial());
 
   Future<void> fetchJobs() async {
     emit(JobLoading());
     try {
-      print("fetching jobs");
       final jobs = await getJobs();
-      print(jobs);
       emit(JobLoaded(jobs: jobs));
     } catch (e) {
-      print(e);
+      emit(JobError(message: e.toString()));
+    }
+  }
+
+  Future<void> applyForJob(String jobId) async {
+    if (applyJob == null) {
+      emit(JobError(message: 'ApplyJob use case is not provided'));
+      return;
+    }
+    emit(JobLoading());
+    try {
+      final freelancerId = await authLocalDataSource?.getId();
+      if (freelancerId == null) {
+        emit(JobError(message: 'Freelancer ID not found'));
+        return;
+      }
+      await applyJob!(jobId, freelancerId);
+      emit(JobApplicationSuccess());
+    } catch (e) {
       emit(JobError(message: e.toString()));
     }
   }
 }
+
+class JobApplicationSuccess extends JobState {}
