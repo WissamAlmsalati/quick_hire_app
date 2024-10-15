@@ -9,4 +9,8 @@ class TokenChecker {
     final token = await secureStorage.read(key: 'token');
     return token != null;
   }
+
+  Future<String?> getUserType() async {
+    return await secureStorage.read(key: 'userType');
+  }
 }
