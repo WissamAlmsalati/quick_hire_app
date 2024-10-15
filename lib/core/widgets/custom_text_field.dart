@@ -73,8 +73,17 @@ class CustomTextField extends StatelessWidget {
                   color: Colors.black.withOpacity(0.10),
                   width: MediaQuery.of(context).size.width * 0.0041),
             ),
-            counterStyle: TextStyle(color: AppColors.primaryColor), // Change the color of the max length indicator
+            counterStyle: TextStyle(color: AppColors.primaryColor),
           ),
+          buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) {
+            return Text(
+              '${maxLength! - currentLength!}',
+              style: TextStyle(
+                color: AppColors.primaryColor,
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+              ),
+            );
+          },
           validator: validator,
           obscureText: obscureText,
           maxLines: maxLines,

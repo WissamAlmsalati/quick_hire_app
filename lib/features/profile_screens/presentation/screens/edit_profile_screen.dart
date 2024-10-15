@@ -5,10 +5,10 @@ import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
-
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
 import 'package:quick_hire/features/profile_screens/presentation/screens/freelancer_profile_screen.dart';
+import 'package:uuid/uuid.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -20,8 +20,12 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
+  final TextEditingController rateNameController = TextEditingController();
+  final TextEditingController ratePriceController = TextEditingController();
 
   File? _image;
+  List<Map<String, String>> rates = [];
+  final uuid = Uuid();
 
   Future<void> _pickImage() async {
     try {
@@ -45,6 +49,73 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
+  void _addRate() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: rateNameController,
+                  decoration: InputDecoration(labelText: 'Rate Name'),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                TextField(
+                  controller: ratePriceController,
+                  decoration: InputDecoration(labelText: 'Rate Price'),
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          rates.add({
+                            'id': uuid.v4(),
+                            'name': rateNameController.text,
+                            'price': ratePriceController.text,
+                          });
+                          rateNameController.clear();
+                          ratePriceController.clear();
+                        });
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Add'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        rateNameController.clear();
+                        ratePriceController.clear();
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Cancel'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _removeRate(String id) {
+    setState(() {
+      rates.removeWhere((rate) => rate['id'] == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,17 +126,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             AppIcons.backIcon,
             color: Colors.white,
           ),
-          onPressed: () {Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => FreelancerProfileScreen())
-    );
-    },
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => FreelancerProfileScreen()),
+            );
+          },
         ),
         centerTitle: true,
         title: SvgPicture.asset('assets/images/quickhire logo.svg'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,48 +193,113 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ],
               ),
-              CustomTextField(controller: usernameController,
-                  labelText: 'Username',
-                  hintText: 'username',
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a username';
-                    }
-                    return null;
-                  },
-                  obscureText: false)
-              ,SizedBox(height: MediaQuery.of(context).size.width * 0.03,),
-              CustomTextField(controller: bioController,
-                  hintText: 'ur old bio',
-                  labelText: 'Bio',
-                  maxLines: 4,
-                  maxLength: 120,
-                  obscureText: false),
-              SizedBox(height: MediaQuery.of(context).size.width * 0.03,),
-
+              CustomTextField(
+                controller: usernameController,
+                labelText: 'Username',
+                hintText: 'username',
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter a username';
+                  }
+                  return null;
+                },
+                obscureText: false,
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              CustomTextField(
+                controller: bioController,
+                hintText: 'ur old bio',
+                labelText: 'Bio',
+                maxLines: 4,
+                maxLength: 120,
+                obscureText: false,
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('Add or Remove Skills or Expertise'),
+                      Text(
+                        'Add or remove Skills & Expertise:',
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 16,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          AppIcons.addIcon,
+                          width: MediaQuery.of(context).size.width * 0.06,
+                          height: MediaQuery.of(context).size.width * 0.06,
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.width * 0.03,),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 4.0,
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Wrap(
+                      spacing: 8.0,
+                      runSpacing: 10.0,
+                      children: [
+                        SkillButtons(skillName: 'Logo Design', iconPath: AppIcons.minusIcon),
+                        SkillButtons(skillName: 'Graphic Design', iconPath: AppIcons.minusIcon),
+                        SkillButtons(skillName: 'Illustration', iconPath: AppIcons.minusIcon),
+                        SkillButtons(skillName: 'Photoshop', iconPath: AppIcons.minusIcon),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                  Row(
                     children: [
-                      SkillButtons(skillName: 'Logo Design',iconPath: AppIcons.minusIcon,),
-                      SkillButtons(skillName: 'Graphic Design',iconPath: AppIcons.minusIcon,),
-                      SkillButtons(skillName: 'Illustration',iconPath: AppIcons.minusIcon,),
-                      SkillButtons(skillName: 'Photoshop',iconPath: AppIcons.minusIcon,),
+                      Text(
+                        'Add or Remove Rates & Pricing:',
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 16,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: _addRate,
+                        icon: SvgPicture.asset(
+                          AppIcons.addIcon,
+                          width: MediaQuery.of(context).size.width * 0.06,
+                          height: MediaQuery.of(context).size.width * 0.06,
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
                     ],
                   ),
-
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: rates.map((rate) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${rate['name']}: ${rate['price']}',
+                              style: TextStyle(
+                                color: AppColors.secondaryColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => _removeRate(rate['id']!),
+                              icon: SvgPicture.asset(AppIcons.minusIcon,width: MediaQuery.of(context).size.width * 0.06, height: MediaQuery.of(context).size.width * 0.06,), color: AppColors.primaryColor,
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

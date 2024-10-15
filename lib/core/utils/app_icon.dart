@@ -27,6 +27,6 @@ class AppIcons{
   static const String speakerIcon = "assets/icons/announcement.svg";
   static const String userIcon = "assets/icons/user-profile-02.svg";
   static const String penEditIcon = "assets/icons/pencil-02.svg";
-  static const String addIcon = "assets/icons/add_square_02.svg";
+  static const String addIcon = "assets/icons/add-square-02.svg";
   static const String minusIcon = "assets/icons/minus-circle-contained.svg";
 }
