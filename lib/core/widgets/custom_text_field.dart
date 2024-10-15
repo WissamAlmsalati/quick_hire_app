@@ -9,6 +9,9 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final String? icon;
   final String? Function(String?)? validator;
+  final int? maxLines;
+  final int? minLines;
+  final int? maxLength;
 
   const CustomTextField({
     super.key,
@@ -18,6 +21,9 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.hintText,
     this.icon,
+    this.maxLines,
+    this.minLines,
+    this.maxLength,
   });
 
   @override
@@ -67,9 +73,13 @@ class CustomTextField extends StatelessWidget {
                   color: Colors.black.withOpacity(0.10),
                   width: MediaQuery.of(context).size.width * 0.0041),
             ),
+            counterStyle: TextStyle(color: AppColors.primaryColor), // Change the color of the max length indicator
           ),
           validator: validator,
           obscureText: obscureText,
+          maxLines: maxLines,
+          minLines: minLines,
+          maxLength: maxLength,
         ),
       ),
     ]);
