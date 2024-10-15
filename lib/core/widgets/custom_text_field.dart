@@ -76,14 +76,18 @@ class CustomTextField extends StatelessWidget {
             counterStyle: TextStyle(color: AppColors.primaryColor),
           ),
           buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) {
+            if (maxLength == null || currentLength == null) {
+              return null; // Return null to hide the counter if maxLength or currentLength is null
+            }
             return Text(
-              '${maxLength! - currentLength!}',
+              '${maxLength - currentLength}',
               style: TextStyle(
                 color: AppColors.primaryColor,
                 fontSize: MediaQuery.of(context).size.width * 0.04,
               ),
             );
           },
+
           validator: validator,
           obscureText: obscureText,
           maxLines: maxLines,
