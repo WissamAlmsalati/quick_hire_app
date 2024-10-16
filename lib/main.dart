@@ -42,7 +42,7 @@ void main() {
             getJobs: GetJobs(
               repository: JobRepository(
                 remoteDataSource:
-                JobRemoteDataSourceImpl(client: http.Client()),
+                    JobRemoteDataSourceImpl(client: http.Client()),
               ),
             ),
           )..fetchJobs(),
