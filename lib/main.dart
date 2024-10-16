@@ -1,21 +1,27 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_hire/core/theme/app_theme.dart';
 import 'package:quick_hire/core/utils/token_checker.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+
 
 import 'clientfeture/buttom_nav_bar/preentation/screens/client_navigation_screen.dart';
 import 'freelancefeatures/HomeScreen/data/datasources/job_remote_data_source.dart';
 import 'freelancefeatures/HomeScreen/data/repositories/job_repository.dart';
 import 'freelancefeatures/HomeScreen/domain/usecases/get_jobs.dart';
 import 'freelancefeatures/HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
+
 import 'freelancefeatures/authintication_screens/data/repositories/auth_repository_impl.dart';
 import 'freelancefeatures/authintication_screens/presentation/cubit/auth_cubit.dart';
+
 import 'freelancefeatures/buttom_nav_bar/preentation/screens/navigation_screen.dart';
 import 'freelancefeatures/onboarding_screens/presentation/screens/onboarding_screen.dart';
+import 'freelancefeatures/profile_screens/presentation/cubit/profile_cubit.dart';
+import 'freelancefeatures/profile_screens/data/repositories/user_repository_impl.dart';
+import 'freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
 
 void main() {
   runApp(
@@ -39,10 +45,21 @@ void main() {
             getJobs: GetJobs(
               repository: JobRepository(
                 remoteDataSource:
-                    JobRemoteDataSourceImpl(client: http.Client()),
+                JobRemoteDataSourceImpl(client: http.Client()),
               ),
             ),
           )..fetchJobs(),
+        ),
+        Provider<UserRepositoryImpl>(
+          create: (context) => UserRepositoryImpl(
+            http.Client(),
+            AuthLocalDataSource(FlutterSecureStorage()),
+          ),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(
+            context.read<UserRepositoryImpl>(),
+          ),
         ),
       ],
       child: const MyApp(),

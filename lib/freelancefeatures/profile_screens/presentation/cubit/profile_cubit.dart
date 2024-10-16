@@ -17,6 +17,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       final profileData = await userRepository.fetchUserProfile(userId);
       emit(ProfileLoaded(profileData));
     } catch (e) {
+      print('Error: $e');
       emit(ProfileError(e.toString()));
     }
   }
