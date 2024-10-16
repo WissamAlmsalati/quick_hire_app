@@ -12,6 +12,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Map<String, dynamic>> fetchUserProfile(String id) async {
+    print('Fetching user profile data');
     final response = await client.get(Uri.parse('https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/users/user/$id'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
