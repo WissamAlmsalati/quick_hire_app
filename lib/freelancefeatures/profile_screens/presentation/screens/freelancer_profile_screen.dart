@@ -18,6 +18,13 @@ class FreelancerProfileScreen extends StatefulWidget {
 
 class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
   @override
+  void initState() {
+    super.initState();
+    // Fetch the profile when the screen is initialized
+    context.read<ProfileCubit>().fetchProfile('user_id'); // Replace 'user_id' with the actual user ID
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,181 +46,170 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: BlocBuilder<ProfileCubit, ProfileState>(
-  builder: (context, state) {
-   if(state is ProfileLoading){
-     return Center(child: CircularProgressIndicator());
-  }
-  else if(state is ProfileLoaded)
-  {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-        Row(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.width * 0.2,
-              width: MediaQuery.of(context).size.width * 0.2,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/cyclops-profile.png'),
-                  fit: BoxFit.cover,
-                ),
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.secondaryColor,
-                  width: 2.0,
-                ),
-              ),
-            ),
-            Spacer(),
-            IconButton(onPressed: (){Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => EditProfileScreen())
-            );
-            }, icon: SvgPicture.asset(AppIcons.editIcon,
-                width: MediaQuery.of(context).size.width * 0.07,
-                height: MediaQuery.of(context).size.width * 0.07),)
-
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-        Text(
-          'johnny storm',
-          style: TextStyle(
-            color: AppColors.secondaryColor,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+            builder: (context, state) {
+              if (state is ProfileLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is ProfileLoaded) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                    Row(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/cyclops-profile.png'),
+                              fit: BoxFit.cover,
+                            ),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColors.secondaryColor,
+                              width: 2.0,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const EditProfileScreen()),
+                            );
+                          },
+                          icon: SvgPicture.asset(
+                            AppIcons.editIcon,
+                            width: MediaQuery.of(context).size.width * 0.07,
+                            height: MediaQuery.of(context).size.width * 0.07,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                    Text(
+                      state.profileData.username,
+                      style: TextStyle(
+                        color: AppColors.secondaryColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+                    Text(
+                    state.profileData.email,
+                      style: TextStyle(
+                        color: AppColors.secondaryColor,
+                        fontSize: 13,
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          AppIcons.locationIcon,
+                          width: MediaQuery.of(context).size.width * 0.1,
+                          height: MediaQuery.of(context).size.width * 0.1,
+                        ),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                        Text(
+                          'baxter building',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    const Divider(color: Colors.grey),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+                    Row(
+                      children: [
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                        Text(
+                          'Skills & Expertise:',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const Spacer(),
+                        TextButton(onPressed: () {}, child: const Text("See all")),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                    Wrap(
+                      spacing: 8.0,
+                      runSpacing: 4.0,
+                      children: const [
+                        SkillButtons(skillName: 'Logo Design'),
+                        SkillButtons(skillName: 'Graphic Design'),
+                        SkillButtons(skillName: 'Illustration'),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+                    const Divider(color: Colors.grey),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Rates & Pricing',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                        Text(
+                          'Logo Design: 300',
+                          style: TextStyle(
+                            color: AppColors.typographyColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                        Text(
+                          'App Ui: 200',
+                          style: TextStyle(
+                            color: AppColors.typographyColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    const Divider(color: Colors.grey),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+                    Row(
+                      children: [
+                        Text(
+                          'Last worked on projects:',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+                    Container(
+                      height: 600, // Set a fixed height for the JobListWidget
+                      child: const JobListWidget(),
+                    ),
+                  ],
+                );
+              } else if (state is ProfileError) {
+                return Center(child: Text(state.message));
+              } else {
+                return const Center(child: Text("Error"));
+              }
+            },
           ),
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.01),
-        Text(
-          'I am a professional web developer with over 5 years of experience. I am proficient in HTML, CSS, JavaScript, and React. I have worked on several projects and I am confident in my ability to deliver quality work.',
-          style: TextStyle(
-            color: AppColors.secondaryColor,
-            fontSize: 13,
-          ),
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-        Row(
-          children: [
-            SvgPicture.asset(AppIcons.locationIcon,
-                width: MediaQuery.of(context).size.width * 0.1,
-                height: MediaQuery.of(context).size.width * 0.1),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-            Text(
-              'baxter building',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-        Container(
-          width: double.infinity,
-          child: Divider(
-            color: Colors.grey,
-          ),
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-        Row(
-          children: [
-            SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-            Text(
-              'Skills & Expertise:',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 16,
-              ),
-            ),
-            Spacer(),
-            TextButton(onPressed: (){}, child: Text("See all"))
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-        Wrap(
-            spacing: 8.0,
-            runSpacing: 4.0,
-            children: [
-              SkillButtons(skillName: 'Logo Design'),
-              SkillButtons(skillName: 'Graphic Design'),
-              SkillButtons(skillName: 'Illustration'),
-
-            ]
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-        Container(
-          width: double.infinity,
-          child: Divider(
-            color: Colors.grey,
-          ),
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Rates & Pricing',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-            Text('Logo Design: 300', style: TextStyle(
-              color: AppColors.typographyColor,
-              fontSize: 16,
-            ),),
-            SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-            Text('App Ui: 200', style: TextStyle(
-              color: AppColors.typographyColor,
-              fontSize: 16,
-            ),),
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-        Container(
-          width: double.infinity,
-          child: Divider(
-            color: Colors.grey,
-          ),
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-        Row(
-          children: [
-            Text(
-              'Last worked on projects:',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-        Container(
-          height: 600, // Set a fixed height for the JobListWidget
-          child: JobListWidget(),
-        ),
-      ],
-    );
-  }
-  else if(state is ProfileError)
-  {
-    return Center(child: Text(state.message));
-  }
-  else{
-    return Center(child: Text("Error"));
-  }
-
-
-
-          },
         ),
       ),
-    ),
     );
   }
 }

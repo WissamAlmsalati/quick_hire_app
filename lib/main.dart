@@ -6,6 +6,8 @@ import 'package:quick_hire/core/utils/token_checker.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:quick_hire/freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
+import 'package:quick_hire/freelancefeatures/profile_screens/presentation/cubit/profile_cubit.dart';
 
 import 'clientfeture/buttom_nav_bar/preentation/screens/client_navigation_screen.dart';
 import 'clientfeture/job_posting/data/repositories/job_repository_impl.dart';
@@ -19,6 +21,8 @@ import 'freelancefeatures/buttom_nav_bar/preentation/screens/navigation_screen.d
 import 'freelancefeatures/onboarding_screens/presentation/screens/onboarding_screen.dart';
 import 'clientfeture/job_posting/data/repositories/job_repository.dart';
 import 'clientfeture/job_posting/presentation/cubit/post_job_cubit.dart';
+import 'freelancefeatures/profile_screens/data/repositories/user_repository_impl.dart';
+import 'freelancefeatures/profile_screens/presentation/domain/repositories/user_repository.dart';
 
 void main() {
   runApp(
@@ -52,6 +56,18 @@ void main() {
         ),
         BlocProvider<PostJobCubit>(
           create: (context) => PostJobCubit(context.read<PostJobRepository>()),
+        ),
+        Provider<AuthLocalDataSource>(
+          create: (context) => AuthLocalDataSource(context.read<FlutterSecureStorage>()),
+        ),
+        RepositoryProvider<UserRepository>(
+          create: (context) => UserRepositoryImpl(
+            http.Client(),
+            context.read<AuthLocalDataSource>(),
+          ),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(context.read<UserRepository>()),
         ),
       ],
       child: const MyApp(),
