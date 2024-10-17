@@ -173,11 +173,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onPressed: () {
                                 final email = emailController.text;
                                 final password = passwordController.text;
+                                final username = usernameController.text;
 
                                 if (email.isNotEmpty && password.isNotEmpty) {
                                   context
                                       .read<AuthCubit>()
-                                      .signUp(email, password, userType, userType);
+                                      .signUp(email, password, username, userType);
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(

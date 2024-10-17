@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../presentation/domain/repositories/user_repository.dart';
 import 'package:quick_hire/freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
-import 'package:quick_hire/freelancefeatures/authintication_screens/data/models/user_model.dart';
+import 'package:quick_hire/freelancefeatures/authintication_screens/data/models/freelancer_model.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final http.Client client;
@@ -12,7 +12,7 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl(this.client, this.localDataSource);
 
   @override
-  Future<User> fetchUserProfile() async {
+  Future<Freelancer> fetchUserProfile() async {
     print('Fetching user profile data');
     final id = await localDataSource.getId(); // Retrieve the user ID
     final token = await localDataSource.getToken(); // Retrieve the token
@@ -23,9 +23,11 @@ class UserRepositoryImpl implements UserRepository {
       },
     );
     print("profile response code: ${response.statusCode}");
+    print("profile response body: ${response.body}");
+    print("profile response headers: ${response.headers}");
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return User.fromJson(data); // Convert the map to a User object
+      return Freelancer.fromJson(data); // Convert the map to a Freelancer object
     } else {
       throw Exception('Failed to load profile data');
     }

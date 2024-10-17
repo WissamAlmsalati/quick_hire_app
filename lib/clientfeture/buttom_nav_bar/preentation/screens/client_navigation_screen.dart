@@ -209,7 +209,7 @@ class ClentHomeScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: 4,
                       // Display 4 items
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       // Disable scroll inside ListView
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {

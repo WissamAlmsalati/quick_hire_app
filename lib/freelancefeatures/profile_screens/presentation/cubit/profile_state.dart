@@ -13,7 +13,7 @@ class ProfileInitial extends ProfileState {}
 class ProfileLoading extends ProfileState {}
 
 class ProfileLoaded extends ProfileState {
-  final User profileData;
+  final Freelancer profileData;
 
   const ProfileLoaded(this.profileData);
 

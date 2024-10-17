@@ -35,27 +35,27 @@ class Freelancer extends User {
     activeProjects: activeProjects,
     oldProjects: oldProjects,
     wallet: wallet,
-    token: token, // Add the token field to the super constructor
+    token: token,
   );
 
   factory Freelancer.fromJson(Map<String, dynamic> json) {
     return Freelancer(
-      id: json['id'],
-      username: json['username'],
-      email: json['email'],
-      password: json['password'],
-      userType: json['userType'],
-      isSuperUser: json['isSuperUser'],
-      jobs: List<String>.from(json['jobs']),
-      activeProjects: List<String>.from(json['activeProjects']),
-      oldProjects: List<String>.from(json['oldProjects']),
-      wallet: json['wallet'],
-      token: json['token'], // Add the token field to fromJson
-      skills: List<String>.from(json['skills']),
-      rate: json['rate'],
-      portfolio: List<String>.from(json['portfolio']),
-      bio: json['bio'],
-      ratings: List<int>.from(json['ratings']),
+      id: json['id'] ?? '',
+      username: json['username'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+      userType: json['userType'] ?? '',
+      isSuperUser: json['isSuperUser'] ?? false,
+      jobs: List<String>.from(json['jobs'] ?? []),
+      activeProjects: List<String>.from(json['activeProjects'] ?? []),
+      oldProjects: List<String>.from(json['oldProjects'] ?? []),
+      wallet: json['wallet'] ?? 0,
+      token: json['token'] ?? '',
+      skills: List<String>.from(json['skills'] ?? []),
+      rate: json['rate'] ?? 0,
+      portfolio: List<String>.from(json['portfolio'] ?? []),
+      bio: json['bio'] ?? '',
+      ratings: List<int>.from(json['ratings'] ?? []),
     );
   }
 

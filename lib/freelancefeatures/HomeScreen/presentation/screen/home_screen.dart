@@ -1,13 +1,12 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
-import 'package:quick_hire/core/widgets/custom_text_field.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../../../../core/widgets/custom_text_field.dart';
 import '../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import '../../../authintication_screens/presentation/screens/login_screen.dart';
 import '../../../job_screens/presentation/screens/category_screen.dart';
@@ -38,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           onPressed: () async {
-            final authLocalDataSource =
-                AuthLocalDataSource(FlutterSecureStorage());
+            final authLocalDataSource = AuthLocalDataSource(FlutterSecureStorage());
             await authLocalDataSource.deleteToken();
             await authLocalDataSource.deleteId();
             Navigator.pushReplacement(
@@ -53,8 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () {
-          return
-          context.read<JobCubit>().fetchJobs();
+          return context.read<JobCubit>().fetchJobs();
         },
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -112,8 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: 10.0,
                       height: 10.0,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _currentIndex == index
@@ -146,8 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 // Category grid with 2 rows and 4 columns
                 Container(
-                    height: MediaQuery.of(context).size.height *
-                        0.10, // Fixed height for the grid
+                    height: MediaQuery.of(context).size.height * 0.10, // Fixed height for the grid
                     child: ListView.builder(
                       itemCount: 4,
                       // Display 4 items0
@@ -161,13 +156,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        CategoryScreen(categoryName: index)));
+                                    builder: (context) => CategoryScreen(categoryName: index)));
                           },
                           child: Container(
                             margin: EdgeInsets.only(
                                 right: MediaQuery.of(context).size.width * 0.025),
-
                             // Add vertical margin between items
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(

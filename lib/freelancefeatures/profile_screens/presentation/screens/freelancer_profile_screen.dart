@@ -98,7 +98,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                     Text(
-                    state.profileData.email,
+                      state.profileData.email,
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 13,
@@ -143,11 +143,9 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     Wrap(
                       spacing: 8.0,
                       runSpacing: 4.0,
-                      children: const [
-                        SkillButtons(skillName: 'Logo Design'),
-                        SkillButtons(skillName: 'Graphic Design'),
-                        SkillButtons(skillName: 'Illustration'),
-                      ],
+                      children: state.profileData.skills.map((skill) {
+                        return SkillButtons(skillName: skill);
+                      }).toList(),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     const Divider(color: Colors.grey),
