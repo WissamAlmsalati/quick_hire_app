@@ -12,6 +12,7 @@ import '../../../authintication_screens/presentation/screens/login_screen.dart';
 import '../../../job_screens/presentation/screens/category_screen.dart';
 import '../cubit/job_cubit/job_cubit.dart';
 import '../widget/job_list_widget.dart';
+import '../widget/category_list_widget.dart'; // Import the new widget
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -125,8 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "Popular Categories",
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                     const Spacer(),
                     TextButton(
@@ -134,53 +135,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         "View All",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                // Category grid with 2 rows and 4 columns
+                // Replace the existing ListView.builder with CategoryListWidget
                 SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.10, // Fixed height for the grid
-                    child: ListView.builder(
-                      itemCount: 4,
-                      // Display 4 items0
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      // Disable scroll inside ListView
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            print('Category $index');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CategoryScreen(categoryName: index)));
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                right: MediaQuery.of(context).size.width * 0.025),
-                            // Add vertical margin between items
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  MediaQuery.of(context).size.width * 0.05),
-                              border: Border.all(
-                                color: Colors.black.withOpacity(0.50),
-                                // Change color and opacity as needed
-                                width: 1,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Category $index',
-                                style: const TextStyle(fontSize: 16.0),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    )),
+                  height: MediaQuery.of(context).size.height * 0.10,
+                  child: const CategoryListWidget(),
+                ),
                 SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                 // Job listings
                 Row(
@@ -188,8 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "Job Listings",
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                     const Spacer(),
                     TextButton(
@@ -202,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         "View All",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                     ),
                   ],

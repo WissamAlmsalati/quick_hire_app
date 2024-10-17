@@ -38,4 +38,39 @@ class UserRepositoryImpl implements UserRepository {
     // TODO: implement fetchUsername
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> updateUserProfile(Freelancer freelancer) async {
+    final id = await localDataSource.getId();
+    final token = await localDataSource.getToken();
+    final response = await client.put(
+      Uri.parse('https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/users/user/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: json.encode(freelancer.toJson()),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update profile data');
+    }
+  }
+
+  Future<void> patchUserProfile(Map<String, dynamic> updates) async {
+    final id = await localDataSource.getId();
+    final token = await localDataSource.getToken();
+    final response = await client.patch(
+      Uri.parse('https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/users/user/?id=$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: json.encode(updates),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to patch profile data');
+    }
+  }
 }

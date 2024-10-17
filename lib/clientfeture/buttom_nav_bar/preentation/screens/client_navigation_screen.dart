@@ -7,6 +7,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import '../../../../core/widgets/custom_text_field.dart';
+import '../../../../freelancefeatures/HomeScreen/data/repositories/category_repository.dart';
+import '../../../../freelancefeatures/HomeScreen/presentation/cubit/category_cubit/category_cubit.dart';
+import '../../../../freelancefeatures/HomeScreen/presentation/cubit/category_cubit/category_state.dart';
 import '../../../../freelancefeatures/HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
 import '../../../../freelancefeatures/HomeScreen/presentation/widget/job_list_widget.dart';
 import '../../../../freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
@@ -95,200 +98,78 @@ class ClientHomeScreen extends StatelessWidget {
 }
 
 class ClentHomeScreen extends StatelessWidget {
-  const ClentHomeScreen({super.key});
+  const ClentHomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-    final List<String> items = ['Item 1', 'Item 2', 'Item 3'];
-    int currentIndex = 0;
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          'Home',
-          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: Colors.white,
-              ),
-        ),
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          context.read<JobCubit>().fetchJobs();
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.04,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CustomTextField(
-                  icon: AppIcons.searchIcon,
-                  controller: controller,
-                  hintText: "Search for a new job",
-                  obscureText: false,
-                ),
-                const SizedBox(height: 20),
-                // Carousel slider
-                CarouselSlider(
-                  items: items.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'text $i',
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          ),
-                        );
-                      },
+    return BlocProvider(
+      create: (context) => CategoryCubit(CategoryRepository())..fetchCategories(),
+      child: BlocBuilder<CategoryCubit, CategoryState>(
+        builder: (context, state) {
+          if (state is CategoryLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CategoryLoaded) {
+            return ListView.builder(
+              itemCount: state.categories.length,
+              physics: const NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                final category = state.categories[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryScreen(
+                          index: index,
+                          categoryName: category.name,
+                        ),
+                      ),
                     );
-                  }).toList(),
-                  options: CarouselOptions(
-                    height: 150.0,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    viewportFraction: 1.0,
-                    onPageChanged: (index, reason) {
-                      currentIndex = index;
-                    },
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.025,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width * 0.05,
+                      ),
+                      border: Border.all(
+                        color: Colors.black.withOpacity(0.50),
+                        width: 1,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/${category.image}',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          category.name,
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                // Dots for transition
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: items.map((i) {
-                    int index = items.indexOf(i);
-                    return Container(
-                      width: 10.0,
-                      height: 10.0,
-                      margin:
-                          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: currentIndex == index
-                            ? AppColors.primaryColor // Active dot color
-                            : Colors.grey, // Inactive dot color
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Text(
-                      "Popular Categories",
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "View All",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                // Category grid with 2 rows and 4 columns
-                SizedBox(
-                    height: MediaQuery.of(context).size.height *
-                        0.10, // Fixed height for the grid
-                    child: ListView.builder(
-                      itemCount: 4,
-                      // Display 4 items
-                      physics: const NeverScrollableScrollPhysics(),
-                      // Disable scroll inside ListView
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            print('Category $index');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        CategoryScreen(categoryName: index)));
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                right:
-                                    MediaQuery.of(context).size.width * 0.025),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  MediaQuery.of(context).size.width * 0.05),
-                              border: Border.all(
-                                color: Colors.black.withOpacity(0.50),
-                                width: 1,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Category $index',
-                                style: const TextStyle(fontSize: 16.0),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    )),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-                // Job listings
-                Row(
-                  children: [
-                    Text(
-                      "Job Listings",
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const JobListWidget()));
-                      },
-                      child: Text(
-                        "View All",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-                // Job listings grid with 2 rows and 4 columns
-                SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.5,
-                    child: const JobListWidget(
-                      isHasLimit: true,
-                      limit: 5,
-                    )),
-              ],
-            ),
-          ),
-        ),
+                );
+              },
+            );
+          } else if (state is CategoryError) {
+            return Center(child: Text(state.message));
+          } else {
+            return const Center(child: Text('No categories available'));
+          }
+        },
       ),
     );
   }
 }
-
 class ClientActiveJobs extends StatelessWidget {
   const ClientActiveJobs({super.key});
 

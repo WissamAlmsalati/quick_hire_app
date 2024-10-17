@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import '../../../HomeScreen/presentation/screen/home_screen.dart';
+import '../../../inbox_feature/presentation/screen/inbox_screen.dart';
 import '../../../job_feature/presentation/screen/job_screen.dart';
 import '../../../profile_screens/presentation/screens/freelancer_profile_screen.dart';
 import '../cubit/navigation_cubit.dart';
@@ -74,17 +75,6 @@ class FreelanceHomeScreen extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-
-
-class InboxScreen extends StatelessWidget {
-  const InboxScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
 

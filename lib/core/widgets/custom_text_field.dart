@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final String? labelText;
   final bool obscureText;
   final String? hintText;
+
   final String? icon;
   final String? Function(String?)? validator;
   final int? maxLines;
@@ -47,7 +48,7 @@ class CustomTextField extends StatelessWidget {
               filled: true,
               hintText: hintText,
               hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.black.withOpacity(0.50),
+                  color: AppColors.typographyColor.withOpacity(0.50),
                   fontSize: MediaQuery.of(context).size.width * 0.04),
               prefixIcon: icon != null
                   ? Padding(
@@ -76,6 +77,10 @@ class CustomTextField extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.0041),
               ),
               counterStyle: TextStyle(color: AppColors.primaryColor),
+            ),
+            style: TextStyle(
+              color: Colors.black, // Change the input text color to black
+              fontSize: MediaQuery.of(context).size.width * 0.04,
             ),
             buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) {
               if (maxLength == null || currentLength == null) {

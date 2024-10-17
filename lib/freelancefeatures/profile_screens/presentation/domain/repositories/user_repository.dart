@@ -4,4 +4,5 @@ import 'package:quick_hire/freelancefeatures/authintication_screens/data/models/
 abstract class UserRepository {
   Future<Freelancer> fetchUserProfile();
   Future<String> fetchUsername(String id);
+  Future<void> updateUserProfile(Freelancer freelancer);
 }
