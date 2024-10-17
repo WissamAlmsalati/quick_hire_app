@@ -9,7 +9,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final String registerUrl = 'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/auth/register';
   final String loginUrl = 'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/auth/login';
 
-  final AuthLocalDataSource authLocalDataSource = AuthLocalDataSource(FlutterSecureStorage());
+  final AuthLocalDataSource authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
 
   @override
   Future<User> login(String email, String password) async {

@@ -41,7 +41,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             remoteDataSource: JobRemoteDataSourceImpl(client: http.Client()),
           ),
         ),
-        authLocalDataSource: AuthLocalDataSource(FlutterSecureStorage()),
+        authLocalDataSource: AuthLocalDataSource(const FlutterSecureStorage()),
       )..fetchJobs(),
       child: Scaffold(
         appBar: AppBar(
@@ -62,7 +62,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           listener: (context, state) {
             if (state is JobApplicationSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Job application successful!')),
+                const SnackBar(content: Text('Job application successful!')),
               );
             } else if (state is JobError) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -72,7 +72,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           },
           builder: (context, state) {
             if (state is JobLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is JobError) {
               return Center(child: Text(state.message));
             } else if (state is JobLoaded) {
@@ -85,17 +85,17 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 40,
                           backgroundImage: NetworkImage(
                             'assets/images/cyclops-profile.png',
                           ),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text(
                               job.clientName,
                               style: TextStyle(
@@ -108,12 +108,12 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                               children: [
                                 Text(
                                   job.deadline.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 10,
                                     color: Colors.grey,
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(
                                   job.canApply ? 'Active' : 'Inactive',
                                   style: TextStyle(
@@ -123,7 +123,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             RichText(
                               text: TextSpan(
                                 children: [
@@ -151,7 +151,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(
+                    const Text(
                       'Job Description:',
                       style: TextStyle(
                         fontSize: 15,
@@ -165,14 +165,14 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         color: AppColors.typographyColor,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Container(
+                    const SizedBox(height: 10),
+                    SizedBox(
                       width: double.infinity,
-                      child: Divider(
+                      child: const Divider(
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         SvgPicture.asset(
@@ -181,8 +181,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           width: MediaQuery.of(context).size.width * 0.08,
                           height: MediaQuery.of(context).size.width * 0.08,
                         ),
-                        SizedBox(width: 5),
-                        Text(
+                        const SizedBox(width: 5),
+                        const Text(
                           'Location: ',
                           style: TextStyle(
                             fontSize: 15,
@@ -197,7 +197,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         SvgPicture.asset(
@@ -206,8 +206,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           width: MediaQuery.of(context).size.width * 0.08,
                           height: MediaQuery.of(context).size.width * 0.08,
                         ),
-                        SizedBox(width: 5),
-                        Text(
+                        const SizedBox(width: 5),
+                        const Text(
                           'Budget: ',
                           style: TextStyle(
                             fontSize: 15,
@@ -215,43 +215,43 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           ),
                         ),
                         Text(
-                          '${job.budget.toString()}',
+                          job.budget.toString(),
                           style: TextStyle(
                             color: AppColors.typographyColor,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
-                    Container(
+                    const SizedBox(height: 10),
+                    SizedBox(
                       width: double.infinity,
-                      child: Divider(
+                      child: const Divider(
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'Skills and Expertise:',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Wrap(
                       spacing: 5.0,
                       runSpacing: 5.0,
                       children: job.skills.map((skill) => SkillButtons(skillName: skill)).toList(),
                     ),
-                    SizedBox(height: 10),
-                    Container(
+                    const SizedBox(height: 10),
+                    SizedBox(
                       width: double.infinity,
-                      child: Divider(
+                      child: const Divider(
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'About Client:',
                       style: TextStyle(
                         fontSize: 15,
@@ -278,7 +278,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             buttomPd: 10,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: CustomButton(
                             text: 'Save Job',

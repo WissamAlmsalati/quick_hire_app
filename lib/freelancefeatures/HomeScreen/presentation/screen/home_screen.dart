@@ -37,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           onPressed: () async {
-            final authLocalDataSource = AuthLocalDataSource(FlutterSecureStorage());
+            final authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
             await authLocalDataSource.deleteToken();
             await authLocalDataSource.deleteId();
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
             );
           },
         ),
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   hintText: "Search for a new job",
                   obscureText: false,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 // Carousel slider
                 CarouselSlider(
                   items: items.map((i) {
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Center(
                             child: Text(
                               'text $i',
-                              style: TextStyle(fontSize: 16.0),
+                              style: const TextStyle(fontSize: 16.0),
                             ),
                           ),
                         );
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Dots for transition
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       width: 10.0,
                       height: 10.0,
-                      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _currentIndex == index
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Text(
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: AppColors.primaryColor,
                           ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextButton(
                       onPressed: () {},
                       child: Text(
@@ -141,12 +141,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 // Category grid with 2 rows and 4 columns
-                Container(
+                SizedBox(
                     height: MediaQuery.of(context).size.height * 0.10, // Fixed height for the grid
                     child: ListView.builder(
                       itemCount: 4,
                       // Display 4 items0
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       // Disable scroll inside ListView
                       itemBuilder: (BuildContext context, int index) {
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(
                               child: Text(
                                 'Category $index',
-                                style: TextStyle(fontSize: 16.0),
+                                style: const TextStyle(fontSize: 16.0),
                               ),
                             ),
                           ),
@@ -191,13 +191,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: AppColors.primaryColor,
                           ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => JobListWidget()));
+                                builder: (context) => const JobListWidget()));
                       },
                       child: Text(
                         "View All",

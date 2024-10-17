@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.black),
+          icon: const Icon(Icons.chevron_left, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },

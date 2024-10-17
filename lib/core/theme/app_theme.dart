@@ -4,82 +4,82 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static ThemeData getLightTheme(BuildContext context) {
     return ThemeData(
-      primaryColor: Color(0xFF0077B5),
+      primaryColor: const Color(0xFF0077B5),
       textTheme: TextTheme(
         displayLarge: GoogleFonts.urbanist(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         displayMedium: GoogleFonts.urbanist(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         displaySmall: GoogleFonts.urbanist(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         headlineLarge: GoogleFonts.urbanist(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         headlineMedium: GoogleFonts.urbanist(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         headlineSmall: GoogleFonts.urbanist(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         titleLarge: GoogleFonts.urbanist(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         titleMedium: GoogleFonts.urbanist(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         titleSmall: GoogleFonts.urbanist(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         bodyLarge: GoogleFonts.urbanist(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         bodyMedium: GoogleFonts.urbanist(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         bodySmall: GoogleFonts.urbanist(
           fontSize: 11,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: const Color(0xFF333333),
         ),
         labelLarge: GoogleFonts.urbanist(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         labelMedium: GoogleFonts.urbanist(
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
         labelSmall: GoogleFonts.urbanist(
           fontSize: 10,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF0077B5),
+          color: const Color(0xFF0077B5),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -101,7 +101,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: Color(0xFF0077B5),
+          backgroundColor: const Color(0xFF0077B5),
           textStyle: GoogleFonts.urbanist(
             fontSize: 16,
             fontWeight: FontWeight.bold,

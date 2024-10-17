@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../data/models/client_job_posted_model.dart';
 import '../../data/repositories/client_job_posted_repository.dart';

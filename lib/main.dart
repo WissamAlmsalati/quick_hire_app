@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_hire/core/theme/app_theme.dart';
 import 'package:quick_hire/core/utils/token_checker.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:quick_hire/freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import 'package:quick_hire/freelancefeatures/profile_screens/presentation/cubit/profile_cubit.dart';
-
 import 'clientfeture/buttom_nav_bar/preentation/screens/client_navigation_screen.dart';
 import 'clientfeture/job_posting/data/repositories/job_repository_impl.dart';
 import 'freelancefeatures/HomeScreen/data/datasources/job_remote_data_source.dart';

@@ -20,7 +20,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.white),
+          icon: const Icon(Icons.chevron_left, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -34,7 +34,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(widget.categoryName.toString(), style: Theme.of(context).textTheme.displayMedium),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Available jobs:',
               style: TextStyle(
@@ -43,7 +43,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             ),
 
-                Expanded(
+                const Expanded(
                     flex: 1,
                     child: JobListWidget()),
 

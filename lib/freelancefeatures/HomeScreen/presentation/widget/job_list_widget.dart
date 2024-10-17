@@ -17,14 +17,14 @@ class JobListWidget extends StatelessWidget {
     return BlocBuilder<JobCubit, JobState>(
       builder: (context, state) {
         if (state is JobLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is JobError) {
           return Center(child: Text(state.message));
         } else if (state is JobLoaded) {
           return Padding(
             padding: EdgeInsets.all(MediaQuery.sizeOf(context).aspectRatio * 0.04),
             child: ListView.builder(
-              physics: isHasLimit ? NeverScrollableScrollPhysics() : null,
+              physics: isHasLimit ? const NeverScrollableScrollPhysics() : null,
               itemCount: isHasLimit ? limit : state.jobs.length,
               itemBuilder: (context, index) {
                 final job = state.jobs[index];
@@ -33,7 +33,7 @@ class JobListWidget extends StatelessWidget {
                   width: double.infinity,
                   margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.01),
                   child: Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     alignment: Alignment.topLeft,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,14 +43,14 @@ class JobListWidget extends StatelessWidget {
                           job.title ?? 'N/A',
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           job.description ?? 'N/A',
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -65,7 +65,7 @@ class JobListWidget extends StatelessWidget {
                               "Budget: ${job.budget.toString()}\$ - ${job.budget.toString()}\$",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
                               height: 38,
                               decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class JobListWidget extends StatelessWidget {
                             )
                           ],
                         ),
-                        Divider(thickness: 1, color: Colors.grey),
+                        const Divider(thickness: 1, color: Colors.grey),
                       ],
                     ),
                   ),

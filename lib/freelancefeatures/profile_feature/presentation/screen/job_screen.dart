@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class JobScreen extends StatelessWidget {
-  const JobScreen({Key? key}) : super(key: key);
+  const JobScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

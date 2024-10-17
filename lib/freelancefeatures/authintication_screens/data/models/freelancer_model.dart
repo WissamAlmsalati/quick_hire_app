@@ -8,35 +8,23 @@ class Freelancer extends User {
   List<int> ratings;
 
   Freelancer({
-    required String id,
-    required String username,
-    required String email,
-    required String password,
-    required String userType,
-    required bool isSuperUser,
-    required List<String> jobs,
-    required List<String> activeProjects,
-    required List<String> oldProjects,
-    required int wallet,
-    required String token,
+    required super.id,
+    required super.username,
+    required super.email,
+    required super.password,
+    required super.userType,
+    required super.isSuperUser,
+    required super.jobs,
+    required super.activeProjects,
+    required super.oldProjects,
+    required super.wallet,
+    required super.token,
     required this.skills,
     required this.rate,
     required this.portfolio,
     required this.bio,
     required this.ratings,
-  }) : super(
-    id: id,
-    username: username,
-    email: email,
-    password: password,
-    userType: userType,
-    isSuperUser: isSuperUser,
-    jobs: jobs,
-    activeProjects: activeProjects,
-    oldProjects: oldProjects,
-    wallet: wallet,
-    token: token,
-  );
+  });
 
   factory Freelancer.fromJson(Map<String, dynamic> json) {
     return Freelancer(

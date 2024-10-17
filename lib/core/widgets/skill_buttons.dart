@@ -18,7 +18,7 @@ class SkillButtons extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.primaryColor),
             borderRadius: BorderRadius.circular(8),

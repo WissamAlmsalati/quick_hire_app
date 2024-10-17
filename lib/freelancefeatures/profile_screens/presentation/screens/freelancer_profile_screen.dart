@@ -193,7 +193,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                    Container(
+                    SizedBox(
                       height: 600, // Set a fixed height for the JobListWidget
                       child: const JobListWidget(),
                     ),

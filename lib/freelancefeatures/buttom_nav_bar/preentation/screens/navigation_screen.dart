@@ -14,11 +14,11 @@ class FreelanceHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _screens = [
-      HomeScreen(),
-      JobsScreen(),
-      InboxScreen(),
-      FreelancerProfileScreen(),
+    List<Widget> screens = [
+      const HomeScreen(),
+      const JobsScreen(),
+      const InboxScreen(),
+      const FreelancerProfileScreen(),
     ];
 
 
@@ -28,7 +28,7 @@ class FreelanceHomeScreen extends StatelessWidget {
         // Don't provide a new NavigationCubit here. The BlocProvider above will handle it.
         builder: (context, state) {
           return Scaffold(
-            body: _screens[state],
+            body: screens[state],
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: AppColors.primaryColor,
               unselectedItemColor: AppColors.secondaryColor,

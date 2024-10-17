@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             // Navigate to HomeScreen on successful sign-up
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           } else if (state is AuthError) {
             print(state.message);

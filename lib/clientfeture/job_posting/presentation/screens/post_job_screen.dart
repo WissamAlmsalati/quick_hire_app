@@ -11,7 +11,7 @@ import '../../../buttom_nav_bar/preentation/screens/client_navigation_screen.dar
 import '../../data/repositories/job_repository.dart';
 
 class ClentPostJob extends StatefulWidget {
-  ClentPostJob({super.key});
+  const ClentPostJob({super.key});
 
   @override
   _ClentPostJobState createState() => _ClentPostJobState();

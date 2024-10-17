@@ -49,7 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                    SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                    ),
-                   Text(
+                   const Text(
                     'A platform that provides work opportunities for those who wish to work independently, at their own time and location.',
                     style: TextStyle(
                       fontSize: 16,

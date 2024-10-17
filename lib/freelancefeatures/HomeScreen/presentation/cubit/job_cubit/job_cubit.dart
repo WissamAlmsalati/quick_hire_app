@@ -1,6 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import '../../../domain/entities/job.dart';
 import '../../../domain/usecases/get_jobs.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/models/client_job_posted_model.dart';
 import '../cubit/client_job_cubit.dart';
 
 class ClientJobPostedListWidget extends StatelessWidget {

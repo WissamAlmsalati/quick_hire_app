@@ -19,7 +19,7 @@ class ClientInboxApplication extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(),
+      body: const Column(),
     );
   }
 }

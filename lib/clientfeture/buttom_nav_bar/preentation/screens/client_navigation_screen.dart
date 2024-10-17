@@ -19,13 +19,14 @@ import '../cubit/navigation_cubit.dart';
 class ClientHomeScreen extends StatelessWidget {
   const ClientHomeScreen({super.key});
 
+  @override
   Widget build(BuildContext context) {
-    List<Widget> _screens = [
-      ClentHomeScreen(),
-      ClientActiveJobs(),
+    List<Widget> screens = [
+      const ClentHomeScreen(),
+      const ClientActiveJobs(),
       ClentPostJob(),
-      ClientInboxApplication(),
-      ClientProfileScreen(),
+      const ClientInboxApplication(),
+      const ClientProfileScreen(),
     ];
 
     return BlocProvider(
@@ -33,7 +34,7 @@ class ClientHomeScreen extends StatelessWidget {
       child: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
           return Scaffold(
-            body: _screens[state],
+            body: screens[state],
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: AppColors.primaryColor,
               unselectedItemColor: AppColors.secondaryColor,
@@ -58,7 +59,7 @@ class ClientHomeScreen extends StatelessWidget {
                   ),
                   label: 'Jobs',
                 ),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: Icon(Icons.add),
                   label: 'Post Job',
                 ),
@@ -100,7 +101,7 @@ class ClentHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
     final List<String> items = ['Item 1', 'Item 2', 'Item 3'];
-    int _currentIndex = 0;
+    int currentIndex = 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -129,7 +130,7 @@ class ClentHomeScreen extends StatelessWidget {
                   hintText: "Search for a new job",
                   obscureText: false,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 // Carousel slider
                 CarouselSlider(
                   items: items.map((i) {
@@ -144,7 +145,7 @@ class ClentHomeScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'text $i',
-                              style: TextStyle(fontSize: 16.0),
+                              style: const TextStyle(fontSize: 16.0),
                             ),
                           ),
                         );
@@ -157,11 +158,11 @@ class ClentHomeScreen extends StatelessWidget {
                     enlargeCenterPage: true,
                     viewportFraction: 1.0,
                     onPageChanged: (index, reason) {
-                      _currentIndex = index;
+                      currentIndex = index;
                     },
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Dots for transition
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -171,17 +172,17 @@ class ClentHomeScreen extends StatelessWidget {
                       width: 10.0,
                       height: 10.0,
                       margin:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: _currentIndex == index
+                        color: currentIndex == index
                             ? AppColors.primaryColor // Active dot color
                             : Colors.grey, // Inactive dot color
                       ),
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Text(
@@ -190,7 +191,7 @@ class ClentHomeScreen extends StatelessWidget {
                             color: AppColors.primaryColor,
                           ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextButton(
                       onPressed: () {},
                       child: Text(
@@ -203,7 +204,7 @@ class ClentHomeScreen extends StatelessWidget {
                   ],
                 ),
                 // Category grid with 2 rows and 4 columns
-                Container(
+                SizedBox(
                     height: MediaQuery.of(context).size.height *
                         0.10, // Fixed height for the grid
                     child: ListView.builder(
@@ -237,7 +238,7 @@ class ClentHomeScreen extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 'Category $index',
-                                style: TextStyle(fontSize: 16.0),
+                                style: const TextStyle(fontSize: 16.0),
                               ),
                             ),
                           ),
@@ -254,13 +255,13 @@ class ClentHomeScreen extends StatelessWidget {
                             color: AppColors.primaryColor,
                           ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => JobListWidget()));
+                                builder: (context) => const JobListWidget()));
                       },
                       child: Text(
                         "View All",
@@ -314,13 +315,13 @@ class ClientActiveJobs extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 16,
                     ),
-            tabs: [
+            tabs: const [
               Tab(text: 'Active Jobs'),
               Tab(text: 'Job Posted'),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [],
         ),
       ),
@@ -374,7 +375,7 @@ class SkillsDropdown extends StatefulWidget {
 }
 
 class _SkillsDropdownState extends State<SkillsDropdown> {
-  List<String> _selectedSkills = [];
+  final List<String> _selectedSkills = [];
   final TextEditingController _skillController = TextEditingController();
 
   @override
@@ -388,7 +389,7 @@ class _SkillsDropdownState extends State<SkillsDropdown> {
             labelText: 'Enter Skill',
             hintText: 'Type a skill',
             suffixIcon: IconButton(
-              icon: Icon(Icons.check),
+              icon: const Icon(Icons.check),
               onPressed: () {
                 final newSkill = _skillController.text.trim();
                 if (newSkill.isNotEmpty &&
@@ -403,7 +404,7 @@ class _SkillsDropdownState extends State<SkillsDropdown> {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Wrap(
           spacing: 8.0,
           runSpacing: 4.0,

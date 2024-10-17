@@ -56,21 +56,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: rateNameController,
-                  decoration: InputDecoration(labelText: 'Rate Name'),
+                  decoration: const InputDecoration(labelText: 'Rate Name'),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                 TextField(
                   controller: ratePriceController,
-                  decoration: InputDecoration(labelText: 'Rate Price'),
+                  decoration: const InputDecoration(labelText: 'Rate Price'),
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -78,7 +78,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       onPressed: () {
 
                       },
-                      child: Text('Add'),
+                      child: const Text('Add'),
                     ),
                     TextButton(
                       onPressed: () {
@@ -86,7 +86,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ratePriceController.clear();
                         Navigator.of(context).pop();
                       },
-                      child: Text('Cancel'),
+                      child: const Text('Cancel'),
                     ),
                   ],
                 ),
@@ -139,7 +139,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           image: DecorationImage(
                             image: _image != null
                                 ? FileImage(_image!)
-                                : AssetImage('assets/images/cyclops-profile.png') as ImageProvider,
+                                : const AssetImage('assets/images/cyclops-profile.png') as ImageProvider,
                             fit: BoxFit.cover,
                           ),
                           shape: BoxShape.circle,
@@ -224,8 +224,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Wrap(
                       spacing: 8.0,
                       runSpacing: 10.0,

@@ -3,32 +3,19 @@ import '../../domain/entities/job.dart';
 
 class JobModel extends Job {
   JobModel({
-    required String id,
-    required String title,
-    required String description,
-    required double budget,
-    required DateTime deadline,
-    required String clientName,
-    required Client client,
-    required List<String> applications,
-    required bool canApply,
-    String? acceptedFreelancer,
-    required List<String> skills,
-    String location = 'Remote',
-  }) : super(
-    id: id,
-    title: title,
-    description: description,
-    budget: budget,
-    deadline: deadline,
-    clientName: clientName,
-    client: client,
-    applications: applications,
-    canApply: canApply,
-    acceptedFreelancer: acceptedFreelancer,
-    skills: skills,
-    location: location,
-  );
+    required super.id,
+    required super.title,
+    required super.description,
+    required super.budget,
+    required super.deadline,
+    required super.clientName,
+    required super.client,
+    required super.applications,
+    required super.canApply,
+    super.acceptedFreelancer,
+    required super.skills,
+    super.location,
+  });
 
   factory JobModel.fromJson(Map<String, dynamic> json) {
     return JobModel(
