@@ -13,7 +13,6 @@ import '../../data/repositories/auth_repository_impl.dart';
 import '../widgets/login_form_widget.dart';
 import '../widgets/sign_up_form.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -49,19 +48,11 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Text(
                   'Login',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .displayLarge
-                      ?.copyWith(color: AppColors.primaryColor),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(color: AppColors.primaryColor),
                 ),
                 Text(
                   'to search for new Employers or Jobs',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .headlineMedium
-                      ?.copyWith(color: AppColors.primaryColor),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.primaryColor),
                 ),
                 const Gap(70),
                 CustomTextField(
@@ -75,19 +66,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                 ),
                 const Gap(40),
-
-
-
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is AuthLoading) {
                       // Handle loading state
                     } else if (state is AuthSuccess) {
                       // Navigate to HomeScreen on success
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => ButtomNavBar()),
-                      // );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      );
                     } else if (state is AuthError) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(state.message)),
@@ -106,13 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           final email = emailController.text;
                           final password = passwordController.text;
 
-                          if (email.isNotEmpty && password.isNotEmpty
-                          ) {
-                            context.read<AuthCubit>().signIn(
-                                email,
-                                password
-                            );
-
+                          if (email.isNotEmpty && password.isNotEmpty) {
+                            context.read<AuthCubit>().signIn(email, password);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -129,8 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
-
-
                 const Gap(40),
                 Row(
                   children: [
@@ -215,4 +196,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

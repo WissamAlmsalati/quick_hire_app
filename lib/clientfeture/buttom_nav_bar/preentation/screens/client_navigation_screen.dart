@@ -13,7 +13,9 @@ import '../../../../freelancefeatures/authintication_screens/data/datasources/lo
 import '../../../../freelancefeatures/authintication_screens/presentation/screens/login_screen.dart';
 import '../../../../freelancefeatures/job_screens/presentation/screens/category_screen.dart';
 import '../../../inbox_feature/presentation/screens/inbox_screens.dart';
+import '../../../inbox_feauter/presentation/screens/inbox_screen.dart';
 import '../../../job_posting/presentation/screens/post_job_screen.dart';
+import '../../../jobsFeature/activeJobs/widgets/active_jobs_widget.dart';
 import '../cubit/navigation_cubit.dart';
 
 class ClientHomeScreen extends StatelessWidget {
@@ -25,7 +27,7 @@ class ClientHomeScreen extends StatelessWidget {
       const ClentHomeScreen(),
       const ClientActiveJobs(),
       ClentPostJob(),
-      const ClientInboxApplication(),
+      ClientPostedJobsScreen(),
       const ClientProfileScreen(),
     ];
 
@@ -171,8 +173,8 @@ class ClentHomeScreen extends StatelessWidget {
                     return Container(
                       width: 10.0,
                       height: 10.0,
-                      margin:
-                          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 2.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: currentIndex == index
@@ -283,46 +285,6 @@ class ClentHomeScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ClientActiveJobs extends StatelessWidget {
-  const ClientActiveJobs({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.primaryColor,
-          title: Text(
-            'Active Jobs',
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          bottom: TabBar(
-            labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-            unselectedLabelStyle:
-                Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-            tabs: const [
-              Tab(text: 'Active Jobs'),
-              Tab(text: 'Job Posted'),
-            ],
-          ),
-        ),
-        body: const TabBarView(
-          children: [],
         ),
       ),
     );

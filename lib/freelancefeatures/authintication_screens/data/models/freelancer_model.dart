@@ -1,60 +1,83 @@
-import 'user_model.dart';
-
-class Freelancer extends User {
-  List<String> skills;
-  int rate;
-  List<String> portfolio;
-  String bio;
-  List<int> ratings;
+class Freelancer {
+  final String id;
+  final String username;
+  final String email;
+  final String password;
+  final String userType;
+  final bool isSuperUser;
+  final List<String> jobs;
+  final List<String> activeProjects;
+  final List<dynamic> oldProjects;
+  final int wallet;
+  final String type;
+  final List<dynamic> skills;
+  final int rate;
+  final List<dynamic> portfolio;
+  final String bio;
+  final List<dynamic> ratings;
+  final int version;
 
   Freelancer({
-    required super.id,
-    required super.username,
-    required super.email,
-    required super.password,
-    required super.userType,
-    required super.isSuperUser,
-    required super.jobs,
-    required super.activeProjects,
-    required super.oldProjects,
-    required super.wallet,
-    required super.token,
+    required this.id,
+    required this.username,
+    required this.email,
+    required this.password,
+    required this.userType,
+    required this.isSuperUser,
+    required this.jobs,
+    required this.activeProjects,
+    required this.oldProjects,
+    required this.wallet,
+    required this.type,
     required this.skills,
     required this.rate,
     required this.portfolio,
     required this.bio,
     required this.ratings,
+    required this.version,
   });
 
   factory Freelancer.fromJson(Map<String, dynamic> json) {
     return Freelancer(
-      id: json['id'] ?? '',
-      username: json['username'] ?? '',
-      email: json['email'] ?? '',
-      password: json['password'] ?? '',
-      userType: json['userType'] ?? '',
-      isSuperUser: json['isSuperUser'] ?? false,
-      jobs: List<String>.from(json['jobs'] ?? []),
-      activeProjects: List<String>.from(json['activeProjects'] ?? []),
-      oldProjects: List<String>.from(json['oldProjects'] ?? []),
-      wallet: json['wallet'] ?? 0,
-      token: json['token'] ?? '',
-      skills: List<String>.from(json['skills'] ?? []),
-      rate: json['rate'] ?? 0,
-      portfolio: List<String>.from(json['portfolio'] ?? []),
-      bio: json['bio'] ?? '',
-      ratings: List<int>.from(json['ratings'] ?? []),
+      id: json['_id'],
+      username: json['username'],
+      email: json['email'],
+      password: json['password'],
+      userType: json['userType'],
+      isSuperUser: json['isSuperUser'],
+      jobs: List<String>.from(json['jobs']),
+      activeProjects: List<String>.from(json['activeProjects']),
+      oldProjects: List<dynamic>.from(json['oldProjects']),
+      wallet: json['wallet'],
+      type: json['__t'],
+      skills: List<dynamic>.from(json['skills']),
+      rate: json['rate'],
+      portfolio: List<dynamic>.from(json['portfolio']),
+      bio: json['bio'],
+      ratings: List<dynamic>.from(json['ratings']),
+      version: json['__v'],
     );
   }
 
-  @override
   Map<String, dynamic> toJson() {
-    final data = super.toJson();
-    data['skills'] = skills;
-    data['rate'] = rate;
-    data['portfolio'] = portfolio;
-    data['bio'] = bio;
-    data['ratings'] = ratings;
-    return data;
+    return {
+      '_id': id,
+      'username': username,
+      'email': email,
+      'password': password,
+      'userType': userType,
+      'isSuperUser': isSuperUser,
+      'jobs': jobs,
+      'activeProjects': activeProjects,
+      'oldProjects': oldProjects,
+      'wallet': wallet,
+      '__t': type,
+      'skills': skills,
+      'rate': rate,
+      'portfolio': portfolio,
+      'bio': bio,
+      'ratings': ratings,
+      '__v': version,
+    };
   }
 }
