@@ -1,6 +1,11 @@
 import '../../../authintication_screens/data/models/client_model.dart';
 import '../../domain/entities/job.dart';
 
+
+
+import '../../../authintication_screens/data/models/client_model.dart';
+import '../../domain/entities/job.dart';
+
 class JobModel extends Job {
   JobModel({
     required super.id,
@@ -33,6 +38,8 @@ class JobModel extends Job {
       location: json['location'] ?? 'Remote',
     );
   }
+
+
 
   @override
   Map<String, dynamic> toJson() {
