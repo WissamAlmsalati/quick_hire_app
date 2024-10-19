@@ -20,7 +20,7 @@ class CategoryListWidget extends StatelessWidget {
           } else if (state is CategoryLoaded) {
             return ListView.builder(
               itemCount: state.categories.length,
-              physics: const NeverScrollableScrollPhysics(),
+
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 final category = state.categories[index];
@@ -34,6 +34,8 @@ class CategoryListWidget extends StatelessWidget {
                     );
                   },
                   child: Container(
+                    height: MediaQuery.of(context).size.width * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     margin: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width * 0.025,
                     ),
@@ -50,9 +52,9 @@ class CategoryListWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.network(
-                          'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/${category.image}',
-                          width: 100,
-                          height: 100,
+                          '${category.image}',
+                          width: 50,
+                          height: 50,
                           fit: BoxFit.cover,
                         ),
                         const SizedBox(height: 8),

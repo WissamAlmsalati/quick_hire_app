@@ -6,11 +6,10 @@ import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../HomeScreen/data/datasources/job_remote_data_source.dart';
 import '../../../HomeScreen/data/repositories/job_repository.dart';
 import '../../../HomeScreen/domain/usecases/get_jobs.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../../../HomeScreen/domain/usecases/job_repository.dart';
 import '../../../HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
 import '../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
@@ -27,6 +26,22 @@ class JobDetailsScreen extends StatefulWidget {
 }
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
+  String? userType;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserType();
+  }
+
+  Future<void> _fetchUserType() async {
+    final authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
+    final type = await authLocalDataSource.getUserType();
+    setState(() {
+      userType = type;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -258,45 +273,47 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          child: CustomButton(
-                            text: 'Apply Now',
-                            onPressed: () {
-                              context.read<JobCubit>().applyForJob(job.id);
-                            },
-                            color: AppColors.primaryColor,
-                            textColor: AppColors.backgroundColor,
-                            isHaveBorder: false,
-                            fontSize: 16,
-                            borderRadius: 10,
-                            width: 100,
-                            height: 50,
-                            topPd: 10,
-                            buttomPd: 10,
+                    if (userType == 'freelancer') ...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                              text: 'Apply Now',
+                              onPressed: () {
+                                context.read<JobCubit>().applyForJob(job.id);
+                              },
+                              color: AppColors.primaryColor,
+                              textColor: AppColors.backgroundColor,
+                              isHaveBorder: false,
+                              fontSize: 16,
+                              borderRadius: 10,
+                              width: 100,
+                              height: 50,
+                              topPd: 10,
+                              buttomPd: 10,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: CustomButton(
-                            text: 'Save Job',
-                            onPressed: () {},
-                            color: AppColors.backgroundColor,
-                            textColor: AppColors.primaryColor,
-                            isHaveBorder: true,
-                            fontSize: 16,
-                            borderRadius: 10,
-                            width: 100,
-                            height: 50,
-                            topPd: 10,
-                            buttomPd: 10,
-                            borderColor: AppColors.primaryColor,
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: CustomButton(
+                              text: 'Save Job',
+                              onPressed: () {},
+                              color: AppColors.backgroundColor,
+                              textColor: AppColors.primaryColor,
+                              isHaveBorder: true,
+                              fontSize: 16,
+                              borderRadius: 10,
+                              width: 100,
+                              height: 50,
+                              topPd: 10,
+                              buttomPd: 10,
+                              borderColor: AppColors.primaryColor,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ],
                 ),
               );
