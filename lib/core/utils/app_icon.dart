@@ -29,4 +29,5 @@ class AppIcons{
   static const String penEditIcon = "assets/icons/pencil-02.svg";
   static const String addIcon = "assets/icons/add-square-02.svg";
   static const String minusIcon = "assets/icons/minus-circle-contained.svg";
+  static const String sendIcon = "assets/icons/send-01.svg";
 }

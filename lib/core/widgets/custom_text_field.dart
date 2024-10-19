@@ -79,7 +79,7 @@ class CustomTextField extends StatelessWidget {
               counterStyle: TextStyle(color: AppColors.primaryColor),
             ),
             style: TextStyle(
-              color: Colors.black, // Change the input text color to black
+              color: AppColors.typographyColor, // Change the input text color to black
               fontSize: MediaQuery.of(context).size.width * 0.04,
             ),
             buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) {
