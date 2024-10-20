@@ -13,6 +13,7 @@ import '../../../HomeScreen/domain/usecases/get_jobs.dart';
 import '../../../HomeScreen/domain/usecases/job_repository.dart';
 import '../../../HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
 import '../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
+import '../../../chat_feature/presentation/screens/chat_screen.dart';
 
 class JobDetailsScreen extends StatefulWidget {
   final int index;
@@ -153,7 +154,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   TextSpan(
                                     text: job.title,
                                     style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.primaryColor,
                                     ),
@@ -162,6 +163,17 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                               ),
                             ),
                           ],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatScreen(jobId: job.id.toString()),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.chat),
                         ),
                       ],
                     ),

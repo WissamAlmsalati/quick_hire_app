@@ -22,7 +22,6 @@ class FreelanceHomeScreen extends StatelessWidget {
       const FreelancerProfileScreen(),
     ];
 
-
     return BlocProvider(
       create: (context) => NavigationCubit(),
       child: BlocBuilder<NavigationCubit, int>(
@@ -36,32 +35,44 @@ class FreelanceHomeScreen extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               backgroundColor: AppColors.backgroundColor,
               items: [
-               BottomNavigationBarItem(
-  icon: SvgPicture.asset(
-    AppIcons.homeIcon, // Use the correct icon name from AppIcons
-    color: state == 0 ? AppColors.primaryColor : AppColors.secondaryColor,
-  ),
-  label: 'Home',
-),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
-                AppIcons.briefIcon, // Use the correct icon name from AppIcons
-                color: state == 1 ? AppColors.primaryColor : AppColors.secondaryColor,
+                    AppIcons.homeIcon,
+                    // Use the correct icon name from AppIcons
+                    color: state == 0
+                        ? AppColors.primaryColor
+                        : AppColors.secondaryColor,
+                  ),
+                  label: 'Home',
                 ),
+                BottomNavigationBarItem(
+                  icon: SvgPicture.asset(
+                    AppIcons.briefIcon,
+                    // Use the correct icon name from AppIcons
+                    color: state == 1
+                        ? AppColors.primaryColor
+                        : AppColors.secondaryColor,
+                  ),
                   label: 'Jobs',
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
-                    AppIcons.inboxIcon, // Use the correct icon name from AppIcons
-                    color: state == 2 ? AppColors.primaryColor : AppColors.secondaryColor,
+                    AppIcons.inboxIcon,
+                    // Use the correct icon name from AppIcons
+                    color: state == 2
+                        ? AppColors.primaryColor
+                        : AppColors.secondaryColor,
                   ),
                   label: 'Inbox',
                 ),
-                 BottomNavigationBarItem(
-                   icon: SvgPicture.asset(
-                     AppIcons.userIcon, // Use the correct icon name from AppIcons
-                     color: state == 3 ? AppColors.primaryColor : AppColors.secondaryColor,
-                   ),
+                BottomNavigationBarItem(
+                  icon: SvgPicture.asset(
+                    AppIcons.userIcon,
+                    // Use the correct icon name from AppIcons
+                    color: state == 3
+                        ? AppColors.primaryColor
+                        : AppColors.secondaryColor,
+                  ),
                   label: 'Profile',
                 ),
               ],
@@ -77,11 +88,3 @@ class FreelanceHomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-

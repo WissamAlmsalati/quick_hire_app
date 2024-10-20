@@ -34,10 +34,10 @@ class _InboxScreenState extends State<InboxScreen> {
         children: [
           ElevatedButton(onPressed: (){
 
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const ChatScreen()),
-            );
+            // Navigator.pushReplacement(
+            //   context,
+            //   MaterialPageRoute(builder: (context) =>  ChatScreen(jobId: '',)),
+            // );
           }, child: Text("go to chat temp"))
         ],
 

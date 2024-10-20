@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -15,7 +14,6 @@ import '../../../../freelancefeatures/authintication_screens/presentation/screen
 import '../../../../freelancefeatures/job_screens/presentation/screens/category_screen.dart';
 import '../../../../freelancefeatures/profile_screens/presentation/cubit/profile_cubit.dart';
 import '../../../../freelancefeatures/profile_screens/presentation/screens/edit_profile_screen.dart';
-import '../../../inbox_feature/presentation/screens/inbox_screens.dart';
 import '../../../inbox_feauter/presentation/screens/inbox_screen.dart';
 import '../../../job_posting/presentation/screens/post_job_screen.dart';
 import '../cubit/navigation_cubit.dart';
