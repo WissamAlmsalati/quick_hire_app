@@ -334,8 +334,6 @@ class ClientActiveJobs extends StatelessWidget {
   }
 }
 
-
-
 class ClientProfileScreen extends StatefulWidget {
   const ClientProfileScreen({super.key});
 
@@ -358,7 +356,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
         backgroundColor: AppColors.primaryColor,
         leading: IconButton(
           icon: SvgPicture.asset(
-            AppIcons.settingIcon,
+            AppIcons.logoutIcon,
             color: Colors.white,
           ),
           onPressed: () async {
@@ -383,8 +381,6 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
               if (state is ProfileLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is ProfileLoaded) {
-                final profileData = state.profileData;
-                final skills = profileData.skills ?? []; // Ensure skills is not null
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -409,7 +405,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const EditProfileScreen()),
                             );
@@ -424,7 +420,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
                     Text(
-                      profileData.username,
+                      state.clientProfileData?.username ?? 'Unknown',
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 20,
@@ -433,7 +429,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                     Text(
-                      profileData.email,
+                      state.clientProfileData?.username ?? 'Unknown',
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 13,
@@ -478,9 +474,9 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                     Wrap(
                       spacing: 8.0,
                       runSpacing: 4.0,
-                      children: skills.map((skill) {
+                      children: state.freelancerProfileData?.skills?.map((skill) {
                         return SkillButtons(skillName: skill);
-                      }).toList(),
+                      }).toList() ?? [],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     const Divider(color: Colors.grey),
@@ -528,9 +524,12 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                    SizedBox(
+                    const SizedBox(
                       height: 600, // Set a fixed height for the JobListWidget
-                      child: const JobListWidget(),
+                      child:  JobListWidget(
+                        isHasLimit: true,
+                        limit: 5,
+                      ),
                     ),
                   ],
                 );

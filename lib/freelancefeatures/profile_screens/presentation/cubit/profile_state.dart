@@ -1,4 +1,3 @@
-// lib/freelancefeatures/profile_screens/presentation/cubit/profile_state.dart
 part of 'profile_cubit.dart';
 
 abstract class ProfileState extends Equatable {
@@ -13,12 +12,13 @@ class ProfileInitial extends ProfileState {}
 class ProfileLoading extends ProfileState {}
 
 class ProfileLoaded extends ProfileState {
-  final Freelancer profileData;
+  final Freelancer? freelancerProfileData;
+  final Client? clientProfileData;
 
-  const ProfileLoaded(this.profileData);
+  const ProfileLoaded({this.freelancerProfileData, this.clientProfileData});
 
   @override
-  List<Object> get props => [profileData];
+  List<Object> get props => [freelancerProfileData ?? Object(), clientProfileData ?? Object()];
 }
 
 class ProfileError extends ProfileState {

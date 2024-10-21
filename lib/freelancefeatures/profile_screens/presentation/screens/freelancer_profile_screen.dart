@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
@@ -7,6 +8,7 @@ import 'package:quick_hire/core/widgets/skill_buttons.dart';
 import 'package:quick_hire/freelancefeatures/authintication_screens/presentation/screens/login_screen.dart';
 
 import '../../../HomeScreen/presentation/widget/job_list_widget.dart';
+import '../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import '../cubit/profile_cubit.dart';
 import 'edit_profile_screen.dart';
 
@@ -35,11 +37,14 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
             AppIcons.logoutIcon,
             color: Colors.white,
           ),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
+            await authLocalDataSource.deleteToken();
+            await authLocalDataSource.deleteId();
+            Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const EditProfileScreen()),
-            );;
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
           },
         ),
         centerTitle: true,
@@ -93,7 +98,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
                     Text(
-                      state.profileData.username,
+                      state.freelancerProfileData?.username ?? 'Unknown',
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 20,
@@ -102,7 +107,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                     Text(
-                      state.profileData.email,
+                      state.freelancerProfileData?.email ?? 'Unknown',
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 13,
@@ -144,13 +149,13 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Wrap(
-                      spacing: 8.0,
-                      runSpacing: 4.0,
-                      children: state.profileData.skills.map((skill) {
-                        return SkillButtons(skillName: skill);
-                      }).toList(),
-                    ),
+                   Wrap(
+  spacing: 8.0,
+  runSpacing: 4.0,
+  children: state.freelancerProfileData?.skills?.map((skill) {
+    return SkillButtons(skillName: skill);
+  }).toList() ?? [],
+),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     const Divider(color: Colors.grey),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
@@ -197,9 +202,12 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
-                    SizedBox(
+                    const SizedBox(
                       height: 600, // Set a fixed height for the JobListWidget
-                      child: const JobListWidget(),
+                      child:  JobListWidget(
+                        isHasLimit: true,
+                        limit: 5,
+                      ),
                     ),
                   ],
                 );
