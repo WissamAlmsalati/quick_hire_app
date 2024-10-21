@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 // Replace the existing ListView.builder with CategoryListWidget
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.10,
+                  height: MediaQuery.of(context).size.height * 0.15,
                   child: const CategoryListWidget(),
                 ),
                 SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),

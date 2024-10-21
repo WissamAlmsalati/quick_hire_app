@@ -11,10 +11,10 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$index: $categoryName'),
+        title: Text('$categoryName'),
       ),
       body: Center(
-        child: Text('Category $index: $categoryName'),
+        child: Text('Category$categoryName'),
       ),
     );
   }
