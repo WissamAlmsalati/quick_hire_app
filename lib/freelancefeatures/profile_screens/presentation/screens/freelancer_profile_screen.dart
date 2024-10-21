@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
+import 'package:quick_hire/freelancefeatures/authintication_screens/presentation/screens/login_screen.dart';
 
 import '../../../HomeScreen/presentation/widget/job_list_widget.dart';
 import '../cubit/profile_cubit.dart';
@@ -31,11 +32,14 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
         backgroundColor: AppColors.primaryColor,
         leading: IconButton(
           icon: SvgPicture.asset(
-            AppIcons.settingIcon,
+            AppIcons.logoutIcon,
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const EditProfileScreen()),
+            );;
           },
         ),
         centerTitle: true,
@@ -74,7 +78,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const EditProfileScreen()),
                             );
