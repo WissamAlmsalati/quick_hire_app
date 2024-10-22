@@ -32,21 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            AppIcons.settingIcon,
-            color: Colors.white,
-          ),
-          onPressed: () async {
-            final authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
-            await authLocalDataSource.deleteToken();
-            await authLocalDataSource.deleteId();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
-          },
-        ),
+
         centerTitle: true,
         title: SvgPicture.asset('assets/images/quickhire logo.svg'),
       ),
