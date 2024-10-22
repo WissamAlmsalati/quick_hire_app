@@ -18,8 +18,8 @@ class JobRemoteDataSourceImpl implements JobRemoteDataSource {
   Future<List<JobModel>> getAllJobs() async {
     final response = await client.get(Uri.parse(
         'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/jobs/all'));
-print(response.body);
-print(response.statusCode);
+    print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       print(response.body); // Add logging to verify the response
       List<dynamic> jsonResponse = json.decode(response.body);

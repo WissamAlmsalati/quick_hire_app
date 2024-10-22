@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/utils/app_icon.dart';
 import '../../../../freelancefeatures/job_screens/presentation/screens/job_details_screen.dart';
 
-
 import '../../../jobsFeature/activeJobs/presentation/cubit/client_active_jobs_cubit.dart';
 import '../../../jobsFeature/activeJobs/reppostry/active_job_repository.dart';
 import '../../data/repostry/inbox_repository.dart';
@@ -453,7 +452,9 @@ class _ClientInboxApplicationState extends State<ClientInboxApplication> {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   JobApplicationsScreen(
-                                                      jobId: state.postedJobs[index].id),
+                                                      jobId: state
+                                                          .postedJobs[index]
+                                                          .id),
                                             ),
                                           );
                                         },

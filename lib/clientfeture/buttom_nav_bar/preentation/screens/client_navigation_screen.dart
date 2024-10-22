@@ -8,6 +8,7 @@ import 'package:quick_hire/core/utils/constants.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/skill_buttons.dart';
 import '../../../../freelancefeatures/HomeScreen/presentation/cubit/job_cubit/job_cubit.dart';
+import '../../../../freelancefeatures/HomeScreen/presentation/widget/freelance_list.dart';
 import '../../../../freelancefeatures/HomeScreen/presentation/widget/job_list_widget.dart';
 import '../../../../freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import '../../../../freelancefeatures/authintication_screens/presentation/screens/login_screen.dart';
@@ -96,6 +97,7 @@ class ClientHomeScreen extends StatelessWidget {
   }
 }
 
+
 class ClentHomeScreen extends StatelessWidget {
   const ClentHomeScreen({super.key});
 
@@ -111,8 +113,8 @@ class ClentHomeScreen extends StatelessWidget {
         title: Text(
           'Home',
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: Colors.white,
-              ),
+            color: Colors.white,
+          ),
         ),
       ),
       body: RefreshIndicator(
@@ -134,41 +136,41 @@ class ClentHomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 // Carousel slider
-CarouselSlider(
-  items: [
-    'assets/images/banner-1.png',
-    'assets/images/banner2.png',
-    'assets/images/banner-3.png',
-  ].map((imagePath) {
-    return Builder(
-      builder: (BuildContext context) {
-        return Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-            ),
-          ),
-        );
-      },
-    );
-  }).toList(),
-  options: CarouselOptions(
-    height: 150.0,
-    autoPlay: true,
-    enlargeCenterPage: true,
-    viewportFraction: 1.0,
-    onPageChanged: (index, reason) {
-      currentIndex = index;
-    },
-  ),
-),
-const SizedBox(height: 10),                const SizedBox(height: 10),
+                CarouselSlider(
+                  items: [
+                    'assets/images/banner-1.png',
+                    'assets/images/banner2.png',
+                    'assets/images/banner-3.png',
+                  ].map((imagePath) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              imagePath,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                  options: CarouselOptions(
+                    height: 150.0,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 1.0,
+                    onPageChanged: (index, reason) {
+                      currentIndex = index;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
                 // Dots for transition
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -177,8 +179,7 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                     return Container(
                       width: 10.0,
                       height: 10.0,
-                      margin:
-                          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: currentIndex == index
@@ -194,8 +195,8 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                     Text(
                       "Popular Categories",
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                     const Spacer(),
                     TextButton(
@@ -203,16 +204,15 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                       child: Text(
                         "View All",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 // Category grid with 2 rows and 4 columns
                 SizedBox(
-                    height: MediaQuery.of(context).size.height *
-                        0.10, // Fixed height for the grid
+                    height: MediaQuery.of(context).size.height * 0.10, // Fixed height for the grid
                     child: ListView.builder(
                       itemCount: 4,
                       // Display 4 items
@@ -231,8 +231,7 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                           },
                           child: Container(
                             margin: EdgeInsets.only(
-                                right:
-                                    MediaQuery.of(context).size.width * 0.025),
+                                right: MediaQuery.of(context).size.width * 0.025),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                   MediaQuery.of(context).size.width * 0.05),
@@ -258,8 +257,8 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                     Text(
                       "Job Listings",
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                     const Spacer(),
                     TextButton(
@@ -272,8 +271,8 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                       child: Text(
                         "View All",
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primaryColor,
-                            ),
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                     ),
                   ],
@@ -282,10 +281,8 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
                 // Job listings grid with 2 rows and 4 columns
                 SizedBox(
                     height: MediaQuery.sizeOf(context).height * 0.5,
-                    child: const JobListWidget(
-                      isHasLimit: true,
-                      limit: 5,
-                    )),
+                    child: FreelancerListWidget(),
+                ),
               ],
             ),
           ),
@@ -294,7 +291,6 @@ const SizedBox(height: 10),                const SizedBox(height: 10),
     );
   }
 }
-
 class ClientActiveJobs extends StatelessWidget {
   const ClientActiveJobs({super.key});
 
