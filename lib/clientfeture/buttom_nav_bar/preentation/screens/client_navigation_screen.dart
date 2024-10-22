@@ -134,37 +134,41 @@ class ClentHomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 // Carousel slider
-                CarouselSlider(
-                  items: items.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'text $i',
-                              style: const TextStyle(fontSize: 16.0),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    height: 150.0,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    viewportFraction: 1.0,
-                    onPageChanged: (index, reason) {
-                      currentIndex = index;
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
+CarouselSlider(
+  items: [
+    'assets/images/banner-1.png',
+    'assets/images/banner2.png',
+    'assets/images/banner-3.png',
+  ].map((imagePath) {
+    return Builder(
+      builder: (BuildContext context) {
+        return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
+    );
+  }).toList(),
+  options: CarouselOptions(
+    height: 150.0,
+    autoPlay: true,
+    enlargeCenterPage: true,
+    viewportFraction: 1.0,
+    onPageChanged: (index, reason) {
+      currentIndex = index;
+    },
+  ),
+),
+const SizedBox(height: 10),                const SizedBox(height: 10),
                 // Dots for transition
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

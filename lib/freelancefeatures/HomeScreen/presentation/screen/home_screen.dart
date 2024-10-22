@@ -27,12 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
-    final List<int> items = [1, 2, 3, 4, 5]; // Example items
+    final List<int> items = [1, 2, 3]; // Example items matching the number of images
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-
         centerTitle: true,
         title: SvgPicture.asset('assets/images/quickhire logo.svg'),
       ),
@@ -56,19 +55,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
                 // Carousel slider
                 CarouselSlider(
-                  items: items.map((i) {
+                  items: [
+                    'assets/images/banner-1.png',
+                    'assets/images/banner2.png',
+                    'assets/images/banner-3.png',
+                  ].map((imagePath) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
-                            child: Text(
-                              'text $i',
-                              style: const TextStyle(fontSize: 16.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              imagePath,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         );
