@@ -21,4 +21,15 @@ print(response.body);
       throw Exception('Failed to load posted jobs');
     }
   }
+  //might help with the problem
+//   Future<PostedJob> fetchJobById(String jobId) async {
+//     final response = await http.get(Uri.parse('$baseUrl/api/jobs/$jobId'));
+//     if (response.statusCode == 200) {
+//       final Map<String, dynamic> data = json.decode(response.body);
+//       return PostedJob.fromJson(data);
+//     } else {
+//       throw Exception('Failed to load job');
+//     }
+//   }
+// }
 }

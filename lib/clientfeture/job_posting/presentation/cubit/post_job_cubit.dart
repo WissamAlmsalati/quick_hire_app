@@ -19,4 +19,15 @@ class PostJobCubit extends Cubit<PostJobState> {
       emit(PostJobError('Failed to post job'));
     }
   }
+
+//   Future<void> fetchJobById(String jobId) async {
+//     try {
+//       emit(PostJobLoading());
+//       final job = await jobRepository.fetchJobById(jobId);
+//       emit(PostJobLoaded(job));
+//     } catch (e) {
+//       emit(PostJobError('Failed to load job'));
+//     }
+//   }
+// }
 }
