@@ -5,8 +5,12 @@ import 'package:provider/provider.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_button.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
+import '../../../../clientfeture/buttom_nav_bar/preentation/screens/client_navigation_screen.dart';
 import '../../../../core/utils/app_icon.dart';
+import '../../../../core/utils/token_checker.dart';
 import '../../../HomeScreen/presentation/screen/home_screen.dart';
+import '../../../buttom_nav_bar/preentation/screens/navigation_screen.dart';
+import '../../../onboarding_screens/presentation/screens/onboarding_screen.dart';
 import '../cubit/auth_cubit.dart';
 import '../screens/sign_up_screen.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -67,15 +71,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Gap(40),
                 BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
+                  listener: (context, state) async {
                     if (state is AuthLoading) {
                       // Handle loading state
                     } else if (state is AuthSuccess) {
-                      // Navigate to HomeScreen on success
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomeScreen()),
-                      );
+                      // Check user type and navigate accordingly
+                      final userType = await context
+                          .read<TokenChecker>()
+                          .getUserType();
+                      if (userType == 'freelancer') {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const FreelanceHomeScreen()),
+                        );
+                      } else if (userType == 'client') {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const ClientHomeScreen()),
+                        );
+                      } else {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const OnboardingScreen()),
+                        );
+                      }
                     } else if (state is AuthError) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(state.message)),
@@ -95,11 +120,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           final password = passwordController.text;
 
                           if (email.isNotEmpty && password.isNotEmpty) {
-                            context.read<AuthCubit>().signIn(email, password);
+                            context
+                                .read<AuthCubit>()
+                                .signIn(email, password, );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Please fill in all fields'),
+                                content:
+                                Text('Please fill in all fields'),
                               ),
                             );
                           }

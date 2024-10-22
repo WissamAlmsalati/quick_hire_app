@@ -365,13 +365,23 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
           ),
           onPressed: () async {
             final authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
-            await authLocalDataSource.deleteToken();
-            await authLocalDataSource.deleteId();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
+
+            try {
+              await authLocalDataSource.deleteToken();
+              await authLocalDataSource.deleteId();
+
+              // Navigate only after successful deletion
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
+              );
+            } catch (e) {
+              // Handle the error (e.g., show a message to the user)
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Logout failed: $e')),
+              );
+            }
           },
+
         ),
         centerTitle: true,
         title: SvgPicture.asset('assets/images/quickhire logo.svg'),
