@@ -1,4 +1,3 @@
-// lib/freelancefeatures/profile_screens/data/repositories/user_repository_impl.dart
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../presentation/domain/repositories/user_repository.dart';
@@ -51,7 +50,7 @@ class UserRepositoryImpl implements UserRepository {
       },
       body: json.encode(freelancer.toJson()),
     );
-
+    print("update response code: ${response.statusCode}");
     if (response.statusCode != 200) {
       throw Exception('Failed to update profile data');
     }
@@ -61,13 +60,17 @@ class UserRepositoryImpl implements UserRepository {
     final id = await localDataSource.getId();
     final token = await localDataSource.getToken();
     final response = await client.patch(
-      Uri.parse('https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/users/user/?id=$id'),
+      Uri.parse('https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/users/update-user/$id'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
       body: json.encode(updates),
     );
+
+    print("patch response code: ${response.statusCode}");
+    print("patch response body: ${response.body}");
+    print("patch response headers: ${response.headers}");
 
     if (response.statusCode != 200) {
       throw Exception('Failed to patch profile data');

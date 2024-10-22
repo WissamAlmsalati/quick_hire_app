@@ -7,12 +7,13 @@ class CustomTextField extends StatelessWidget {
   final String? labelText;
   final bool obscureText;
   final String? hintText;
-
   final String? icon;
   final String? Function(String?)? validator;
   final int? maxLines;
   final int? minLines;
   final int? maxLength;
+  final bool? readOnly; // New parameter
+  final VoidCallback? onTap; // New parameter
 
   const CustomTextField({
     super.key,
@@ -25,6 +26,8 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     this.minLines,
     this.maxLength,
+    this.readOnly = false, // Default value for readOnly
+    this.onTap, // Added onTap
   });
 
   @override
@@ -79,12 +82,13 @@ class CustomTextField extends StatelessWidget {
               counterStyle: TextStyle(color: AppColors.primaryColor),
             ),
             style: TextStyle(
-              color: AppColors.typographyColor, // Change the input text color to black
+              color: AppColors.typographyColor,
               fontSize: MediaQuery.of(context).size.width * 0.04,
             ),
-            buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) {
+            buildCounter: (BuildContext context,
+                {int? currentLength, int? maxLength, bool? isFocused}) {
               if (maxLength == null || currentLength == null) {
-                return null; // Return null to hide the counter if maxLength or currentLength is null
+                return null;
               }
               return Text(
                 '${maxLength - currentLength}',
@@ -99,6 +103,8 @@ class CustomTextField extends StatelessWidget {
             maxLines: obscureText ? 1 : maxLines,
             minLines: obscureText ? 1 : minLines,
             maxLength: maxLength,
+            readOnly: readOnly ?? false, // Added readOnly here
+            onTap: onTap, // Added onTap here
           ),
         ),
       ],

@@ -11,6 +11,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository userRepository;
 
   ProfileCubit(this.userRepository) : super(ProfileInitial());
+
   Future<void> fetchProfile(String userId) async {
     try {
       emit(ProfileLoading());

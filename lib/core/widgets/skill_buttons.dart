@@ -5,11 +5,13 @@ import 'package:quick_hire/core/utils/constants.dart';
 class SkillButtons extends StatelessWidget {
   final String skillName;
   final String? iconPath;
+  final VoidCallback? onPressed;
 
   const SkillButtons({
     super.key,
     required this.skillName,
     this.iconPath,
+    this.onPressed,
   });
 
   @override
@@ -35,10 +37,13 @@ class SkillButtons extends StatelessWidget {
           Positioned(
             top: -10,
             left: -10,
-            child: SvgPicture.asset(
-              iconPath!,
-              width: 20,
-              height: 20,
+            child: GestureDetector(
+              onTap: onPressed,
+              child: SvgPicture.asset(
+                iconPath!,
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
       ],

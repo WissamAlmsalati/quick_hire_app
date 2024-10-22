@@ -17,9 +17,14 @@ import '../../../chat_feature/presentation/screens/chat_screen.dart';
 
 class JobDetailsScreen extends StatefulWidget {
   final int index;
+  final bool showLastButtonRow;
+  final bool showChatButton;
 
   const JobDetailsScreen({
-    super.key, required this.index,
+    super.key,
+    required this.index,
+    this.showLastButtonRow = true,
+    this.showChatButton = true,
   });
 
   @override
@@ -164,17 +169,18 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ),
                           ],
                         ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ChatScreen(jobId: job.id.toString()),
-                              ),
-                            );
-                          },
-                          icon: Icon(Icons.chat),
-                        ),
+                        if (widget.showChatButton)
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChatScreen(jobId: job.id.toString()),
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.chat),
+                          ),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -285,7 +291,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    if (userType == 'freelancer') ...[
+                    if (widget.showLastButtonRow && userType == 'freelancer') ...[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

@@ -149,13 +149,13 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                   Wrap(
-  spacing: 8.0,
-  runSpacing: 4.0,
-  children: state.freelancerProfileData?.skills?.map((skill) {
-    return SkillButtons(skillName: skill);
-  }).toList() ?? [],
-),
+                    Wrap(
+                      spacing: 8.0,
+                      runSpacing: 4.0,
+                      children: state.freelancerProfileData?.skills?.map((skill) {
+                        return SkillButtons(skillName: skill);
+                      }).toList() ?? [],
+                    ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     const Divider(color: Colors.grey),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
@@ -170,21 +170,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                        Text(
-                          'Logo Design: 300',
-                          style: TextStyle(
-                            color: AppColors.typographyColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                        SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                        Text(
-                          'App Ui: 200',
-                          style: TextStyle(
-                            color: AppColors.typographyColor,
-                            fontSize: 16,
-                          ),
-                        ),
+
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
@@ -204,7 +190,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     const SizedBox(
                       height: 600, // Set a fixed height for the JobListWidget
-                      child:  JobListWidget(
+                      child: JobListWidget(
                         isHasLimit: true,
                         limit: 5,
                       ),
