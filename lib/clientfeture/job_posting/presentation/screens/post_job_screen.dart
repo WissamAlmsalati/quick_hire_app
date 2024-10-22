@@ -10,6 +10,7 @@ import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/custom_text_field.dart';
 import '../../../../freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import '../../../buttom_nav_bar/preentation/screens/client_navigation_screen.dart';
+import '../../../buttom_nav_bar/preentation/screens/client_profile_screen.dart';
 import '../../../jobsFeature/postedJobs/data/repostry/category_post_job_repository.dart';
 import '../../data/repositories/job_repository.dart';
 
@@ -22,8 +23,7 @@ class ClentPostJob extends StatefulWidget {
 
 class _ClentPostJobState extends State<ClentPostJob> {
   final TextEditingController jobTitleController = TextEditingController();
-  final TextEditingController jobDescriptionController =
-      TextEditingController();
+  final TextEditingController jobDescriptionController = TextEditingController();
   final TextEditingController jobLocationController = TextEditingController();
   final TextEditingController jobMaxBudget = TextEditingController();
   final TextEditingController jobMinBudget = TextEditingController();
@@ -61,34 +61,49 @@ class _ClentPostJobState extends State<ClentPostJob> {
         providers: [
           RepositoryProvider(
             create: (context) => PostedJobRepository(
-                baseUrl:
-                    'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com'),
+                baseUrl: 'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com'),
           ),
           RepositoryProvider(
             create: (context) => CategoryPostJobRepository(
-                baseUrl:
-                    'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com'),
+                baseUrl: 'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com'),
           ),
         ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) =>
-                  PostJobCubit(context.read<PostJobRepository>()),
+              create: (context) => PostJobCubit(context.read<PostJobRepository>()),
             ),
             BlocProvider(
-              create: (context) => CategoryPostJobCubit(
-                  context.read<CategoryPostJobRepository>())
+              create: (context) => CategoryPostJobCubit(context.read<CategoryPostJobRepository>())
                 ..fetchCategories(),
             ),
           ],
           child: BlocListener<PostJobCubit, PostJobState>(
             listener: (context, state) {
               if (state is PostJobSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Job posted successfully!')),
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Success'),
+                      content: const Text('Job posted successfully!'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ClientHomeScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
                 );
-                Navigator.pop(context);
               } else if (state is PostJobError) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.message)),
@@ -110,8 +125,7 @@ class _ClentPostJobState extends State<ClentPostJob> {
                             hintText: 'Enter job title',
                             obscureText: false,
                           ),
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.02),
+                          SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                           CustomTextField(
                             labelText: 'Job Description',
                             hintText: 'Enter job description',
@@ -119,20 +133,17 @@ class _ClentPostJobState extends State<ClentPostJob> {
                             maxLines: 5,
                             obscureText: false,
                           ),
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.02),
+                          SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                           CustomTextField(
                             controller: jobLocationController,
                             labelText: 'Location',
                             hintText: 'Enter job location',
                             obscureText: false,
                           ),
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.02),
+                          SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                           const Text(
                             'Budget',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Row(
                             children: [
@@ -144,9 +155,7 @@ class _ClentPostJobState extends State<ClentPostJob> {
                                   obscureText: false,
                                 ),
                               ),
-                              SizedBox(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.02),
+                              SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                               Expanded(
                                 child: CustomTextField(
                                   controller: jobMaxBudget,
@@ -157,12 +166,10 @@ class _ClentPostJobState extends State<ClentPostJob> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.02),
+                          SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                           const Text(
                             "Required Skills",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SkillsDropdown(
                             onSkillsSelected: (skills) {
@@ -171,12 +178,10 @@ class _ClentPostJobState extends State<ClentPostJob> {
                               });
                             },
                           ),
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.02),
+                          SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                           const Text(
                             "Category",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           BlocBuilder<CategoryPostJobCubit, CategoryPostJobState>(
                             builder: (context, state) {
@@ -222,9 +227,9 @@ class _ClentPostJobState extends State<ClentPostJob> {
                                           child: Text(
                                             category.name,
                                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                              color: AppColors.typographyColor,
-                                              fontSize: MediaQuery.of(context).size.width * 0.04,
-                                            ),
+                                                  color: AppColors.typographyColor,
+                                                  fontSize: MediaQuery.of(context).size.width * 0.04,
+                                                ),
                                           ),
                                         );
                                       }).toList(),
@@ -243,9 +248,7 @@ class _ClentPostJobState extends State<ClentPostJob> {
                               }
                             },
                           ),
-
-                          SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.02),
+                          SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                           CustomTextField(
                             controller: deadlineController,
                             labelText: 'Deadline',
@@ -268,8 +271,7 @@ class _ClentPostJobState extends State<ClentPostJob> {
                       }
                       return ElevatedButton(
                         onPressed: () async {
-                          final authLocalDataSource =
-                              AuthLocalDataSource(const FlutterSecureStorage());
+                          final authLocalDataSource = AuthLocalDataSource(const FlutterSecureStorage());
                           final clientId = await authLocalDataSource.getId();
 
                           if (clientId != null && selectedCategoryId != null) {
@@ -281,15 +283,12 @@ class _ClentPostJobState extends State<ClentPostJob> {
                               deadline: deadlineController.text,
                               skills: selectedSkills,
                               categoryId: selectedCategoryId!,
-                              // Use selected category ID
                               location: jobLocationController.text,
                             );
                             context.read<PostJobCubit>().postJob(job);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content:
-                                      Text('Client ID or Category not found')),
+                              const SnackBar(content: Text('Client ID or Category not found')),
                             );
                           }
                         },

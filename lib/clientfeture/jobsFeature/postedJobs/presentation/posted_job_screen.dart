@@ -6,6 +6,8 @@ import 'package:quick_hire/core/utils/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:quick_hire/freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
 
+import '../../../../freelancefeatures/job_screens/presentation/screens/job_details_screen.dart';
+
 class ClientPostedJobsScreen extends StatelessWidget {
   const ClientPostedJobsScreen({super.key});
 
@@ -39,6 +41,15 @@ class ClientPostedJobsScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final job = state.postedJobs[index];
                         return ListTile(
+                          onTap: () {
+                            // Navigate to job details screen
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => JobDetailsScreen(index: index),
+                              ),
+                            );
+                          },
                           title: Text(job.title),
                           subtitle: Text(job.description),
                         );

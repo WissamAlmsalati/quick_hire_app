@@ -18,7 +18,7 @@ class PostJobRepositoryImpl implements PostJobRepository {
     );
     print(response.body);
     print(response.statusCode);
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to post job');
     }
   }

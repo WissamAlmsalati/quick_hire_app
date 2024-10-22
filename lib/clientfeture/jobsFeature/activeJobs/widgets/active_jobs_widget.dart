@@ -5,6 +5,8 @@ import 'package:quick_hire/clientfeture/jobsFeature/activeJobs/reppostry/active_
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:quick_hire/freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
+import 'package:quick_hire/freelancefeatures/job_screens/presentation/screens/job_details_screen.dart';
+import 'package:quick_hire/freelancefeatures/profile_feature/presentation/screen/job_screen.dart';
 
 import '../../postedJobs/presentation/posted_job_screen.dart';
 
@@ -67,7 +69,15 @@ class ClientActiveJobs extends StatelessWidget {
                             itemCount: state.activeJobs.length,
                             itemBuilder: (context, index) {
                               final job = state.activeJobs[index];
-                              return ListTile(
+                              return ListTile(onTap: () {
+                                // Navigate to job details screen
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => JobDetailsScreen(index: index),
+                                  ),
+                                );
+                              },
                                 title: Text(job.title),
                                 subtitle: Text(job.description),
                               );
