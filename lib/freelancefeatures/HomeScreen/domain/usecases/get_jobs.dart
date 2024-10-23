@@ -7,6 +7,7 @@ class GetJobs {
   GetJobs({required this.repository});
 
   Future<List<Job>> call() async {
+    print('GetJobs called');
     return await repository.getAllJobs();
   }
 }

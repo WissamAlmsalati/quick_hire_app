@@ -6,8 +6,6 @@ import '../repostry/applied_jobs_repository.dart';
 
 part 'applied_jobs_state.dart';
 
-
-
 class AppliedJobsCubit extends Cubit<AppliedJobsState> {
   final AppliedJobsRepository appliedJobsRepository;
 

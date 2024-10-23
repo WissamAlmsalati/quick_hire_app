@@ -9,8 +9,8 @@ class Client {
 
   factory Client.fromJson(Map<String, dynamic> json) {
     return Client(
-      id: json['_id'] ?? '',
-      username: json['username'] ?? '',
+      id: json['_id'],
+      username: json['username'],
     );
   }
 

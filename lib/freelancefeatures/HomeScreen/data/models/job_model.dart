@@ -1,11 +1,6 @@
 import '../../../authintication_screens/data/models/client_model.dart';
 import '../../domain/entities/job.dart';
 
-
-
-import '../../../authintication_screens/data/models/client_model.dart';
-import '../../domain/entities/job.dart';
-
 class JobModel extends Job {
   JobModel({
     required super.id,
@@ -31,15 +26,13 @@ class JobModel extends Job {
       deadline: DateTime.parse(json['deadline'] ?? DateTime.now().toIso8601String()),
       clientName: json['clientName'] ?? '',
       client: Client.fromJson(json['client'] ?? {}),
-      applications: List<String>.from(json['applications'] ?? []),
+      applications: json['applications'] ?? [], // No conversion here
       canApply: json['canApply'] ?? false,
       acceptedFreelancer: json['acceptedFreelancer'],
       skills: List<String>.from(json['skills'] ?? []),
       location: json['location'] ?? 'Remote',
     );
   }
-
-
 
   @override
   Map<String, dynamic> toJson() {

@@ -1,6 +1,5 @@
 part of 'applied_jobs_cubit.dart';
 
-
 abstract class AppliedJobsState extends Equatable {
   const AppliedJobsState();
 

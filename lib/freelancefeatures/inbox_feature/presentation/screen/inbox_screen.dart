@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_icon.dart';
 import '../../../../core/utils/constants.dart';
-import '../../../chat_feature/presentation/screens/chat_screen.dart';
 import '../../applied_jobs/applied_jobs_cubit.dart';
 import '../../repostry/applied_jobs_repository.dart';
-import '../../../job_screens/presentation/screens/job_details_screen.dart'; // Import JobDetailsScreen
+import '../../../job_screens/presentation/screens/job_details_screen.dart';
 
 class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
@@ -14,7 +13,10 @@ class InboxScreen extends StatefulWidget {
   State<InboxScreen> createState() => _InboxScreenState();
 }
 
+
 class _InboxScreenState extends State<InboxScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -50,27 +52,32 @@ class _InboxScreenState extends State<InboxScreen> {
                           print(job);
 
                           // Handle null or missing values gracefully
-                          final jobId = job['jobId'] ?? 'Unknown Job ID';
-                          final status = job['status'] ?? 'Unknown Status';
+                          final jobId = job['_id'] ?? 'Unknown Job ID';
+                          final jobTitle = job['title'] ?? 'Unknown Job Title';
+                          final clientName = job['clientName'] ?? 'Unknown Client';
+                          final jobDescription = job['description'] ?? 'Unknown Description';
+                          final category = job['category'] ?? 'Unknown Location';
+                          final status = job['title'] ?? 'Unknown Status';
                           final appliedAt = job['appliedAt'] ?? 'Unknown Date';
-
-                          // Ensure jobId is an int
-                          final jobIdInt = int.tryParse(jobId) ?? 0;
 
                           return Card(
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
                             child: ListTile(
-                              title: Text('Job ID: $jobId'),
-                              subtitle: Text('Status: $status\nApplied At: $appliedAt'),
+                              title: Text(jobTitle),
+                              subtitle: Text("Client: $clientName \nCategory: $category \nStatus: $status \nApplied At: $appliedAt"),
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => JobDetailsScreen(index: jobIdInt,showChatButton: true,showLastButtonRow: false
-                                      ,), // Pass jobId as int
+                                    builder: (context) => JobDetailsScreen(
+                                      index: jobId, // This should be an int, but jobId is a String
+                                      showChatButton: true,
+                                      showLastButtonRow: false,
+                                    ),
                                   ),
                                 );
                               },
+
                             ),
                           );
                         },

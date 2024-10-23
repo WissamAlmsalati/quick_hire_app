@@ -70,11 +70,11 @@ class ClientActiveJobs extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final job = state.activeJobs[index];
                               return ListTile(onTap: () {
-                                // Navigate to job details screen
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => JobDetailsScreen(index: index),
+                                    builder: (context) => JobDetailsScreen(
+                                        index: index),
                                   ),
                                 );
                               },

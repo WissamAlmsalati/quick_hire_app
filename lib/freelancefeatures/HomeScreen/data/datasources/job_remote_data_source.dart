@@ -21,6 +21,7 @@ class JobRemoteDataSourceImpl implements JobRemoteDataSource {
     print(response.body);
     print(response.statusCode);
     if (response.statusCode == 200) {
+      print('Success');
       print(response.body); // Add logging to verify the response
       List<dynamic> jsonResponse = json.decode(response.body);
       return jsonResponse.map((job) => JobModel.fromJson(job)).toList();

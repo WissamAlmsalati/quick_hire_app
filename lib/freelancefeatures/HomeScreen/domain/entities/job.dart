@@ -8,7 +8,7 @@ class Job {
   final DateTime deadline;
   final String clientName;
   final Client client;
-  final List<String> applications;
+  final List<dynamic> applications; // Changed to List<dynamic>
   final bool canApply;
   final String? acceptedFreelancer;
   final List<String> skills;
@@ -29,9 +29,26 @@ class Job {
     this.location = 'Remote',
   });
 
+  factory Job.fromJson(Map<String, dynamic> json) {
+    return Job(
+      id: json['_id'],
+      title: json['title'],
+      description: json['description'],
+      budget: (json['budget'] as num).toDouble(),
+      deadline: DateTime.parse(json['deadline']),
+      clientName: json['clientName'],
+      client: Client.fromJson(json['client']),
+      applications: json['applications'], // No conversion here
+      canApply: json['canApply'],
+      acceptedFreelancer: json['acceptedFreelancer'],
+      skills: List<String>.from(json['skills']),
+      location: json['location'] ?? 'Remote',
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      '_id': id,
       'title': title,
       'description': description,
       'budget': budget,
