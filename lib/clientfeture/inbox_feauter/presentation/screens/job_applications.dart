@@ -59,6 +59,7 @@ class JobApplicationsScreen extends StatelessWidget {
   }
 }
 
+
 class FreelanceDetailScreen extends StatelessWidget {
   final String jobId;
   final String freelancerId;
@@ -82,6 +83,8 @@ class FreelanceDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return BlocProvider(
       create: (context) => FreelanceProfileCubit(ProfileRepository(baseUrl: 'https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com'))
         ..fetchProfile(freelancerId),
@@ -90,34 +93,114 @@ class FreelanceDetailScreen extends StatelessWidget {
           title: const Text('Freelancer Details'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: BlocBuilder<FreelanceProfileCubit, FreelanceProfileState>(
-            builder: (context, state) {
-              if (state is FreelanceProfileLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is FreelanceProfileLoaded) {
-                final profile = state.profile;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Freelancer ID: ${profile['id']}', style: const TextStyle(fontSize: 18)),
-                    Text('Name: ${profile['username']}', style: const TextStyle(fontSize: 18)),
-                    Text('Email: ${profile['email']}', style: const TextStyle(fontSize: 18)),
-                    Text('Bio: ${profile['bio']}', style: const TextStyle(fontSize: 18)),
-                    Text('Skills: ${profile['skills']}', style: const TextStyle(fontSize: 18)),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () => _acceptFreelancer(context),
-                      child: const Text('Accept Freelancer'),
-                    ),
-                  ],
-                );
-              } else if (state is FreelanceProfileError) {
-                return Center(child: Text(state.message));
-              } else {
-                return const Center(child: Text('Error loading profile'));
-              }
-            },
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: BlocBuilder<FreelanceProfileCubit, FreelanceProfileState>(
+              builder: (context, state) {
+                if (state is FreelanceProfileLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is FreelanceProfileLoaded) {
+                  final profile = state.profile;
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Profile Picture
+                      Center(
+                        child: CircleAvatar(
+                          radius: screenWidth * 0.15, // Adjust size based on screen width
+                          backgroundImage: NetworkImage('https://www.example.com/path-to-placeholder-image.jpg'),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // Freelancer Name
+                      Center(
+                        child: Text(
+                          profile.username,
+                          style: TextStyle(fontSize: screenWidth * 0.06, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Center(
+                        child: Text(
+                          'Email: ${profile.email}',
+                          style: TextStyle(fontSize: screenWidth * 0.04, color: Colors.grey),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // Freelancer Bio
+                      const Text(
+                        'Bio:',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        profile.bio.isEmpty ? 'No bio available' : profile.bio,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 20),
+                      // Skills
+                      const Text(
+                        'Skills:',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        profile.skills.isNotEmpty ? profile.skills.join(', ') : 'No skills listed',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 20),
+                      // Old Projects
+                      if (profile.oldProjects.isNotEmpty) ...[
+                        const Text(
+                          'Old Projects:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                      const SizedBox(height: 20),
+                      // New Projects
+                      if (profile.activeProjects.isNotEmpty) ...[
+                        const Text(
+                          'New Projects:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                      // Portfolio & Ratings
+                      const Text(
+                        'Portfolio:',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        'Ratings: ${profile.ratings}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 20),
+                      // Hourly Rate
+                      Text(
+                        'Rate: \$${profile.rate}/hr',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 30),
+                      // Accept Freelancer Button
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () => _acceptFreelancer(context),
+                          child: const Text('Accept Freelancer'),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(screenWidth * 0.5, 50), // Responsive button width
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else if (state is FreelanceProfileError) {
+                  return Center(child: Text(state.message));
+                } else {
+                  return const Center(child: Text('Error loading profile'));
+                }
+              },
+            ),
           ),
         ),
       ),

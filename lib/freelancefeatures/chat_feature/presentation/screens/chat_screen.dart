@@ -16,7 +16,6 @@ class ChatScreen extends StatefulWidget {
   final String jobId;
   const ChatScreen({super.key, required this.jobId});
 
-
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -39,17 +38,36 @@ class _ChatScreenState extends State<ChatScreen> {
     final userId = await _authLocalDataSource.getId();
 
     if (userType != null && userId != null) {
-      final freelancerId = userType == 'freelance' ? userId : '';
-      final clientId = userType == 'client' ? userId : '';
-
-      final url = 'http://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com/api/chats/${widget.jobId}/$freelancerId/$clientId';
+      final url = 'ws://10.0.2.2:3001'; // Update to your WebSocket server URL
       _channel = WebSocketChannel.connect(Uri.parse(url));
 
+      // Join the chat room
+      _channel.sink.add(json.encode({
+        'event': 'joinRoom',
+        'jobId': widget.jobId,
+        'userId': userId,
+      }));
+
       _channel.stream.listen((data) {
-        final message = Message.fromJson(json.decode(data));
-        setState(() {
-          _messages.add(message);
-        });
+        final decodedData = json.decode(data);
+        if (decodedData['event'] == 'previousMessages') {
+          final messages = (decodedData['data'] as List)
+              .map((message) => Message.fromJson(message))
+              .toList();
+          setState(() {
+            _messages.addAll(messages);
+          });
+        } else if (decodedData['event'] == 'receiveMessage') {
+          final message = Message.fromJson(decodedData['data']);
+          setState(() {
+            _messages.add(message);
+          });
+        }
+        print('Message received: ${decodedData['data']}');
+      }, onError: (error) {
+        print('WebSocket error: $error');
+      }, onDone: () {
+        print('WebSocket connection closed');
       });
     }
   }
@@ -75,21 +93,29 @@ class _ChatScreenState extends State<ChatScreen> {
           jobId: widget.jobId,
         );
 
-        _channel.sink.add(json.encode(message.toJson()));
+        _channel.sink.add(json.encode({
+          'event': 'sendMessage',
+          'jobId': widget.jobId,
+          'sender': userId,
+          'message': _controller.text,
+        }));
 
-        // Log success message to console
-        print('Message sent successfully: ${_controller.text}');
+        print('Message sent: ${_controller.text}');
 
         setState(() {
           _messages.add(message);
           _controller.clear();
         });
       }
+    } else {
+      print('Message is empty, not sent');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.jobId);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,

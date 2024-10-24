@@ -21,6 +21,8 @@ import 'clientfeture/job_posting/data/repositories/job_repository.dart';
 import 'clientfeture/job_posting/presentation/cubit/post_job_cubit.dart';
 import 'freelancefeatures/profile_screens/data/repositories/user_repository_impl.dart';
 import 'freelancefeatures/profile_screens/presentation/domain/repositories/user_repository.dart';
+import 'clientfeture/search_feature/presentation/cubit/search_cubit.dart';
+import 'clientfeture/search_feature/repostry/search_repository.dart';
 
 void main() {
   runApp(
@@ -66,6 +68,9 @@ void main() {
         ),
         BlocProvider<ProfileCubit>(
           create: (context) => ProfileCubit(context.read<UserRepository>()),
+        ),
+        BlocProvider<SearchCubit>(
+          create: (context) => SearchCubit(SearchRepository('https://blooming-inlet-19967-0478a7dc2f5d.herokuapp.com')),
         ),
       ],
       child: const MyApp(),

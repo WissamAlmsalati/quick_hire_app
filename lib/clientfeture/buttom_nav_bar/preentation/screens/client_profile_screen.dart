@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -56,7 +55,6 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
               );
             }
           },
-
         ),
         centerTitle: true,
         title: SvgPicture.asset('assets/images/quickhire logo.svg'),
@@ -117,13 +115,8 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.01),
-                    Text(
-                      state.clientProfileData?.username ?? 'Unknown',
-                      style: TextStyle(
-                        color: AppColors.secondaryColor,
-                        fontSize: 13,
-                      ),
-                    ),
+
+
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     Row(
                       children: [
@@ -160,13 +153,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Wrap(
-                      spacing: 8.0,
-                      runSpacing: 4.0,
-                      children: state.freelancerProfileData?.skills?.map((skill) {
-                        return SkillButtons(skillName: skill);
-                      }).toList() ?? [],
-                    ),
+
                     SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     const Divider(color: Colors.grey),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
@@ -215,7 +202,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
                     const SizedBox(
                       height: 600, // Set a fixed height for the JobListWidget
-                      child:  JobListWidget(
+                      child: JobListWidget(
                         isHasLimit: true,
                         limit: 5,
                       ),
@@ -234,6 +221,7 @@ class _ClientProfileScreenState extends State<ClientProfileScreen> {
     );
   }
 }
+
 class SkillsDropdown extends StatefulWidget {
   final Function(List<String>) onSkillsSelected;
 

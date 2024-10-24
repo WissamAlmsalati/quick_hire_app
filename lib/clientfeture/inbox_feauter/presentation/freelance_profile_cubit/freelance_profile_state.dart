@@ -12,7 +12,7 @@ class FreelanceProfileInitial extends FreelanceProfileState {}
 class FreelanceProfileLoading extends FreelanceProfileState {}
 
 class FreelanceProfileLoaded extends FreelanceProfileState {
-  final Map<String, dynamic> profile;
+  final Freelancer profile;
 
   const FreelanceProfileLoaded(this.profile);
 

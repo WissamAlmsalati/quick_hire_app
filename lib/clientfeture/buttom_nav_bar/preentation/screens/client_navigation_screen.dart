@@ -19,6 +19,7 @@ import '../../../../freelancefeatures/profile_screens/presentation/screens/edit_
 import '../../../inbox_feauter/presentation/screens/inbox_screen.dart';
 import '../../../job_posting/presentation/screens/post_job_screen.dart';
 import '../../../jobsFeature/activeJobs/widgets/active_jobs_widget.dart';
+import '../../../search_feature/presentation/screens/search_screen.dart';
 import '../cubit/navigation_cubit.dart';
 import 'client_profile_screen.dart';
 
@@ -106,159 +107,164 @@ class ClentHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-    final List<String> items = ['Item 1', 'Item 2', 'Item 3'];
-    int currentIndex = 0;
+  final TextEditingController controller = TextEditingController();
+  final List<String> items = ['Item 1', 'Item 2', 'Item 3'];
+  int currentIndex = 0;
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          'Home',
-          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-            color: Colors.white,
-          ),
-        ),
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          context.read<JobCubit>().fetchJobs();
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.04,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CustomTextField(
-                  icon: AppIcons.searchIcon,
-                  controller: controller,
-                  hintText: "Search for a new job",
-                  obscureText: false,
-                ),
-                const SizedBox(height: 20),
-                // Carousel slider
-                CarouselSlider(
-                  items: [
-                    'assets/images/banner-1.png',
-                    'assets/images/banner2.png',
-                    'assets/images/banner-3.png',
-                  ].map((imagePath) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              imagePath,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    height: 150.0,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    viewportFraction: 1.0,
-                    onPageChanged: (index, reason) {
-                      currentIndex = index;
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Dots for transition
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: items.map((i) {
-                    int index = items.indexOf(i);
-                    return Container(
-                      width: 10.0,
-                      height: 10.0,
-                      margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: currentIndex == index
-                            ? AppColors.primaryColor // Active dot color
-                            : Colors.grey, // Inactive dot color
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Text(
-                      "Popular Categories",
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "View All",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                // Category grid with 2 rows and 4 columns
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  child: const CategoryListWidget(),
-                ),                SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-                // Job listings
-                Row(
-                  children: [
-                    Text(
-                      "Job Listings",
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const JobListWidget()));
-                      },
-                      child: Text(
-                        "View All",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-                // Job listings grid with 2 rows and 4 columns
-                SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.5,
-                    child: FreelancerListWidget(),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+  return Scaffold(
+  appBar: AppBar(
+  backgroundColor: AppColors.primaryColor,
+  title: Text(
+  'Home',
+  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+  color: Colors.white,
+  ),
+  ),
+  ),
+  body: RefreshIndicator(
+  onRefresh: () async {
+  context.read<JobCubit>().fetchJobs();
+  },
+  child: Padding(
+  padding: EdgeInsets.symmetric(
+  horizontal: MediaQuery.of(context).size.width * 0.04,
+  ),
+  child: SingleChildScrollView(
+  child: Column(
+  children: [
+  CustomTextField(
+  icon: AppIcons.searchIcon,
+  controller: controller,
+  hintText: "Search for a new job",
+  obscureText: false,
+  readOnly: true,
+  onTap: () {
+  Navigator.push(
+  context,
+  MaterialPageRoute(
+  builder: (context) => SearchScreen(),
+  ),
+  );
+  },
+  ),
+  const SizedBox(height: 20),
+  // Carousel slider
+  CarouselSlider(
+  items: [
+  'assets/images/banner-1.png',
+  'assets/images/banner2.png',
+  'assets/images/banner-3.png',
+  ].map((imagePath) {
+  return Builder(
+  builder: (BuildContext context) {
+  return Container(
+  width: double.infinity,
+  decoration: BoxDecoration(
+  borderRadius: BorderRadius.circular(10),
+  ),
+  child: ClipRRect(
+  borderRadius: BorderRadius.circular(10),
+  child: Image.asset(
+  imagePath,
+  fit: BoxFit.cover,
+  ),
+  ),
+  );
+  },
+  );
+  }).toList(),
+  options: CarouselOptions(
+  height: 150.0,
+  autoPlay: true,
+  enlargeCenterPage: true,
+  viewportFraction: 1.0,
+  onPageChanged: (index, reason) {
+  currentIndex = index;
+  },
+  ),
+  ),
+  const SizedBox(height: 10),
+  // Dots for transition
+  Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: items.map((i) {
+  int index = items.indexOf(i);
+  return Container(
+  width: 10.0,
+  height: 10.0,
+  margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+  decoration: BoxDecoration(
+  shape: BoxShape.circle,
+  color: currentIndex == index
+  ? AppColors.primaryColor // Active dot color
+      : Colors.grey, // Inactive dot color
+  ),
+  );
+  }).toList(),
+  ),
+  const SizedBox(height: 20),
+  Row(
+  children: [
+  Text(
+  "Popular Categories",
+  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+  color: AppColors.primaryColor,
+  ),
+  ),
+  const Spacer(),
+  TextButton(
+  onPressed: () {},
+  child: Text(
+  "View All",
+  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+  color: AppColors.primaryColor,
+  ),
+  ),
+  ),
+  ],
+  ),
+  // Category grid with 2 rows and 4 columns
+  SizedBox(
+  height: MediaQuery.of(context).size.height * 0.15,
+  child: const CategoryListWidget(),
+  ),                SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
+  // Job listings
+  Row(
+  children: [
+  Text(
+  "Job Listings",
+  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+  color: AppColors.primaryColor,
+  ),
+  ),
+  const Spacer(),
+  TextButton(
+  onPressed: () {
+  Navigator.push(
+  context,
+  MaterialPageRoute(
+  builder: (context) => const JobListWidget()));
+  },
+  child: Text(
+  "View All",
+  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+  color: AppColors.primaryColor,
+  ),
+  ),
+  ),
+  ],
+  ),
+  SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
+  // Job listings grid with 2 rows and 4 columns
+  SizedBox(
+  height: MediaQuery.sizeOf(context).height * 0.5,
+  child: FreelancerListWidget(),
+  ),
+  ],
+  ),
+  ),
+  ),
+  ),
+  );
   }
-}
-
-
-
-
+  }
