@@ -145,8 +145,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                               ],
                             ),
                             const SizedBox(height: 5),
-                            RichText(
-                              text: TextSpan(
+                            Text.rich(
+                              TextSpan(
                                 children: [
                                   TextSpan(
                                     text: 'Looking for a ',
@@ -166,7 +166,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   ),
                                 ],
                               ),
+                              softWrap: true, // Enable text wrapping to a new line
                             ),
+
                           ],
                         ),
                         if (widget.showChatButton)
@@ -283,14 +285,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         color: Colors.grey,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'About Client:',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+
+                    Spacer(),
                     if (widget.showLastButtonRow && userType == 'freelancer') ...[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,

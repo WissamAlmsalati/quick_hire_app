@@ -366,19 +366,7 @@ class _ClientInboxApplicationState extends State<ClientInboxApplication> {
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
                           color: Colors.white,
                         )),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ClientPostedJobsScreen(),
-                        ),
-                      );
-                    },
-                    icon: Icon(Icons.post_add),
-                  ),
-                ],
+
               ),
               body: BlocBuilder<ClientPostedJobsCubit, ClientPostedJobsState>(
                 builder: (context, state) {

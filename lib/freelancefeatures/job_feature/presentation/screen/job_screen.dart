@@ -9,6 +9,7 @@ class JobsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primaryColor,

@@ -42,6 +42,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     if (state is SearchLoading) {
                       return Center(child: CircularProgressIndicator());
                     } else if (state is SearchLoaded) {
+                      if (state.results.isEmpty) {
+                        return Center(child: Text('No results found'));
+                      }
                       return ListView.builder(
                         itemCount: state.results.length,
                         itemBuilder: (context, index) {

@@ -6,25 +6,24 @@ import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
 import 'package:quick_hire/core/widgets/skill_buttons.dart';
 import 'package:quick_hire/freelancefeatures/authintication_screens/presentation/screens/login_screen.dart';
+import 'package:quick_hire/freelancefeatures/profile_screens/presentation/screens/edit_profile_screen.dart';
 
-import '../../../HomeScreen/presentation/widget/job_list_widget.dart';
-import '../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
-import '../cubit/profile_cubit.dart';
-import 'edit_profile_screen.dart';
+import '../../../../freelancefeatures/HomeScreen/presentation/widget/job_list_widget.dart';
+import '../../../../freelancefeatures/authintication_screens/data/datasources/local/auth_local_data_source.dart';
+import '../cubit/client_profile_cubit.dart';
 
-class FreelancerProfileScreen extends StatefulWidget {
-  const FreelancerProfileScreen({super.key});
+class ClientProfileScreen extends StatefulWidget {
+  const ClientProfileScreen({super.key});
 
   @override
-  State<FreelancerProfileScreen> createState() => _FreelancerProfileScreenState();
+  State<ClientProfileScreen> createState() => _ClientProfileScreenState();
 }
 
-class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
+class _ClientProfileScreenState extends State<ClientProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // Fetch the profile when the screen is initialized
-    context.read<ProfileCubit>().fetchProfile('user_id'); // Replace 'user_id' with the actual user ID
+    context.read<ClientProfileCubit>().fetchClientProfile('671d62e7e7ece2c9f1f5ef32');
   }
 
   @override
@@ -54,11 +53,11 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
-          child: BlocBuilder<ProfileCubit, ProfileState>(
+          child: BlocBuilder<ClientProfileCubit, ClientProfileState>(
             builder: (context, state) {
-              if (state is ProfileLoading) {
+              if (state is ClientProfileLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is ProfileLoaded) {
+              } else if (state is ClientProfileLoaded) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,7 +84,9 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const EditProfileScreen()),
+                              MaterialPageRoute(
+                                builder: (context) => const EditProfileScreen(),
+                              ),
                             );
                           },
                           icon: SvgPicture.asset(
@@ -98,7 +99,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
                     Text(
-                      state.freelancerProfileData?.username ?? 'Unknown',
+                      state.profile.username,
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 20,
@@ -107,7 +108,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.01),
                     Text(
-                      state.freelancerProfileData?.bio ?? 'Unknown',
+                      state.profile.bio,
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 13,
@@ -123,12 +124,13 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                         ),
                         SizedBox(width: MediaQuery.of(context).size.width * 0.01),
                         Text(
-                          'baxter building',
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 16,
-                          ),
+                          state.profile.email,
                         ),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                        Text(
+                          state.profile.bio,
+                        ),
+
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
@@ -152,9 +154,9 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     Wrap(
                       spacing: 8.0,
                       runSpacing: 4.0,
-                      children: state.freelancerProfileData?.skills?.map((skill) {
+                      children: state.profile.skills.map((skill) {
                         return SkillButtons(skillName: skill);
-                      }).toList() ?? [],
+                      }).toList(),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     const Divider(color: Colors.grey),
@@ -170,7 +172,6 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.03),
@@ -197,7 +198,7 @@ class _FreelancerProfileScreenState extends State<FreelancerProfileScreen> {
                     ),
                   ],
                 );
-              } else if (state is ProfileError) {
+              } else if (state is ClientProfileError) {
                 return Center(child: Text(state.message));
               } else {
                 return const Center(child: Text("Error"));

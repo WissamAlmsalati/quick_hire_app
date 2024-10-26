@@ -5,14 +5,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_hire/core/utils/app_icon.dart';
 import 'package:quick_hire/core/utils/constants.dart';
+import 'package:quick_hire/freelancefeatures/job_feature/presentation/screen/job_screen.dart';
 
+import '../../../../clientfeture/search_feature/presentation/screens/search_screen.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../authintication_screens/data/datasources/local/auth_local_data_source.dart';
 import '../../../authintication_screens/presentation/screens/login_screen.dart';
 import '../../../job_screens/presentation/screens/category_screen.dart';
 import '../cubit/job_cubit/job_cubit.dart';
 import '../widget/job_list_widget.dart';
-import '../widget/category_list_widget.dart'; // Import the new widget
+import '../widget/category_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<int> items = [1, 2, 3]; // Example items matching the number of images
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         centerTitle: true,
@@ -51,6 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller: controller,
                   hintText: "Search for a new job",
                   obscureText: false,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  SearchScreen()),
+                    );
+                  },
                 ),
                 const SizedBox(height: 20),
                 // Carousel slider
@@ -151,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const JobListWidget()));
+                                builder: (context) => const JobsScreen()));
                       },
                       child: Text(
                         "View All",
@@ -165,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                 // Job listings grid with 2 rows and 4 columns
                 SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.5,
+                    height: MediaQuery.sizeOf(context).height * 0.53,
                     child: const JobListWidget(
                       isHasLimit: true,
                       limit: 5,

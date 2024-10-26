@@ -22,7 +22,7 @@ class FreelancerListWidget extends StatelessWidget {
           if (state is FreelancerLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is FreelancerError) {
-            return Center(child: Text('Error: ${state.message}'));
+            return Center(child: Text(state.message));
           } else if (state is FreelancerLoaded) {
             final freelancers = state.freelancers;
             return Padding(

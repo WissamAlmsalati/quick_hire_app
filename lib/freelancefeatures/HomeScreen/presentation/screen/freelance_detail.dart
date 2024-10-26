@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class FreelancerDetailScreen extends StatelessWidget {
   final Map<String, dynamic> freelancer;
 
-  const FreelancerDetailScreen({Key? key, required this.freelancer}) : super(key: key);
+  const FreelancerDetailScreen({Key? key, required this.freelancer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,36 +17,38 @@ class FreelancerDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ClipOval(
+              child: Image.network(
+                freelancer['profilePicture'] ??
+                    'https://via.placeholder.com/150',
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+
             Text(
-              'Username: ${freelancer['username']}',
+              '${freelancer['username']}',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
+
             SizedBox(height: 8),
             Text(
-              'Email: ${freelancer['email']}',
+              '${freelancer['bio']}',
               style: TextStyle(fontSize: 18, color: Colors.grey[700]),
             ),
-            SizedBox(height: 8),
-            Text(
-              'User Type: ${freelancer['userType']}',
-              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-            ),
+            Divider(),
+
+
             SizedBox(height: 16),
             Text(
-              'Bio:',
+              'Skills & Expertise',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            Divider(),
+
             SizedBox(height: 8),
-            Text(
-              freelancer['bio'] ?? 'No bio available',
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Skills:',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
+
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
@@ -53,7 +56,25 @@ class FreelancerDetailScreen extends StatelessWidget {
                   .map((skill) => Chip(label: Text(skill.toString())))
                   .toList(),
             ),
-            // Add more fields as needed
+
+
+            SizedBox(height: 16),
+            Text(
+              'rate: ${freelancer['rate']}',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Divider(),
+
+            SizedBox(height: 8),
+            Text(
+              'Location: ${freelancer['location']}',
+              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Email: ${freelancer['email']}',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),

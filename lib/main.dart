@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:quick_hire/clientfeture/client_profile/presentation/cubit/client_profile_cubit.dart';
 import 'package:quick_hire/core/theme/app_theme.dart';
 import 'package:quick_hire/core/utils/token_checker.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -56,6 +57,9 @@ void main() {
         ),
         BlocProvider<PostJobCubit>(
           create: (context) => PostJobCubit(context.read<PostJobRepository>()),
+        ),
+        BlocProvider(
+          create: (context) => ClientProfileCubit(),
         ),
         Provider<AuthLocalDataSource>(
           create: (context) => AuthLocalDataSource(context.read<FlutterSecureStorage>()),

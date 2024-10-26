@@ -169,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             );
                           } else {
                             return CustomButton(
-                              text: "Login",
+                              text: "Sign Up",
                               onPressed: () {
                                 final email = emailController.text;
                                 final password = passwordController.text;
