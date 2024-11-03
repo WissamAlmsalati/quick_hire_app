@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quick_hire/core/utils/constants.dart';
 import '../../data/repositories/category_repository.dart';
 import '../cubit/category_cubit/category_cubit.dart';
 import '../cubit/category_cubit/category_state.dart';
@@ -68,14 +69,6 @@ class CategoryListWidget extends StatelessWidget {
 
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.01,
-                        ),
-                        Text(
-                          category.name,
-                          style:Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),

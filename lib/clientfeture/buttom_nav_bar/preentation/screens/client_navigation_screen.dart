@@ -227,7 +227,6 @@ class ClentHomeScreen extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.15,
                   child: const CategoryListWidget(),
                 ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                 // Job listings
                 Row(
                   children: [
